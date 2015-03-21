@@ -8,6 +8,7 @@ package projetorentacar;
 import Conexao.ConexaoBDJavaDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -18,9 +19,10 @@ public class AcessoUsuario {
     private String usuario;
     private String senha;
     private String cargo;
-
-    public void validarUsuario(String usuario, String senha, String cargo) {
-        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("RENTACAR");
+    
+    //String usuario, String senha, String cargo
+    public void validarUsuario() {
+        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
         
@@ -30,11 +32,37 @@ public class AcessoUsuario {
                                 "FROM USUARIOS \n" +
                                 "JOIN CARGOS ON CARGO_ID = ID_CARGO";
             pstmt = conn.prepareStatement(comandoSQL);
-            
-            pstmt.getResultSet();
-                    
+            ResultSet resp = pstmt.executeQuery();
+            while(resp.next()){
+            this.usuario = resp.getString(1);
+            this.senha = resp.getString(2);
+            this.cargo = resp.getString(3);
+            }
         } catch (Exception e){
             
         }
     }
+
+    /**
+     * @return the usuario
+     */
+    public String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @return the senha
+     */
+    public String getSenha() {
+        return senha;
+    }
+
+    /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+    
+    
 }
