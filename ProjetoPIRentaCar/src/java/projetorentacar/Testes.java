@@ -5,6 +5,8 @@
  */
 package projetorentacar;
 
+import java.util.Scanner;
+
 /**
  *
  * @author pc
@@ -12,9 +14,16 @@ package projetorentacar;
 public class Testes {
     public static void main(String[] args) {
         AcessoUsuario ac = new AcessoUsuario();
-        ac.validarUsuario();
+        Scanner in = new Scanner(System.in);
+        System.out.print("Login: ");
+        String log = in.next().toUpperCase();
+        System.out.print("Senha: ");
+        String pass = in.next().toUpperCase();
+        boolean val = ac.validarUsuario(log, pass);
+        if(val){
         System.out.println(ac.getUsuario());
         System.out.println(ac.getSenha());
         System.out.println(ac.getCargo());
+        }
     }
 }

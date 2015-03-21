@@ -9,6 +9,7 @@ import Conexao.ConexaoBDJavaDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -16,21 +17,21 @@ import java.sql.ResultSet;
  */
 public class AcessoUsuario {
 
-    private String usuario;
+    private String usuario = null;
     private String senha;
     private String cargo;
     
     //String usuario, String senha, String cargo
-    public void validarUsuario() {
-        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("RentaCar");
+    public boolean validarUsuario(String log, String pass) {
+        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("usu");
         Connection conn = null;
         PreparedStatement pstmt = null;
         
         try{
             conn = conexao.obterConexao();
-            String comandoSQL = "SELECT LOGIN, SENHA, DESCRICAO_CARGO\n" +
-                                "FROM USUARIOS \n" +
-                                "JOIN CARGOS ON CARGO_ID = ID_CARGO";
+            String comandoSQL = ("SELECT LOGIN, SENHA, DESCRICAO_CARGO FROM USUARIOS "
+                   + "JOIN CARGOS ON CARGO_ID = ID_CARGO WHERE LOGIN = '"+ log+"'");
+            System.out.println(comandoSQL);
             pstmt = conn.prepareStatement(comandoSQL);
             ResultSet resp = pstmt.executeQuery();
             while(resp.next()){
@@ -38,9 +39,28 @@ public class AcessoUsuario {
             this.senha = resp.getString(2);
             this.cargo = resp.getString(3);
             }
-        } catch (Exception e){
+            pstmt.close();
+            if(this.usuario == null){
+                System.out.println("Não existe usuario no sistema");
+                return false;
+            }
+         
+        } catch (SQLException ex){
+            ex.printStackTrace();
+            } catch (Exception e){
+           e.printStackTrace();
             
         }
+        return validar(log, pass);
+    }
+    
+    public boolean validar(String log, String pass){
+        if(this.usuario.equalsIgnoreCase(log) && this.senha.equalsIgnoreCase(pass)){
+            System.out.println("Credencias OK!");
+            return true;
+        }
+        System.out.println("Credenciais erradas.");
+        return false;
     }
 
     /**
