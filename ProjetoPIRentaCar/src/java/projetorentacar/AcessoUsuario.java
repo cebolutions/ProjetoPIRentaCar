@@ -20,16 +20,17 @@ public class AcessoUsuario {
     private String usuario = null;
     private String senha;
     private String cargo;
+    private boolean ativo;
     
     //String usuario, String senha, String cargo
     public boolean validarUsuario(String log, String pass) {
-        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("usu");
+        ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
         
         try{
             conn = conexao.obterConexao();
-            String comandoSQL = ("SELECT LOGIN, SENHA, DESCRICAO_CARGO FROM USUARIOS "
+            String comandoSQL = ("SELECT LOGIN, SENHA, ATIVO, DESCRICAO_CARGO FROM USUARIOS "
                    + "JOIN CARGOS ON CARGO_ID = ID_CARGO WHERE LOGIN = '"+ log+"'");
             System.out.println(comandoSQL);
             pstmt = conn.prepareStatement(comandoSQL);
@@ -37,7 +38,8 @@ public class AcessoUsuario {
             while(resp.next()){
             this.usuario = resp.getString(1);
             this.senha = resp.getString(2);
-            this.cargo = resp.getString(3);
+            this.ativo = resp.getBoolean(3);
+            this.cargo = resp.getString(4);
             }
             pstmt.close();
             if(this.usuario == null){
@@ -55,7 +57,7 @@ public class AcessoUsuario {
     }
     
     public boolean validar(String log, String pass){
-        if(this.usuario.equalsIgnoreCase(log) && this.senha.equalsIgnoreCase(pass)){
+        if(this.usuario.equalsIgnoreCase(log) && this.senha.equalsIgnoreCase(pass) && this.ativo){
             System.out.println("Credencias OK!");
             return true;
         }
