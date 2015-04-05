@@ -13,7 +13,12 @@ import java.util.Scanner;
  */
 public class Testes {
     public static void main(String[] args) {
+        //Usuario u = new Usuario("yypp", "123", "123", "yy", "yy", 0, 0);
+        //u.cadastrarUsuarioBD(u);
+        /*
         AcessoUsuario ac = new AcessoUsuario();
+        LogSistema logSis = new LogSistema();
+        
         Scanner in = new Scanner(System.in);
         System.out.print("Login: ");
         String log = in.next().toUpperCase();
@@ -21,9 +26,14 @@ public class Testes {
         String pass = in.next().toUpperCase();
         boolean val = ac.validarUsuario(log, pass);
         if(val){
-        System.out.println(ac.getUsuario());
+        logSis.setUsuarioId(ac.getUsuarioId());
+        logSis.cadastrarLog(0);
+        System.out.println(ac.getLogin());
         System.out.println(ac.getSenha());
         System.out.println(ac.getCargo());
         }
+        */
+        Cliente c = new Cliente();
+        c.cadastrarCliente();
     }
 }

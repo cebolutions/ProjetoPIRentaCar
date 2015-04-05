@@ -1,10 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projetorentacar;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import Conexao.ConexaoBDJavaDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,13 +16,24 @@ import java.sql.SQLException;
  *
  * @author ygor.yppessoa
  */
-public class AcessoUsuario {
-
-    private String usuario = null;
+public class AcessoUsuario extends HttpServlet {
+    private int usuarioId;
+    private String login = null;
     private String senha;
     private String cargo;
     private boolean ativo;
     
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+       PrintWriter out = response.getWriter();
+            try {
+        } catch (Exception e){
+            
+        } finally {
+                out.close();
+    }
+    }
     //String usuario, String senha, String cargo
     public boolean validarUsuario(String log, String pass) {
         ConexaoBDJavaDB conexao = new ConexaoBDJavaDB("RentaCar");
@@ -30,19 +42,20 @@ public class AcessoUsuario {
         
         try{
             conn = conexao.obterConexao();
-            String comandoSQL = ("SELECT LOGIN, SENHA, ATIVO, DESCRICAO_CARGO FROM USUARIOS "
+            String comandoSQL = ("SELECT ID_USUARIO, LOGIN, SENHA, ATIVO, DESCRICAO_CARGO FROM USUARIOS "
                    + "JOIN CARGOS ON CARGO_ID = ID_CARGO WHERE LOGIN = '"+ log+"'");
             System.out.println(comandoSQL);
             pstmt = conn.prepareStatement(comandoSQL);
             ResultSet resp = pstmt.executeQuery();
             while(resp.next()){
-            this.usuario = resp.getString(1);
-            this.senha = resp.getString(2);
-            this.ativo = resp.getBoolean(3);
-            this.cargo = resp.getString(4);
+            this.usuarioId = resp.getInt(1);
+            this.login = resp.getString(2);
+            this.senha = resp.getString(3);
+            this.ativo = resp.getBoolean(4);
+            this.cargo = resp.getString(5);
             }
             pstmt.close();
-            if(this.usuario == null){
+            if(this.login == null){
                 System.out.println("Não existe usuario no sistema");
                 return false;
             }
@@ -53,11 +66,12 @@ public class AcessoUsuario {
            e.printStackTrace();
             
         }
+        
         return validar(log, pass);
     }
     
     public boolean validar(String log, String pass){
-        if(this.usuario.equalsIgnoreCase(log) && this.senha.equalsIgnoreCase(pass) && this.ativo){
+        if(this.login.equalsIgnoreCase(log) && this.senha.equalsIgnoreCase(pass) && this.ativo){
             System.out.println("Credencias OK!");
             return true;
         }
@@ -68,8 +82,8 @@ public class AcessoUsuario {
     /**
      * @return the usuario
      */
-    public String getUsuario() {
-        return usuario;
+    public String getLogin() {
+        return login;
     }
 
     /**
@@ -84,6 +98,10 @@ public class AcessoUsuario {
      */
     public String getCargo() {
         return cargo;
+    }
+
+    public int getUsuarioId() {
+        return usuarioId;
     }
     
     

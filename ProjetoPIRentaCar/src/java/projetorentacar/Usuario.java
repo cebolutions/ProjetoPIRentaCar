@@ -1,5 +1,9 @@
 package projetorentacar;
 
+import Conexao.ConexaoBDJavaDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,7 +34,7 @@ public class Usuario {
 
     
 
-    public void cadastrarCliente() {
+    public void cadastrarUsuario() {
         Scanner in = new Scanner(System.in);
         System.out.println("CADASTRAR NOVO CLIENTE");
         System.out.println("Nome: ");
@@ -39,22 +43,53 @@ public class Usuario {
         String rg = in.next();
         System.out.println("CPF: ");
         String cpf = in.next();
-        System.out.println("CNH: ");
-        String cnh = in.next();
-        System.out.println("Data de Nasc.: ");
-        String dataNasc = in.next();
-        Date dtNasc = null;
-        Date dtCadastro = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-        try{
-        dtNasc = dateFormat.parse(dataNasc);
-        System.out.println(dateFormat.format(dtNasc));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }        
+        System.out.println("Login: ");
+        String log = in.next();
+        System.out.println("Senha: ");
+        String pass = in.next();
+        System.out.println("Cargo: ");
+        int cargo = in.nextInt();
+        System.out.println("Senha: ");
+        int filial = in.nextInt();
         
-        Cliente cliente = new Cliente(nome,rg,cpf,cnh,dtNasc,dtCadastro);
-        cliente.cadastrarNovoCliente(cliente);
+        
+        
+        Usuario user = new Usuario(nome,rg,cpf,log,pass,cargo,filial);
+        user.cadastrarUsuarioBD(user);
+    }
+     public void cadastrarUsuarioBD(Usuario u) {
+        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        String cmdSQL = "INSERT INTO TB_USUARIOS (NOME_USUARIO, RG, CPF, LOGIN, SENHA, ATIVO, CARGO_ID, FILIAL_ID) "
+                + "VALUES (?,?,?,?,?,?,?,?)";
+
+        try {
+            conn = cnx.obterConexao();
+            pstmt = conn.prepareStatement(cmdSQL);
+            pstmt.setString(1, u.getNome());
+            pstmt.setString(2, u.getRg());
+            pstmt.setString(3, u.getCpf());
+            pstmt.setString(4, u.getLogin());
+            pstmt.setString(5, u.getSenha());
+            pstmt.setBoolean(6, u.isAtivo());
+            pstmt.setInt(7, u.getCargo());
+            pstmt.setInt(8, u.getFilial());
+            pstmt.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pstmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void cadastrarVenda() {

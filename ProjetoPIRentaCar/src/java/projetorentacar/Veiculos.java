@@ -119,11 +119,11 @@ public class Veiculos {
     }
 
     public void adicionarVeiculo() {
-
+        //UPDATE TB_ESTOQUE SET QUANTIDADE=QUANTIDADE + 1 WHERE VEICULO_ID = 0;
     }
 
     public void retirarVeiculo() {
-
+        //UPDATE TB_ESTOQUE SET QUANTIDADE=QUANTIDADE - 1 WHERE VEICULO_ID = 0;
     }
 
     public int getIdVeiculo() {

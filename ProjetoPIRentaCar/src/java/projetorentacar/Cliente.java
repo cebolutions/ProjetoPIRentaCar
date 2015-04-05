@@ -5,15 +5,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
  * @author pc
  */
 public class Cliente {
+
     private int clienteId;
     private String nome;
     private String rg;
@@ -21,22 +25,59 @@ public class Cliente {
     private String cnh;
     private Date dataNascimento;
     private Date dataCadastro;
-
-    public Cliente(String nome, String rg, String cpf, String cnh, Date dataNascimento, Date dataCadastro) {
+    
+    public Cliente() {
+        
+    }
+    public Cliente(String nome, String rg, String cpf, String cnh, Date dataNascimento) {
         this.nome = nome;
         this.rg = rg;
         this.cpf = cpf;
         this.cnh = cnh;
         this.dataNascimento = dataNascimento;
-        this.dataCadastro = dataCadastro;
+        this.dataCadastro = new Date();
     }
-    
-    public void cadastrarNovoCliente(Cliente c) {
+    public Cliente(String nome, String rg, String cpf, String cnh, Date dataNascimento, Date dtCadastro) {
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.cnh = cnh;
+        this.dataNascimento = dataNascimento;
+        this.dataCadastro = dtCadastro;
+    }
+
+    public void cadastrarCliente() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("CADASTRAR NOVO CLIENTE");
+        System.out.println("Nome: ");
+        String nome = in.nextLine().toUpperCase();
+        System.out.println("RG: ");
+        String rg = in.next();
+        System.out.println("CPF: ");
+        String cpf = in.next();
+        System.out.println("CNH: ");
+        String cnh = in.next();
+        System.out.println("Data de Nasc.: ");
+        String dataNasc = in.next();
+        Date dtNasc = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            dtNasc = dateFormat.parse(dataNasc);
+            System.out.println(dateFormat.format(dtNasc));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Cliente cliente = new Cliente(nome, rg, cpf, cnh, dtNasc);
+        cliente.cadastrarClienteBD(cliente);
+    }
+
+    public void cadastrarClienteBD(Cliente c) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String cmdSQL = "INSERT INTO TB_CADASTRO_CLIENTE (NOME_CLIENTE, RG, CPF, CNH, DATA_NASCIMENTO, DATA_CADASTRO "
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String cmdSQL = "INSERT INTO TB_CADASTRO_CLIENTE (NOME_CLIENTE, RG, CPF, CNH, DATA_NASCIMENTO, DATA_CADASTRO) "
+                + "VALUES (?,?,?,?,?,?)";
 
         try {
             conn = cnx.obterConexao();
@@ -45,9 +86,9 @@ public class Cliente {
             pstmt.setString(2, c.getRg());
             pstmt.setString(3, c.getCpf());
             pstmt.setString(4, c.getCnh());
-            pstmt.setDate(5, (java.sql.Date) c.getDataNascimento());
-            pstmt.setDate(6, (java.sql.Date) c.getDataCadastro());
-            pstmt.executeQuery();
+            pstmt.setDate(5, new java.sql.Date(c.getDataNascimento().getTime()));
+            pstmt.setDate(6, new java.sql.Date(c.getDataCadastro().getTime()));
+            pstmt.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (Exception e) {
