@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class Cliente {
         this.dataNascimento = dataNascimento;
         this.dataCadastro = new Date();
     }
-    public Cliente(String nome, String rg, String cpf, String cnh, Date dataNascimento, Date dtCadastro) {
+    public Cliente(int clienteId, String nome, String rg, String cpf, String cnh, Date dataNascimento, Date dtCadastro) {
+        this.clienteId = clienteId;
         this.nome = nome;
         this.rg = rg;
         this.cpf = cpf;
@@ -112,7 +114,7 @@ public class Cliente {
         List<Cliente> lClientes = new ArrayList<Cliente>();
         try {
             conn = cnx.obterConexao();
-            String comandoSQL = "SELECT FROM TB_CADASTRO_CLIENTE";
+            String comandoSQL = "SELECT * FROM TB_CADASTRO_CLIENTE";
             pstmt = conn.prepareStatement(comandoSQL);
             ResultSet cliente = pstmt.executeQuery();
             while (cliente.next()) {
@@ -123,7 +125,7 @@ public class Cliente {
                 this.cnh = cliente.getString(5);
                 this.dataNascimento = cliente.getDate(6);
                 this.dataCadastro = cliente.getDate(7);
-                Cliente c = new Cliente(this.nome, this.rg, this.cpf, this.cnh, this.dataNascimento, this.dataCadastro);
+                Cliente c = new Cliente(this.clienteId, this.nome, this.rg, this.cpf, this.cnh, this.dataNascimento, this.dataCadastro);
                 lClientes.add(c);
             }
 
@@ -145,6 +147,10 @@ public class Cliente {
         return lClientes;
     }
 
+    public int getClienteId() {
+        return clienteId;
+    }
+    
     public String getNome() {
         return nome;
     }

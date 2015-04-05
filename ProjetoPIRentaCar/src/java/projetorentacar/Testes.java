@@ -5,7 +5,7 @@
  */
 package projetorentacar;
 
-import java.util.Scanner;
+import java.util.List;
 
 /**
  *
@@ -34,6 +34,14 @@ public class Testes {
         }
         */
         Cliente c = new Cliente();
-        c.cadastrarCliente();
+        //c.cadastrarCliente();
+        List<Cliente> lista = c.buscarCliente();
+        for(Cliente cl:lista){
+            System.out.print(cl.getClienteId());
+            System.out.print("");
+            System.out.print(cl.getNome());
+            System.out.print("");
+            System.out.println(cl.getDataCadastro());
+        }
     }
 }
