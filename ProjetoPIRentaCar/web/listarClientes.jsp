@@ -3,9 +3,8 @@
     Created on : 05/04/2015, 19:20:52
     Author     : pc
 --%>
-
-<%@page import="java.util.List"%>
-<%@page import="projetorentacar.Cliente"%>
+<%@ taglib prefix="c" url="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" url="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -28,17 +27,17 @@
                 <th>Data Nascimento</th>
                 <th>Data Cadastro</th>
             </tr>
-            <% for(Cliente cl:lista){%>
+            <c:forEach items="$(lista)" var = "cliente" varStatus="stat">
                 <tr>
-                <td> <%= cl.getClienteId() %> </td>
-                <td> <%= cl.getNome() %> </td>
-                <td> <%= cl.getRg() %> </td>
-                <td> <%= cl.getCpf() %> </td>
-                <td> <%= cl.getCnh() %> </td>
-                <td> <%= cl.getDataNascimento() %> </td>
-                <td> <%= cl.getDataCadastro() %> </td>
+                <td> <c: out value="$(cliente.clienteId)" /> </td>
+                <td> <c: out value="$(cliente.nome)" /> </td>
+                <td> <c: out value="$(cliente.rg)" /> </td>
+                <td> <c: out value="$(cliente.cpf)" /> </td>
+                <td> <c: out value="$(cliente.cnh)" /> </td>
+                <td> <c: out value="$(cliente.dataNascimento)" /> </td>
+                <td> <c: out value="$(cliente.dataCadastro)" /> </td>
                 </tr>
-            <%}%>
+            </c:forEach>
         </table>
     </body>
 </html>
