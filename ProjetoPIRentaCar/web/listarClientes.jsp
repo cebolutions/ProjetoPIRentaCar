@@ -27,7 +27,8 @@
                 <th>Data Nascimento</th>
                 <th>Data Cadastro</th>
             </tr>
-            <c:forEach items="$(lista)" var = "cliente" varStatus="stat">
+            <jsp:useBean id="cliente" class="projetorentacar.Cliente.buscarCliente"/>
+            <c:forEach items="$(cliente.lista)" var = "cliente" varStatus="stat">
                 <tr>
                 <td> <c: out value="$(cliente.clienteId)" /> </td>
                 <td> <c: out value="$(cliente.nome)" /> </td>
