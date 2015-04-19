@@ -5,9 +5,6 @@
  */
 package projetorentacar;
 
-import Dao.ClienteDAO;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,24 +33,8 @@ public class Testes {
         System.out.println(ac.getCargo());
         }
         */
-        ClienteDAO c = new ClienteDAO();
+        Cliente c = new Cliente();
         //c.cadastrarCliente();
-        String dtNasc = "01/01/1980";
-        String dtCadastro = "19/04/2015";
-        String idC = "0";
-            int id = Integer.parseInt(idC);
-        Date date = null;
-        Date datec = null;
-        try {
-                SimpleDateFormat dfmt = new SimpleDateFormat("dd/mm/yyyy");
-                date = dfmt.parse(dtNasc);
-                datec = dfmt.parse(dtCadastro);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        Cliente cli = new Cliente(id,"a","11","33","11",date, datec);
-        c.updateCliente(cli);
-        
         List<Cliente> lista = c.buscarCliente();
         for(Cliente cl:lista){
             System.out.print(cl.getClienteId());
