@@ -12,7 +12,6 @@ import projetorentacar.Cliente;
 
 @WebServlet(urlPatterns = {"/AtualizarCliente"})
 public class AtualizarCliente extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

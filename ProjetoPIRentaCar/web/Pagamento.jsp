@@ -14,7 +14,7 @@
     <body>
         <form id="BuscarContrato" name="BuscarContrato">
             <td>Contrato </td> <input type="text" maxlength="11" name="CPFClientePesquisa">
-            <button type="submit" name="btPesquisa">Pesquisar</button><br>
+            <button type="submit" name="btPesquisa">Pesquisar </button><br>
             <br>
 
 

@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Clientes</h1>
+        <h1>Clientes </h1>
         <a href="cadastraCliente.jsp">Cadastrar Cliente</a><br>
         <a href="consultaCliente.jsp">Consultar Cliente</a><br>
         <a href="atualizarCliente.jsp">Atualizar Cliente</a><br>

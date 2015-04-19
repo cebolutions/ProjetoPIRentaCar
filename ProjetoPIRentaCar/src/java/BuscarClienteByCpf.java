@@ -14,7 +14,6 @@ import projetorentacar.Cliente;
 
 @WebServlet(urlPatterns = {"/BuscarClienteByCpf"})
 public class BuscarClienteByCpf extends HttpServlet {
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

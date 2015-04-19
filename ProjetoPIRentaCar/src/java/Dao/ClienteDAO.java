@@ -28,7 +28,6 @@ public class ClienteDAO extends Cliente {
         PreparedStatement pstmt = null;
         String cmdSQL = "INSERT INTO TB_CADASTRO_CLIENTE (NOME_CLIENTE, RG, CPF, CNH, DATA_NASCIMENTO, DATA_CADASTRO) "
                 + "VALUES (?,?,?,?,?,?)";
-
         try {
             conn = cnx.obterConexao();
             pstmt = conn.prepareStatement(cmdSQL);

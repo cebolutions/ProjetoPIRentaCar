@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Clientes</title>
+        <title>Lista de Clientes </title>
     </head>
     <body>
         <table border="1" cellpadding="10">

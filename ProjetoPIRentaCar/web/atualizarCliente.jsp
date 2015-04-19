@@ -16,7 +16,7 @@
     <body>
         <form action="AtualizarCliente" method="post">
             <label>CPF Cliente </label><input type="text" maxlength="11" name="CPFClientePesquisa">
-            <button type="submit" name="btPesquisa">Pesquisar</button><br>
+            <button type="submit" name="btPesquisa">Pesquisar </button><br>
             <br>
         </form>
         <fieldset>

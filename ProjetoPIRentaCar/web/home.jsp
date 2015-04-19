@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <h1>Home </h1>
         <a href="clientes.jsp">Clientes</a><br>
         <a href="">Usuários</a><br>
         <a href="Contrato.jsp">Contrato</a><br>
