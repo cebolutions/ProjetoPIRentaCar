@@ -21,11 +21,12 @@
                     <tr><td>RG:</td><td><input type="text" name="rg" /></td></tr>
                     <tr><td>CPF:</td><td><input type="text" name="cpf" /></td></tr>
                     <tr><td>CNH:</td><td><input type="text" name="cnh" /></td></tr>
-                    <tr><td>Data Nasc.:</td><td><input type="text" name="dtNasc" /></td></tr>
+                    <tr><td>Data Nasc.:</td><td><input type="date" name="dtNasc" /></td></tr>
                 </table>
                 <input type="submit" value="Cadastrar" name="submit"/>
             </form>
         </div>
+        <a href="clientes.jsp">Voltar</a>
     </body>
 </html>
 
