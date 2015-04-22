@@ -35,7 +35,7 @@ public class Testes {
         System.out.println(ac.getSenha());
         System.out.println(ac.getCargo());
         }
-        */
+        
         ClienteDAO c = new ClienteDAO();
         //c.cadastrarCliente();
         String dtNasc = "01/01/1980";
@@ -61,6 +61,18 @@ public class Testes {
             System.out.print(cl.getNome());
             System.out.print("");
             System.out.println(cl.getDataCadastro());
+        }
+        */
+        
+        Veiculos vdao = new Veiculos();
+        int i = 0;
+            List<Veiculos> lista = vdao.verificarDisponibilidadeByFilial(i);
+        for(Veiculos cl:lista){
+            System.out.print(cl.getNomeVeiculo());
+            System.out.print(" ");
+            System.out.print(cl.getMarca());
+            System.out.print(" ");
+            System.out.println(cl.getCategoria());
         }
     }
 }

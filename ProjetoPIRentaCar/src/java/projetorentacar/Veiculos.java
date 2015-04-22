@@ -39,7 +39,7 @@ public class Veiculos {
         this.quantidade = quantidade;
     }
 
-    public List verificarDisponibilidade() {
+    public List<Veiculos> verificarDisponibilidade() {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
         Connection conn = null;
         PreparedStatement pstm = null;
@@ -50,6 +50,52 @@ public class Veiculos {
                 + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
                 + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
                 + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID";
+
+        try {
+            conn = cnx.obterConexao();
+            pstm = conn.prepareStatement(cmdSQL);
+            ResultSet disp = pstm.executeQuery();
+            while (disp.next()) {
+
+                this.idVeiculo = disp.getInt("ID_VEICULO");
+                this.nomeVeiculo = disp.getString("NOME_VEICULO");
+                this.placa = disp.getString("PLACA_VEICULO");
+                this.cor = disp.getString("DESCRICAO_COR");
+                this.marca = disp.getString("DESCRICAO_MARCA");
+                this.categoria = disp.getString("DESCRICAO_CATEGORIA");
+                this.quantidade = disp.getInt("QUANTIDADE");
+                Veiculos v = new Veiculos(this.getIdVeiculo(), this.getNomeVeiculo(), this.getPlaca(), this.getCor(), this.getMarca(), this.getCategoria(), this.getQuantidade());
+                veiculos.add(v);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+                pstm.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return veiculos;
+    }
+
+     public List<Veiculos> verificarDisponibilidadeByFilial(int filial) {
+        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
+        Connection conn = null;
+        PreparedStatement pstm = null;
+        List<Veiculos> veiculos = new ArrayList<>();
+        String cmdSQL = "SELECT ID_VEICULO, NOME_VEICULO, DESCRICAO_MARCA, DESCRICAO_CATEGORIA, QUANTIDADE, V.FILIAL_ID "
+                + "FROM TB_VEICULOS AS V"
+                + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
+                + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
+                + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID "
+                + "WHERE V.FILIAL_ID = "+filial+"";
 
         try {
             conn = cnx.obterConexao();

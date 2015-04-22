@@ -1,7 +1,15 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+function disponibilidade(i){
+    var filial = document.getElementById("filial");
+    filial.setAttribute("value", i);
+    var url = 'Disponibilidade';
+    
+    var myAjax = new Ajax.Request(  
+        url,{  
+                method: 'POST',  
+                parameters: filial,  
+                onComplete: showResponse  
+            }  
+    );
+}
 
 

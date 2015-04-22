@@ -25,7 +25,7 @@
             </tr>
             <c:forEach items="${lista}" var="cliente" varStatus="stat">
                 <tr>
-                <td> <c:out value="${cliente.clienteId}" /> </td>
+                <td> <c:out value="${cliente.clienteId}" /></td>
                 <td> <c:out value="${cliente.nome}" /> </td>
                 <td> <c:out value="${cliente.rg}" /> </td>
                 <td> <c:out value="${cliente.cpf}" /> </td>
