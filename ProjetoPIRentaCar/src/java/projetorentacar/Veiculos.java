@@ -156,7 +156,7 @@ public class Veiculos {
 
     
     /*
-        Comparar o valor de valor de contrato com valor da quantidade de diárias
+        Comparar o valor de contrato com valor da quantidade de diárias
     */
     public void adicionarVeiculo(/*int id_veiculo_alocado, int id_filial, Date dataEntrega*/) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
