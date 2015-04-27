@@ -14,9 +14,13 @@
     <body>
         <h1>Home </h1>
         <a href="clientes.jsp">Clientes</a><br>
-        <a href="">Usuários</a><br>
-        <a href="Contrato.jsp">Contrato</a><br>
+        <a href="usuarios.jsp">Usuários</a><br>
+        <a href="Contrato_1.jsp">Contrato</a><br>
         <a href="">Pagamentos</a><br>
+        
+        
+        
+        <a href="login.jsp">Logout</a><br>
         
     </body>
 </html>

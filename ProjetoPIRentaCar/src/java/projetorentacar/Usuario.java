@@ -1,12 +1,6 @@
 package projetorentacar;
 
-import Conexao.ConexaoBDJavaDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import Dao.UsuarioDAO;
 import java.util.Scanner;
 
 public class Usuario {
@@ -20,6 +14,9 @@ public class Usuario {
     private int filial;
     private boolean ativo;
 
+    public Usuario(){
+        
+    }
     public Usuario(String nome, String rg, String cpf, String login, String senha, int cargo, int filial) {
         this.nome = nome;
         this.rg = rg;
@@ -29,6 +26,18 @@ public class Usuario {
         this.cargo = cargo;
         this.filial = filial;
         this.ativo = true;
+
+    }
+    public Usuario(int id, String nome, String rg, String cpf, String login, String senha, int cargo, int filial, boolean ativo) {
+        this.usuarioId = id;
+        this.nome = nome;
+        this.rg = rg;
+        this.cpf = cpf;
+        this.login = login;
+        this.senha = senha;
+        this.cargo = cargo;
+        this.filial = filial;
+        this.ativo = ativo;
 
     }
 
@@ -55,45 +64,17 @@ public class Usuario {
         
         
         Usuario user = new Usuario(nome,rg,cpf,log,pass,cargo,filial);
-        user.cadastrarUsuarioBD(user);
+        UsuarioDAO udao = new UsuarioDAO();
+        udao.cadastrarUsuarioBD(user);
     }
-     public void cadastrarUsuarioBD(Usuario u) {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        String cmdSQL = "INSERT INTO TB_USUARIOS (NOME_USUARIO, RG, CPF, LOGIN, SENHA, ATIVO, CARGO_ID, FILIAL_ID) "
-                + "VALUES (?,?,?,?,?,?,?,?)";
+     
 
-        try {
-            conn = cnx.obterConexao();
-            pstmt = conn.prepareStatement(cmdSQL);
-            pstmt.setString(1, u.getNome());
-            pstmt.setString(2, u.getRg());
-            pstmt.setString(3, u.getCpf());
-            pstmt.setString(4, u.getLogin());
-            pstmt.setString(5, u.getSenha());
-            pstmt.setBoolean(6, u.isAtivo());
-            pstmt.setInt(7, u.getCargo());
-            pstmt.setInt(8, u.getFilial());
-            pstmt.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                pstmt.close();
-                conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public boolean validarLogin(String login, String pass, Usuario u) {
+        if (u.getLogin().equalsIgnoreCase(login) && u.getSenha().equalsIgnoreCase(pass)) {
+            return true;
+        } else {
+            return false;
         }
-    }
-
-    public void cadastrarVenda() {
-
     }
 
     public void receberPagamento() {
@@ -136,5 +117,44 @@ public class Usuario {
 
     public boolean isAtivo() {
         return ativo;
+    }
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setCargo(int cargo) {
+        this.cargo = cargo;
+    }
+
+    public void setFilial(int filial) {
+        this.filial = filial;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

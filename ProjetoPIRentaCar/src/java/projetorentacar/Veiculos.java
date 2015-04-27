@@ -90,12 +90,12 @@ public class Veiculos {
         Connection conn = null;
         PreparedStatement pstm = null;
         List<Veiculos> veiculos = new ArrayList<>();
-        String cmdSQL = "SELECT ID_VEICULO, NOME_VEICULO, DESCRICAO_MARCA, DESCRICAO_CATEGORIA, QUANTIDADE, V.FILIAL_ID "
-                + "FROM TB_VEICULOS AS V"
+        String cmdSQL = "SELECT ID_VEICULO, NOME_VEICULO, DESCRICAO_MARCA, DESCRICAO_CATEGORIA, QUANTIDADE, tb_estoque.filial_id "
+                + "FROM TB_VEICULOS "
                 + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
                 + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
                 + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID "
-                + "WHERE V.FILIAL_ID = "+filial+"";
+                + "WHERE tb_estoque.filial_id = "+filial+"";
 
         try {
             conn = cnx.obterConexao();
@@ -105,14 +105,13 @@ public class Veiculos {
 
                 this.idVeiculo = disp.getInt("ID_VEICULO");
                 this.nomeVeiculo = disp.getString("NOME_VEICULO");
-                this.placa = disp.getString("PLACA_VEICULO");
-                this.cor = disp.getString("DESCRICAO_COR");
                 this.marca = disp.getString("DESCRICAO_MARCA");
                 this.categoria = disp.getString("DESCRICAO_CATEGORIA");
                 this.quantidade = disp.getInt("QUANTIDADE");
                 Veiculos v = new Veiculos(this.getIdVeiculo(), this.getNomeVeiculo(), this.getPlaca(), this.getCor(), this.getMarca(), this.getCategoria(), this.getQuantidade());
                 veiculos.add(v);
             }
+            
 
         } catch (SQLException ex) {
             ex.printStackTrace();

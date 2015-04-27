@@ -5,8 +5,8 @@
  */
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import org.joda.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import projetorentacar.Veiculos;
+import org.joda.time.*;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -23,49 +25,45 @@ import projetorentacar.Veiculos;
 @WebServlet(urlPatterns = {"/Disponibilidade"})
 public class Disponibilidade extends HttpServlet {
 
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-      
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-           
-            String dtRetirada = request.getParameter("dtRetirada");
-            String dtDevolucao = request.getParameter("dtDevolucao");
-            String veicEscolhido = request.getParameter("filial");
-            System.out.println(veicEscolhido);
-            int filial = Integer.parseInt(veicEscolhido);
-            Date ret = null;
-            Date dev = null;
-            
-            try {
-                SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
-                ret = dfmt.parse(dtRetirada);
-                dev = dfmt.parse(dtDevolucao);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Veiculos vdao = new Veiculos();
-            List<Veiculos> listaVeic = vdao.verificarDisponibilidade();
-            
-            request.setAttribute("ret", ret);
-            request.setAttribute("dev", dev);
-            request.setAttribute("filial", filial);
+
+        String dtRetirada = request.getParameter("dtRetirada");
+        String dtDevolucao = request.getParameter("dtDevolucao");
+        String veicEscolhido = request.getParameter("filial");
+        System.out.println(veicEscolhido);
+        int filial = Integer.parseInt(veicEscolhido);
+        Date ret = null;
+        Date dev = null;
+        try {
+            SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
+            ret = dfmt.parse(dtRetirada);
+            dev = dfmt.parse(dtDevolucao);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss Z");
+        DateTime start = formatter.parseDateTime(dtRetirada);
+        //http://johannburkard.de/blog/programming/java/date-time-parsing-formatting-joda-time.html
+        DateTime end = formatter.parseDateTime(dtDevolucao);
+        int dias = Days.daysBetween(start, end).getDays();
+        Veiculos vdao = new Veiculos();
+        List<Veiculos> listaVeic = vdao.verificarDisponibilidadeByFilial(filial);
+
+        request.setAttribute("ret", ret);
+        request.setAttribute("dev", dev);
+        request.setAttribute("filialId", filial);
+        request.setAttribute("diarias", dias);
+
+        if (listaVeic.isEmpty()) {
+            request.setAttribute("veicSemDisp", "Sem disponibilidade");
+        } else {
             request.setAttribute("veic", listaVeic);
-            request.getRequestDispatcher("Contrato_2.jsp").forward(request, response);
+        }
+        request.getRequestDispatcher("Contrato_2.jsp").forward(request, response);
     }
 
     /**

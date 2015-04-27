@@ -12,12 +12,12 @@ import projetorentacar.Cliente;
 
 @WebServlet(urlPatterns = {"/AtualizarCliente"})
 public class AtualizarCliente extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         if (request.getParameter("CPFClientePesquisa") == null) {
-            // disabled esta dando conflito
             int id = Integer.parseInt(request.getParameter("id"));
             String nome = request.getParameter("nome");
             String rg = request.getParameter("rg");
@@ -27,7 +27,7 @@ public class AtualizarCliente extends HttpServlet {
             String dtCadastro = request.getParameter("dtCadastro");
             Date date = null;
             Date dateCad = null;
-            
+
             try {
                 SimpleDateFormat dfmt = new SimpleDateFormat("dd/mm/yyyy");
                 date = dfmt.parse(dtNasc);
@@ -36,19 +36,34 @@ public class AtualizarCliente extends HttpServlet {
                 e.printStackTrace();
             }
             ClienteDAO c = new ClienteDAO();
-            Cliente cliente = new Cliente(id,nome,rg,cpf,cnh,date,dateCad);
+            Cliente cliente = new Cliente(id, nome, rg, cpf, cnh, date, dateCad);
             c.updateCliente(cliente);
-            
+
             request.getRequestDispatcher("/cadastroSucesso.jsp").forward(request, response);
-            
+
         } else {
             String cpfBusca = request.getParameter("CPFClientePesquisa");
             ClienteDAO c = new ClienteDAO();
             Cliente cliente = c.buscarClienteByCpf(cpfBusca);
-            request.setAttribute("cliente", cliente);
-
-            request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
+            
+            if (cliente.getCpf() == null) {
+                request.getRequestDispatcher("/atualizarClienteErro.jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
+            }
         }
     }
+@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
+            String cpfBusca = request.getParameter("cpf");
+            ClienteDAO c = new ClienteDAO();
+            Cliente cliente = c.buscarClienteByCpf(cpfBusca);
+            request.setAttribute("cliente", cliente);
+            
+                request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
+            
+        }
+    
 }

@@ -12,8 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import projetorentacar.Cliente;
 
 /**
@@ -98,7 +96,7 @@ public class ClienteDAO extends Cliente {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
-        List<Cliente> lClientes = new ArrayList<Cliente>();
+        
         try {
             conn = cnx.obterConexao();
             String comandoSQL = "SELECT * FROM TB_CADASTRO_CLIENTE WHERE CPF = '" + cpf + "'";
@@ -115,6 +113,8 @@ public class ClienteDAO extends Cliente {
                 c.setDataCadastro(cliente.getDate(7));
                 return c;
             }
+            Cliente c = new Cliente();
+            return c;
 
         } catch (SQLException ex) {
             ex.printStackTrace();

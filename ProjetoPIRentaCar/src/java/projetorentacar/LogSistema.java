@@ -9,7 +9,6 @@ import Conexao.ConexaoBDJavaDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -17,26 +16,26 @@ import java.util.Date;
  * @author pc
  */
 public class LogSistema {
-    private int usuarioId;
     
     public LogSistema(){
         
     }
-    public void cadastrarLog (int i){
+    public void cadastrarLog (int log, int id){
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
         Connection conn = null;
         PreparedStatement pstm = null;
-        String cmdSQL = "INSERT INTO TB_HISTORICO_ACESSO (USUARIO_ID, TIPO_LOG_ID, DATA_SISTEMA, HORA SISTEMA)"
-                + "VALUES (?,?,?,?);";
-        Date data = new Date();
-        Time hora = null;
+        String cmdSQL = "INSERT INTO TB_HISTORICO_ACESSO (USUARIO_ID, TIPO_LOG_ID, DATA_SISTEMA, HORA_SISTEMA)"
+                + " VALUES (?,?,?,?)";
+        Date dataUtil = new Date();
+        java.sql.Date data = new java.sql.Date(dataUtil.getTime());
+        java.sql.Time hora = new java.sql.Time(dataUtil.getTime());
         try {
             conn = cnx.obterConexao();
             pstm = conn.prepareStatement(cmdSQL);
             
-            pstm.setInt(1, usuarioId);
-            pstm.setInt(2, i);
-            pstm.setDate(3, (java.sql.Date) data);
+            pstm.setInt(1, id);
+            pstm.setInt(2, log);
+            pstm.setDate(3, data);
             pstm.setTime(4, hora);
             pstm.execute();
             
@@ -56,7 +55,4 @@ public class LogSistema {
         }
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
-    }
 }

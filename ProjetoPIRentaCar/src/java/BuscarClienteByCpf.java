@@ -21,7 +21,11 @@ public class BuscarClienteByCpf extends HttpServlet {
         ClienteDAO c = new ClienteDAO();
         Cliente cliente = c.buscarClienteByCpf(cpf);
         request.setAttribute("cliente", cliente);
+        if(cliente.getCpf() == null){
+            request.getRequestDispatcher("/consultaClienteErro.jsp").forward(request, response);
+        } else {
         request.getRequestDispatcher("/consultaCliente.jsp").forward(request, response);
+        }
 
     }
 
