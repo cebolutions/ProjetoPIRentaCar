@@ -45,7 +45,7 @@ public class Disponibilidade extends HttpServlet {
             e.printStackTrace();
         }
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy HH:mm:ss Z");
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
         DateTime start = formatter.parseDateTime(dtRetirada);
         //http://johannburkard.de/blog/programming/java/date-time-parsing-formatting-joda-time.html
         DateTime end = formatter.parseDateTime(dtDevolucao);
