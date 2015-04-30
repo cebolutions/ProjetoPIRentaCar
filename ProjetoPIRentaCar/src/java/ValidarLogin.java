@@ -30,6 +30,7 @@ public class ValidarLogin extends HttpServlet {
 
         UsuarioDAO u = new UsuarioDAO();
         Usuario user = u.buscarLogin(login);
+        request.setAttribute("user", user);
         if (user.isAtivo()) {
             if (user.validarLogin(login, pass, user)) {
                 LogSistema log = new LogSistema();

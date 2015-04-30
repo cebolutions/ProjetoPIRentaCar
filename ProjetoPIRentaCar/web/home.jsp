@@ -11,7 +11,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    
     <body>
+        <label>${user.nome}</label><input type="hidden" name="userLogado" value="${user.usuarioId}"/>
         <h1>Home </h1>
         <a href="clientes.jsp">Clientes</a><br>
         <a href="usuarios.jsp">Usuários</a><br>

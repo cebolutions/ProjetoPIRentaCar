@@ -4,27 +4,34 @@
  * and open the template in the editor.
  */
 
+import Dao.ClienteDAO;
 import Dao.VeiculoDAO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import projetorentacar.Cliente;
 import projetorentacar.Veiculos;
 
 /**
  *
  * @author pc
  */
-@WebServlet(urlPatterns = {"/ValorReserva"})
-public class ValorReserva extends HttpServlet {
+@WebServlet(urlPatterns = {"/ConfirmarReserva"})
+public class ConfirmarReserva extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            String cpfCliente = request.getParameter("CPFClientePesquisa");
+            ClienteDAO c = new ClienteDAO();
+            Cliente cliente = c.buscarClienteByCpf(cpfCliente);
             String dtRetirada = request.getParameter("dtRetirada");
             String dtDevolucao = request.getParameter("dtDevolucao");
             String fil = request.getParameter("filial");
@@ -52,13 +59,28 @@ public class ValorReserva extends HttpServlet {
                 e.printStackTrace();
             }
     
+            
+        if (cliente.getCpf() != null) {
+            
+            
+            request.setAttribute("cliente", cliente);
             request.setAttribute("ret", ret);
             request.setAttribute("dev", dev);
             request.setAttribute("filial", filial);
             request.setAttribute("diarias", diarias);
             request.setAttribute("veic", veiculo);
             request.setAttribute("valor", valorTotal);
-            request.getRequestDispatcher("Contrato_3.jsp").forward(request, response);
-    }
+            request.getRequestDispatcher("Contrato_4.jsp").forward(request, response);
 
+        } else {
+            request.setAttribute("erro", "Cliente não existe");
+            request.setAttribute("ret", ret);
+            request.setAttribute("dev", dev);
+            request.setAttribute("filial", filial);
+            request.setAttribute("diarias", diarias);
+            request.setAttribute("veic", veiculo);
+            request.setAttribute("valor", valorTotal);
+            request.getRequestDispatcher("Contrato_4Erro.jsp").forward(request, response);
+        }
+    }
 }

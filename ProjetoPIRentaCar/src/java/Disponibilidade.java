@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Dao.VeiculoDAO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -50,12 +51,12 @@ public class Disponibilidade extends HttpServlet {
         //http://johannburkard.de/blog/programming/java/date-time-parsing-formatting-joda-time.html
         DateTime end = formatter.parseDateTime(dtDevolucao);
         int dias = Days.daysBetween(start, end).getDays();
-        Veiculos vdao = new Veiculos();
+        VeiculoDAO vdao = new VeiculoDAO();
         List<Veiculos> listaVeic = vdao.verificarDisponibilidadeByFilial(filial);
 
         request.setAttribute("ret", ret);
         request.setAttribute("dev", dev);
-        request.setAttribute("filialId", filial);
+        request.setAttribute("filial", filial);
         request.setAttribute("diarias", dias);
 
         if (listaVeic.isEmpty()) {

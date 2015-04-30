@@ -37,81 +37,8 @@ public class Contrato {
 
     }
 
-    public void cadastrarContrato() {
-        Scanner in = new Scanner(System.in);
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet res = null;
-        List<Veiculos> veiculos = new ArrayList<>();
-        List fop = new ArrayList<>();
-        Veiculos veic = new Veiculos();
-        veiculos = veic.verificarDisponibilidade();
-        System.out.println("VEICULOS");
-        for (int i = 0; i < veiculos.size(); i++) {
-            System.out.println(veiculos.get(i).getIdVeiculo()+" | " + veiculos.get(i).getNomeVeiculo()+" | "+ veiculos.get(i).getCor()+" | " + veiculos.get(i).getMarca()+" | " + veiculos.get(i).getCategoria());
-        }
-        
-        System.out.print("Escolha o veículo: ");
-        this.veiculoId = in.nextInt();
-
-        System.out.print("Informe a data de retirada: ");
-        String dtRet = in.next();
-        System.out.print("Informe a data de devolução: ");
-        String dtDev = in.next();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
-        try{
-        this.dataRetirada = dateFormat.parse(dtRet);
-        this.dataDevolucao = dateFormat.parse(dtDev);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }  
-        System.out.print("Quantidade de diárias: ");
-        this.quantidadeDiarias = in.nextInt();
-        this.saldoReserva = veic.saldoReserva(this.quantidadeDiarias);
-        verificarFormaPagto();
-        System.out.print("Escolha a opção: ");
-        this.formaPagamentoId = in.nextInt();
-        
-        System.out.println("s"+saldoReserva);
-        
-        //Contrato c = new Contrato();
-        
-    }
     
-    public void verificarFormaPagto(){
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet res = null;
-        String cmdSQLFop = "SELECT * FROM TB_FORMA_DE_PAGAMENTOS";
-        try {
-            conn = cnx.obterConexao();
-            pstm = conn.prepareStatement(cmdSQLFop);
-            res = pstm.executeQuery();
-            System.out.println("FORMAS DE PAGAMENTOS");
-            int i = 0;
-            while(res.next()){
-                
-                String f = res.getString(2);
-                System.out.println(i+" - "+f);
-                i++;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-                pstm.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
     public void validarPagamento() {
 
     }

@@ -15,6 +15,8 @@ import java.util.Date;
  *
  * @author pc
  */
+
+//transformar em interface
 public class LogSistema {
     
     public LogSistema(){

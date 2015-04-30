@@ -23,7 +23,8 @@ public class Veiculos {
     private String renavam;
     private String placa;
     private int quantidade;
-
+    private double valorCategoria;
+    
     public Veiculos() {
 
     }
@@ -39,136 +40,12 @@ public class Veiculos {
         this.quantidade = quantidade;
     }
 
-    public List<Veiculos> verificarDisponibilidade() {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        List<Veiculos> veiculos = new ArrayList<>();
-        String cmdSQL = "SELECT ID_VEICULO, NOME_VEICULO, PLACA_VEICULO, DESCRICAO_COR, DESCRICAO_MARCA, DESCRICAO_CATEGORIA, QUANTIDADE "
-                + "FROM TB_VEICULOS "
-                + "INNER JOIN TB_CORES ON ID_COR = COR_ID "
-                + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
-                + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
-                + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID";
-
-        try {
-            conn = cnx.obterConexao();
-            pstm = conn.prepareStatement(cmdSQL);
-            ResultSet disp = pstm.executeQuery();
-            while (disp.next()) {
-
-                this.idVeiculo = disp.getInt("ID_VEICULO");
-                this.nomeVeiculo = disp.getString("NOME_VEICULO");
-                this.placa = disp.getString("PLACA_VEICULO");
-                this.cor = disp.getString("DESCRICAO_COR");
-                this.marca = disp.getString("DESCRICAO_MARCA");
-                this.categoria = disp.getString("DESCRICAO_CATEGORIA");
-                this.quantidade = disp.getInt("QUANTIDADE");
-                Veiculos v = new Veiculos(this.getIdVeiculo(), this.getNomeVeiculo(), this.getPlaca(), this.getCor(), this.getMarca(), this.getCategoria(), this.getQuantidade());
-                veiculos.add(v);
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-                pstm.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return veiculos;
-    }
-
-     public List<Veiculos> verificarDisponibilidadeByFilial(int filial) {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        List<Veiculos> veiculos = new ArrayList<>();
-        String cmdSQL = "SELECT ID_VEICULO, NOME_VEICULO, DESCRICAO_MARCA, DESCRICAO_CATEGORIA, QUANTIDADE, tb_estoque.filial_id "
-                + "FROM TB_VEICULOS "
-                + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
-                + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
-                + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID "
-                + "WHERE tb_estoque.filial_id = "+filial+"";
-
-        try {
-            conn = cnx.obterConexao();
-            pstm = conn.prepareStatement(cmdSQL);
-            ResultSet disp = pstm.executeQuery();
-            while (disp.next()) {
-
-                this.idVeiculo = disp.getInt("ID_VEICULO");
-                this.nomeVeiculo = disp.getString("NOME_VEICULO");
-                this.marca = disp.getString("DESCRICAO_MARCA");
-                this.categoria = disp.getString("DESCRICAO_CATEGORIA");
-                this.quantidade = disp.getInt("QUANTIDADE");
-                Veiculos v = new Veiculos(this.getIdVeiculo(), this.getNomeVeiculo(), this.getPlaca(), this.getCor(), this.getMarca(), this.getCategoria(), this.getQuantidade());
-                veiculos.add(v);
-            }
-            
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-                pstm.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return veiculos;
-    }
-
-    public double saldoReserva(int quantidadeDiarias) {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB(("RentaCar"));
-        Connection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet res = null;
-        double saldoReserva = 0;
-        String cmdSQLSaldo = "SELECT ID_VEICULO, VALOR_CATEGORIA "
-                + "FROM TB_VEICULOS JOIN TB_CATEGORIA_VEICULOS "
-                + "ON CATEGORIA_ID = ID_CATEGORIA";
-        try {
-            conn = cnx.obterConexao();
-            pstm = conn.prepareStatement(cmdSQLSaldo);
-            res = pstm.executeQuery();
-            double saldo = res.getBigDecimal("VALOR_CATEGORIA").doubleValue();
-            System.out.println("Saldo: "+saldo);
-            saldoReserva = saldo * quantidadeDiarias;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-                pstm.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return saldoReserva;
-    }
-
-    public void adicionarVeiculo() {
-        //UPDATE TB_ESTOQUE SET QUANTIDADE=QUANTIDADE + 1 WHERE VEICULO_ID = 0;
-    }
-
-    public void retirarVeiculo() {
-        //UPDATE TB_ESTOQUE SET QUANTIDADE=QUANTIDADE - 1 WHERE VEICULO_ID = 0;
+    public Veiculos(int idVeiculo, String nomeVeiculo, String marca, String categoria, int quantidade) {
+        this.idVeiculo = idVeiculo;
+        this.nomeVeiculo = nomeVeiculo;
+        this.marca = marca;
+        this.categoria = categoria;
+        this.quantidade = quantidade;
     }
 
     public int getIdVeiculo() {
@@ -201,5 +78,45 @@ public class Veiculos {
 
     public int getQuantidade() {
         return quantidade;
+    }
+
+    public void setIdVeiculo(int idVeiculo) {
+        this.idVeiculo = idVeiculo;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public void setNomeVeiculo(String nomeVeiculo) {
+        this.nomeVeiculo = nomeVeiculo;
+    }
+
+    public void setRenavam(String renavam) {
+        this.renavam = renavam;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public double getValorCategoria() {
+        return valorCategoria;
+    }
+
+    public void setValorCategoria(double valorCategoria) {
+        this.valorCategoria = valorCategoria;
     }
 }

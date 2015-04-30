@@ -4,7 +4,7 @@
     Author     : pc
 --%>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
         <title>Cadastrar Contrato</title>
     </head>
     <body>
-        <form action="ValorReserva" id="contrato" method="POST">
+        <form id="contrato" action="FinalizarReserva" method="POST">
             <input type="hidden" name="userLogado" value="${CPFlogado}">
             <fieldset>
                 <legend>Reserva</legend>
@@ -38,34 +38,31 @@
                                 </c:choose>
                             </select></td></tr>            
                     <tr><td>Diárias </td><td><input readonly="readonly" type="text" name="diarias" value="${diarias}"></td></tr>
-                    <tr><td><a href="Contrato_1.jsp">Editar</a></td></tr>
-                
+                    <tr><td>Valor Total Reserva: </td><td><input readonly="readonly" type="text" name="valor" value="${valor}"> (<c:out value="${diarias}"/>x R$<c:out value="${veic.valorCategoria}"/>)</td></tr>
                 </table>
             </fieldset>
             <fieldset>
                 <legend>Disponibilidade</legend>
                 <table>
-                <tr>
-                    <td>Veiculo </td>
-                    <td>
-                            <c:forEach items="${veic}" var="veic" varStatus="stat">
-                    <tr><td><input type="radio" name="veiculo" value="${veic.idVeiculo}"><c:out value="${veic.categoria}"/> | <c:out value="${veic.marca}"/> | <c:out value="${veic.nomeVeiculo}"/> | R$<c:out value="${veic.valorCategoria}"/></td></tr>
-                            </c:forEach>
-                        <p><c:out value="${veicSemDisp}"/></p>
-                    </td>
-                </tr>
-
-                
-                <tr><td><button type="submit" name="btGravarContrato">Avançar</button></td></tr>
+                    <tr>
+                        <td>Veiculo Escolhido</td>
+                        <td>
+                    <tr><td><input type="hidden" name="veiculo" value="${veic.idVeiculo}"><c:out value="${veic.categoria}"/> | <c:out value="${veic.marca}"/> | <c:out value="${veic.nomeVeiculo}"/> | R$<c:out value="${veic.valorCategoria}"/></td>
+                    </tr>
                 </table>
             </fieldset>
-
             <fieldset>
                 <legend>Cliente</legend>
-                <h4>Dados do Cliente</h4>
+                <table>
+                    <tr><td>Id:</td><td><input readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
+                    <tr><td>Nome:</td><td><input readonly="readonly" name="nome" value="${cliente.nome}"></td></tr>
+                    <tr><td>CPF:</td><td><input readonly="readonly" name="cpf" value="${cliente.cpf}"></td></tr>
+
+                    <tr><td><button type="submit" name="btGravarContrato">Avançar</button></td></tr>
+                </table>
             </fieldset>
         </form>
-        
-        <h2>2</h2>
+        <a href="Contrato_1.jsp">Alterar dados da busca</a>
+        <h2>3</h2>
     </body>
 </html>

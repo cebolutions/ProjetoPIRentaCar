@@ -17,7 +17,7 @@
         
         <form action="Disponibilidade" method="POST">
             <fieldset>
-                <legend>Contrato</legend>
+                <legend>Reserva</legend>
                 <table>
                     <tr><td>Data Retirada </td><td><input type="text" name="dtRetirada"></td>
                         <td>Data Devolução </td><td><input type="text" name="dtDevolucao"></td></tr>
@@ -29,10 +29,20 @@
                                 <option value="3">Belo Horizonte</option>
                             </select></td></tr>
                     
-                    <tr><td><button type="submit" name="btVerifica">Verificar Disponibilidade</button></td></tr>
+                    <tr><td><button type="submit" name="btVerifica">Avançar</button></td></tr>
 
                 </table>
             </fieldset>
+            <fieldset>
+                <legend>Disponibilidade</legend>
+                <h4>Disponibilidade</h4>
+            </fieldset>
+            <fieldset>
+                <legend>Cliente</legend>
+                <h4>Dados do Cliente</h4>
+            </fieldset>
+            
+            <h2>1</h2>
         </form>
     </body>
 </html>
