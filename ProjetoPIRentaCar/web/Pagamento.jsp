@@ -12,80 +12,47 @@
         <title>Pagamentos</title>
     </head>
     <body>
-        <form id="BuscarContrato" name="BuscarContrato">
-            <td>Contrato </td> <input type="text" maxlength="11" name="CPFClientePesquisa">
-            <button type="submit" name="btPesquisa">Pesquisar </button><br>
-            <br>
+        <form action="BuscarContratoPagamento" id="BuscarContrato" name="BuscarContrato">
+            <label>Contrato </label> <input type="text" name="contrato">
+            <button type="submit" name="btPesquisa">Pesquisar </button>
+        </form>
 
+        <form id="contrato" name="contrato">
+            <fieldset>
+                <legend>Pagamento</legend>
+                <table>
+                    <tr><td>Número da reserva</td><td><input type="text" readonly="readonly" title="Não é possível alterar" name="contrato" value="<c:out value="${contrato.contratoId}"/>"></td></tr>                   
+                    <tr><td>Nome Cliente </td><td><input readonly="readonly" name="nomeCliente" /></td></tr>
+                    <tr><td>CPF Cliente </td><td><input readonly="readonly" name="cpfCliente" /></td></tr>
+                    <tr><td>Data Retirada </td><td><input readonly="readonly" name="dtRetirada"></td></tr>
+                    <tr><td>Data Devolução </td><td><input readonly="readonly" name="dtDevolucao"></td></tr>
+                    <tr><td>Loja </td><td><input readonly="readonly" name="loja" ></td></tr>
+                    <tr><td>Veiculo </td><td><input readonly="readonly" name="veiculo" ></td></tr>
+                    <tr><td>Diárias </td><td><input readonly="readonly" name="diarias" ></td></tr>
+                    <tr><td>Total da Reserva </td><td><input readonly="readonly" name="totalReserva" /></td></tr>
+                    <tr><td>Valor Recebido </td><td><input readonly="readonly" name="valorPago" /></td></tr>
 
-            <jsp:useBean id="cliente" class="projetorentacar.Cliente.buscarCliente"/>
-            <c:forEach items="$(cliente.lista)" var = "cliente" varStatus="stat">
-                <form id="contrato" name="contrato">
-                    <fieldset>
-                        <legend>Pagamento</legend>
-                        <table>
-                            <tr><td>Nome Cliente </td><td><input disabled name="nomeCliente" placeholder="dado do BD" /></td></tr>
-                            <tr><td>CPF Cliente </td><td><input disabled name="cpfCliente" placeholder="dado do BD"/></td></tr>
-                            <tr><td>CNH Cliente </td><td><input disabled name="cnhCliente" placeholder="dado do BD"/></td></tr>
-                            <tr><td>Data Retirada </td><td><input disabled name="dtRetirada"></td></tr>
-                            <tr><td>Data Devolução </td><td><input disabled name="dtDevolucao"></td></tr>
-                            <tr><td>Loja </td><td><input disabled name="loja" value="nomeLoja" placeholder="nome da Loja puxada do BD"></td></tr>
-                            <tr><td>Veiculo </td><td><input disabled name="veiculo" placeholder="pensar como mostrar lista, talvez dropdown"></td></tr>
-                            <tr><td>Diárias </td><td><input disabled name="diarias" ></td></tr>
-                            <tr><td>Saldo da Reserva </td><td><input disabled name="saldoReserva" placeholder="valor "/></td></tr>
+                    <tr><td>Saldo da Reserva </td><td><input readonly="readonly" name="saldoReserva" /></td></tr>
 
-                        </table>	
-                        <fieldset>
+                </table>	
+                <fieldset>
 
-                            <legend>Inserir Pagamento</legend>
-                            <table>
-                                <tr><td>Forma de Pagamento</td><td><select>
-                                            <option value="dinheiro">Dinheiro</option>
-                                            <option value="cartao">Cartão</option>
-                                        </select>
-                                    </td></tr>
-                                <tr><td>Valor Recebido </td><td><input type="text" name="vlRecebido"  /></td></tr>
-                                <tr><td><button type="submit" name="btAddPagto">Cadastrar Pagamento</button></td></tr>
-                            </table>
-                        </fieldset>
-                    </fieldset>
+                    <legend>Inserir Pagamento</legend>
+                    <table>
+                        <tr><td>Forma de Pagamento</td>
+                            <td><select>
+                                    <option value="0">Dinheiro</option>
+                                    <option value="1">Cartão</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr><td>Valor Recebido </td><td><input type="text" name="vlPago"/></td></tr>
+                        <tr><td><button type="submit" name="btAddPagto">Inserir Pagamento</button></td></tr>
+                    </table>
+                </fieldset>
 
-
-
-
-
-                    <fieldset>
-                        <legend>Pagamento Recebidos</legend>
-                        <table border="1" cellpadding="5">
-                            <tr>
-                                <th>Data</th>
-                                <th>Tipo de pagamento</th>
-                                <th>Valor</th>
-                            </tr>
-                            <tr>
-                                <th>01/01/1890</th>
-                                <th>Dinheiro</th>
-                                <th>100,00</th>
-                            </tr>
-                            <tr>
-                                <th>02/01/1890</th>
-                                <th>Cartão</th>
-                                <th>100,00</th>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <th>Total Pago</th>
-                                <th>200,00</th>
-                            </tr>
-                        </table>
-                    </fieldset>
-
-                    <p> só liberar o bt quando saldo = 0</p>
-                    <button disabled type="submit" name="btFinalizarContrato">Finalizar Contrato</button><br>
-
+                <button disabled type="submit" name="btFinalizarContrato">Finalizar Contrato</button><br>
                 </form>
 
-
-                </fieldset>	
                 </body>
                 </html>

@@ -11,11 +11,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 import projetorentacar.Usuario;
-import projetorentacar.Veiculos;
 
 /**
  *
@@ -217,6 +214,7 @@ public class UsuarioDAO extends Usuario {
         }
         return null;
     }
+    /*
     public void cadastrarVenda() {
         Scanner sc = new Scanner(System.in);
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
@@ -357,7 +355,7 @@ public class UsuarioDAO extends Usuario {
                 
              } else {
              }
-             */
+             
         } catch (SQLException ex) {
             ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
@@ -373,4 +371,5 @@ public class UsuarioDAO extends Usuario {
         }
 
     }
+*/
 }

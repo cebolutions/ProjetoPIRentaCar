@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,8 +19,10 @@
         <a href="clientes.jsp">Clientes</a><br>
         <a href="usuarios.jsp">Usuários</a><br>
         <a href="Contrato_1.jsp">Contrato</a><br>
-        <a href="">Pagamentos</a><br>
+        <a href="Pagamento.jsp">Pagamentos</a><br>
+        <a href="Relatorios.jsp">Relatorios</a><br><br>
         
+       
         
         
         <a href="login.jsp">Logout</a><br>

@@ -79,7 +79,8 @@ public class VeiculoDAO {
                 + "INNER JOIN TB_CORES ON ID_COR = COR_ID "
                 + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
                 + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
-                + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID";
+                + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID "
+                + "WHERE ID_VEICULO = "+id;
 
         try {
             conn = cnx.obterConexao();

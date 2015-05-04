@@ -5,9 +5,6 @@
  */
 package projetorentacar;
 
-import Dao.ClienteDAO;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -63,7 +60,7 @@ public class Testes {
             System.out.println(cl.getDataCadastro());
         }
         */
-        
+        /*
         Veiculos vdao = new Veiculos();
         int i = 0;
             List<Veiculos> lista = vdao.verificarDisponibilidadeByFilial(i);
@@ -74,5 +71,7 @@ public class Testes {
             System.out.print(" ");
             System.out.println(cl.getCategoria());
         }
+                */
     }
+                
 }

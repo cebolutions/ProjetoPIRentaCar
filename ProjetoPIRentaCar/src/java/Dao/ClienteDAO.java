@@ -133,6 +133,47 @@ public class ClienteDAO extends Cliente {
         }
         return null;
     }
+  public Cliente buscarClienteById(int id) {
+        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        
+        try {
+            conn = cnx.obterConexao();
+            String comandoSQL = "SELECT * FROM TB_CADASTRO_CLIENTE WHERE ID_CLIENTE = " + id;
+            pstmt = conn.prepareStatement(comandoSQL);
+            ResultSet cliente = pstmt.executeQuery();
+            while (cliente.next()) {
+                Cliente c = new Cliente();
+                c.setClienteId(cliente.getInt(1));
+                c.setNome(cliente.getString(2));
+                c.setRg(cliente.getString(3));
+                c.setCpf(cliente.getString(4));
+                c.setCnh(cliente.getString(5));
+                c.setDataNascimento(cliente.getDate(6));
+                c.setDataCadastro(cliente.getDate(7));
+                return c;
+            }
+            Cliente c = new Cliente();
+            return c;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pstmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
 
     public void updateCliente(Cliente c) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("Rentacar");

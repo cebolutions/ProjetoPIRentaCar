@@ -1,16 +1,6 @@
 package projetorentacar;
 
-import Conexao.ConexaoBDJavaDB;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -26,36 +16,78 @@ public class Contrato {
     private Date dataDevolucao;
     private int quantidadeDiarias;
     private double saldoReserva;
-    private int formaPagamentoId;
     private int filialId;
+    private boolean aberto;
+    
     public Contrato(){
     
     }
-    public Contrato(int contratoId, int clienteId, int usuarioId,
-            int veiculoId, Date dataRetirada, Date dataDevolucao, int quantidadeDiarias, int saldoReserva,
-            int formaPagamentoId, int filialId) {
-
+    public Contrato(int clienteId, int usuarioId, int veiculoId, Date dataRetirada, Date dataDevolucao, 
+            int quantidadeDiarias, double saldoReserva, int filialId) {
+        this.clienteId = clienteId;
+        this.usuarioId = usuarioId;
+        this.veiculoId = veiculoId;
+        this.dataRetirada = dataRetirada;
+        this.dataDevolucao = dataDevolucao;
+        this.quantidadeDiarias = quantidadeDiarias;
+        this.saldoReserva = saldoReserva;
+        this.filialId = filialId;
+        this.aberto = true;
+        
     }
 
     
-
-    public void validarPagamento() {
-
+public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRetirada, Date dataDevolucao, 
+            int quantidadeDiarias, double saldoReserva, int filialId, boolean ativo) {
+        this.contratoId = id;
+        this.clienteId = clienteId;
+        this.usuarioId = usuarioId;
+        this.veiculoId = veiculoId;
+        this.dataRetirada = dataRetirada;
+        this.dataDevolucao = dataDevolucao;
+        this.quantidadeDiarias = quantidadeDiarias;
+        this.saldoReserva = saldoReserva;
+        this.filialId = filialId;
+        this.aberto = ativo;
+        
+    }
+    public int getContratoId() {
+        return contratoId;
     }
 
-    public void getRetirada() {
-
+    public int getClienteId() {
+        return clienteId;
     }
 
-    public void setRetirada() {
-
+    public int getUsuarioId() {
+        return usuarioId;
     }
 
-    public void getEntrega() {
-
+    public int getVeiculoId() {
+        return veiculoId;
     }
 
-    public void setEntrega() {
+    public Date getDataRetirada() {
+        return dataRetirada;
+    }
 
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public int getQuantidadeDiarias() {
+        return quantidadeDiarias;
+    }
+
+    public double getSaldoReserva() {
+        return saldoReserva;
+    }
+
+    public int getFilialId() {
+        return filialId;
+    }
+
+    public boolean isAberto() {
+        return aberto;
     }
 }

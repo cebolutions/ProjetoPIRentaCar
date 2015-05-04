@@ -18,7 +18,7 @@ public class ProjetoPIRentaCar {
      */
     public static void main(String[] args) {
        Contrato c = new Contrato();
-       c.cadastrarContrato();
+       //c.cadastrarContrato();
        
         
     }

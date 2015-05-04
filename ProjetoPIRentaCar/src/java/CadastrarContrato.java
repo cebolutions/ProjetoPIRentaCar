@@ -5,6 +5,7 @@
  */
 
 import Dao.ClienteDAO;
+import Dao.ContratoDAO;
 import Dao.VeiculoDAO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import projetorentacar.Cliente;
+import projetorentacar.Contrato;
 import projetorentacar.Veiculos;
 
 /**
@@ -37,18 +39,20 @@ public class CadastrarContrato extends HttpServlet {
         String fil = request.getParameter("filial");
         String qtd = request.getParameter("diarias");
         String veic = request.getParameter("veiculo");
+        String valor = request.getParameter("valor");
         int filial = Integer.parseInt(fil);
         int diarias = Integer.parseInt(qtd);
         int veiculoId = Integer.parseInt(veic);
-
+        double valorReserva = Double.parseDouble(valor);
+        
         VeiculoDAO v = new VeiculoDAO();
 
         Veiculos veiculo = v.verificarDisponibilidadeById(veiculoId);
-        double valorTotal = v.saldoReserva(diarias, veiculo.getValorCategoria());
 
         Date ret = null;
         Date dev = null;
-
+        int usuarioId = 0;
+        // precisa receber info do usuario logado
         try {
             SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
             ret = dfmt.parse(dtRetirada);
@@ -56,17 +60,15 @@ public class CadastrarContrato extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+            Contrato contrato = new Contrato(c.getClienteId(), usuarioId, veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
+            ContratoDAO cdao = new ContratoDAO();
+            cdao.cadastrarContratoBD(contrato);
             //executar cadastrar contrato
 
+            request.setAttribute("contrato", contrato);
             request.setAttribute("cliente", cliente);
-            request.setAttribute("ret", ret);
-            request.setAttribute("dev", dev);
-            request.setAttribute("filial", filial);
-            request.setAttribute("diarias", diarias);
             request.setAttribute("veic", veiculo);
-            request.setAttribute("valor", valorTotal);
-            request.getRequestDispatcher("Contrato.jsp").forward(request, response);
+            request.getRequestDispatcher("ContratoAberto.jsp").forward(request, response);
 
     }
 }

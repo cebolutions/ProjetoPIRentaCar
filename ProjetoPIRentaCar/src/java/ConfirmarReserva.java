@@ -70,6 +70,7 @@ public class ConfirmarReserva extends HttpServlet {
             request.setAttribute("diarias", diarias);
             request.setAttribute("veic", veiculo);
             request.setAttribute("valor", valorTotal);
+            v.retirarVeiculo(veiculoId, filial);
             request.getRequestDispatcher("Contrato_4.jsp").forward(request, response);
 
         } else {
