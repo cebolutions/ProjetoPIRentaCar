@@ -4,6 +4,7 @@
     Author     : pc
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,11 +13,6 @@
         <title>Pagamentos</title>
     </head>
     <body>
-        <form action="FecharContrato" id="BuscarContrato" name="BuscarContrato">
-            <label>Contrato </label> <input type="text" name="contrato">
-            <button type="submit" name="btPesquisa">Pesquisar </button>
-        </form>
-
         <form id="contrato" name="contrato">
             <fieldset>
                 <legend>Pagamento</legend>
@@ -27,21 +23,21 @@
                     <tr><td>Data Retirada </td><td><input readonly="readonly" name="dtRetirada" value="<c:out value="${contrato.dataRetirada}"/>"></td></tr>
                     <tr><td>Data Devolução </td><td><input readonly="readonly" name="dtDevolucao" value="<c:out value="${contrato.dataDevolucao}"/>"></td></tr>
                     <tr><td>Loja </td><td>
-                    <c:choose>
-                        <c:when test="${contrato.filialId == 0}">
-                            <input readonly="readonly" name="filial" value="São Paulo">
-                        </c:when>
-                        <c:when test="${contrato.filialId == 1}">
-                            <input readonly="readonly" name="filial" value="Rio de Janeiro">
-                        </c:when>
-                        <c:when test="${contrato.filialId == 2}">
-                            <input readonly="readonly" name="filial" value="Porto Alegre">
-                        </c:when>
-                        <c:when test="${contrato.filialId == 3}">
-                            <input readonly="readonly" name="filial" value="Belo Horizonte">
-                        </c:when>
-                    </c:choose>
-                    </td></tr>
+                            <c:choose>
+                                <c:when test="${contrato.filialId == 0}">
+                                    <input readonly="readonly" name="filial" value="São Paulo">
+                                </c:when>
+                                <c:when test="${contrato.filialId == 1}">
+                                    <input readonly="readonly" name="filial" value="Rio de Janeiro">
+                                </c:when>
+                                <c:when test="${contrato.filialId == 2}">
+                                    <input readonly="readonly" name="filial" value="Porto Alegre">
+                                </c:when>
+                                <c:when test="${contrato.filialId == 3}">
+                                    <input readonly="readonly" name="filial" value="Belo Horizonte">
+                                </c:when>
+                            </c:choose>
+                        </td></tr>
                     <tr><td>Veiculo </td><td><input readonly="readonly" name="veiculo" value="<c:out value="${veiculo.nomeVeiculo}"/>"></td></tr>
                     <tr><td>Diárias </td><td><input readonly="readonly" name="diarias" value="<c:out value="${contrato.quantidadeDiarias}"/>"></td></tr>
                     <tr><td>Total da Reserva </td><td><input readonly="readonly" name="totalReserva" value="<c:out value="${contrato.saldoReserva}"/>"></td></tr>
@@ -49,8 +45,7 @@
 
                     <tr><td>Saldo da Reserva </td><td><input readonly="readonly" name="saldoReserva" value="<c:out value="${saldo}"/>"></td></tr>
 
-
-                </table>	
+                </table>
                 <button type="submit" name="btFinalizarContrato">Finalizar Contrato</button><br>
             </fieldset>
         </form>

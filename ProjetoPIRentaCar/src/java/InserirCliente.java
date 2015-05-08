@@ -11,7 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import projetorentacar.Cliente;
+import projetorentacar.LogSistema;
+import projetorentacar.Usuario;
 
 @WebServlet(urlPatterns = {"/InserirCliente"})
 public class InserirCliente extends HttpServlet {
@@ -19,6 +22,10 @@ public class InserirCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
+        
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");
@@ -33,6 +40,8 @@ public class InserirCliente extends HttpServlet {
         Cliente cliente = new Cliente(nome, rg, cpf, cnh, date);
         ClienteDAO c = new ClienteDAO();
         c.cadastrarClienteBD(cliente);
+        LogSistema log = new LogSistema();
+        log.cadastrarLog(5, user.getUsuarioId());
         RequestDispatcher rd = request.getRequestDispatcher("cadastroSucesso.jsp");
         rd.forward(request, response);
     }

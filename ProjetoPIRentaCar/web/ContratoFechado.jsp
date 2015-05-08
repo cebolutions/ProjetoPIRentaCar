@@ -13,12 +13,7 @@
         <title>Pagamentos</title>
     </head>
     <body>
-        <form action="BuscarContratoPagamento" method="POST">
-            <label>Contrato </label> <input type="text" name="contrato">
-            <button type="submit" name="btPesquisa">Pesquisar </button>
-        </form>
-
-        <form action="InserirPagamento" method="POST" id="contrato" name="contrato">
+        <form id="contrato" name="contrato">
             <fieldset>
                 <legend>Pagamento</legend>
                 <table>
@@ -48,27 +43,20 @@
                     <tr><td>Total da Reserva </td><td><input readonly="readonly" name="totalReserva" value="<c:out value="${contrato.saldoReserva}"/>"></td></tr>
                     <tr><td>Valor Recebido </td><td><input readonly="readonly" name="valorPago" value="<c:out value="${pgtoRecebido}"/>"></td></tr>
 
-                    <tr><td>Saldo da Reserva </td><td><input readonly="readonly" name="saldoReserva" value="<c:out value="${saldo}"/>"></td></tr>
+                    <tr><td>Status </td><td>
+                        <c:choose>
+                                <c:when test="${contrato.aberto == true}">
+                                    <input readonly="readonly" name="status" value="Aberto">
+                                </c:when>
+                                <c:when test="${contrato.aberto == false}">
+                                    <input readonly="readonly" name="status" value="Fechado">
+                                </c:when>
+                            </c:choose>
+                        </td></tr>
 
-                </table>	
-                <fieldset>
+                </table>
+            </fieldset>
+        </form>
 
-                    <legend>Inserir Pagamento</legend>
-                    <table>
-                        <tr><td>Forma de Pagamento</td>
-                            <td><select name="fop">
-                                    <option value="0">Dinheiro</option>
-                                    <option value="1">Cartão</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <p>${erro}</p>
-                        <tr><td>Valor Recebido </td><td><input type="text" name="vlPago"/></td></tr>
-                        <tr><td><button type="submit" name="btAddPagto">Inserir Pagamento</button></td></tr>
-                    </table>
-                </fieldset>
-                <button disabled type="submit" name="btFinalizarContrato">Finalizar Contrato</button><br>
-                </form>
-
-                </body>
-                </html>
+    </body>
+</html>

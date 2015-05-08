@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import projetorentacar.Cliente;
 import projetorentacar.Contrato;
+import projetorentacar.LogSistema;
 import projetorentacar.Veiculos;
 
 /**
@@ -39,14 +40,14 @@ public class BuscarContratoPagamento extends HttpServlet {
         double recebido = pdao.totalRecebidoByContrato(contrato.getContratoId());
         double saldoReserva = contrato.getSaldoReserva() - recebido;
         
-        if (saldoReserva == 0) {
+        if (contrato.isAberto()) {
             
             request.setAttribute("cliente", cliente);
             request.setAttribute("contrato", contrato);
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
-            request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
+            request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
             
         } else {
             request.setAttribute("cliente", cliente);
@@ -54,7 +55,7 @@ public class BuscarContratoPagamento extends HttpServlet {
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
-            request.getRequestDispatcher("InserirPagamento.jsp").forward(request, response);
+            request.getRequestDispatcher("ContratoFechado.jsp").forward(request, response);
         }
     }
 

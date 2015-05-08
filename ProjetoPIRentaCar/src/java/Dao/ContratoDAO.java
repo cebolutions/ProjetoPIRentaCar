@@ -70,12 +70,12 @@ public class ContratoDAO {
         Connection con = null;
         PreparedStatement pstm = null;
         String cmdSQL = "UPDATE TB_CONTRATO SET ABERTO='FALSE' "
-                + "WHERE ID_CONTRATO " + contrato.getContratoId();
+                + "WHERE ID_CONTRATO = " + contrato.getContratoId();
 
         try {
             con = cnx.obterConexao();
             pstm = con.prepareStatement(cmdSQL);
-            pstm.executeQuery();
+            pstm.executeUpdate();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
