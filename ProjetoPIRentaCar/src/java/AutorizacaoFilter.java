@@ -21,7 +21,7 @@ import projetorentacar.Usuario;
  *
  * @author pc
  */
-@WebFilter(filterName = "AutorizacaoFilter", servletNames = {""})
+@WebFilter(filterName = "AutorizacaoFilter", servletNames = {"InserirCliente"})
 public class AutorizacaoFilter implements Filter {
 
     @Override
@@ -36,7 +36,7 @@ public class AutorizacaoFilter implements Filter {
 
         // B) TENTA RECUPERAR A SESSÃO DO USUÁRIO
         HttpSession sessao = httpRequest.getSession();
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
+        Usuario usuario = (Usuario) sessao.getAttribute("user");
 
         // 2) NA LÓGICA IMPLEMENTADA, SE EXISTIR OBJETO DO USUÁRIO SIGNIFICA
         //    QUE USUÁRIO ESTÁ LOGADO
@@ -45,7 +45,8 @@ public class AutorizacaoFilter implements Filter {
             httpResponse.sendRedirect("login.jsp");
             return;
         }
-
+        chain.doFilter(request, response);
+        /*
         try {
             // 3) VERIFICAR SE USUARIO PODE ACESSAR PAGINA
             if (verificarAcesso(usuario, httpRequest, httpResponse)) {
@@ -59,6 +60,7 @@ public class AutorizacaoFilter implements Filter {
             t.printStackTrace();
         }
     }
+        
 
     private boolean verificarAcesso(Usuario usuario, HttpServletRequest req, HttpServletResponse resp) {
         String pagina = req.getRequestURI();
@@ -68,6 +70,7 @@ public class AutorizacaoFilter implements Filter {
             return true;
         }
         return false;
+        */
     }
 
     /**

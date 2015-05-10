@@ -17,8 +17,8 @@ import projetorentacar.LogSistema;
 import projetorentacar.Usuario;
 
 /**
- *
- * @author pc
+ * SERVLET PARA VALIDAR USUARIO SE ESTA CADASTRADO E ATIVO NO BD E ENVIAR PARA HOME.JSP
+ * 
  */
 @WebServlet(urlPatterns = {"/ValidarLogin"})
 public class ValidarLogin extends HttpServlet {

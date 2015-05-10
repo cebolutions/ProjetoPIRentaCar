@@ -8,15 +8,61 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <link rel="shortcut icon" href="img/favicon.PNG" type="image/x-icon"/>
+        <title>Cebolutions Rent a Car</title>
     </head>
     <body>
-        <h1>Clientes </h1>
-        <a href="cadastraCliente.jsp">Cadastrar Cliente</a><br>
-        <a href="consultaCliente.jsp">Consultar Cliente</a><br>
-        <a href="atualizarCliente.jsp">Atualizar Cliente</a><br>
-        <a href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista</a><br><br>
-        <a href="home.jsp">Voltar</a>
+        
+        <header>
+            <div class="logo-empresa">
+                <a href="home.jsp"></a>
+            </div>
+            <section class="menu">
+		   <nav class>
+			<ul>
+				<li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
+				<li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
+				<li><a id="atualiza" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
+				<li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
+				
+			</ul>
+		   </nav>
+		</section>
+		<div class="teste"></div>
+        </header>
+
+        <div class="container destaque">
+            <section class="menu-opcoes">
+                <h2>opções</h2>
+                <nav class>
+                    <ul>
+                        <li><a id="inicio" href="home.jsp">Inicio</a></li>
+                        <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
+                        <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
+                        <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
+                        <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
+                        <li><a id="logout" href="login.jsp">Logout</a></li>
+                    </ul>
+                </nav>
+            </section><!-- fim .menu-opcoes -->
+
+        </div><!-- fim .container .destaque -->
+
+        <footer>
+            <div class="container">
+                <p>Cebolutions <span>Rent a Car</span></p>
+
+                <ul class="social">
+                    <li><a href="http://facebook.com/">Facebook</a></li>
+                    <li><a href="http://twitter.com/">Twitter</a></li>
+                    <li><a href="http://plus.google.com/">Google+</a></li>
+                </ul>
+            </div>
+        </footer>
     </body>
 </html>

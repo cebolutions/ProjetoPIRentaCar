@@ -6,13 +6,14 @@
 
 import Dao.UsuarioDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import projetorentacar.LogSistema;
 import projetorentacar.Usuario;
 
 /**
@@ -25,6 +26,10 @@ public class InserirUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
+
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");
@@ -34,12 +39,15 @@ public class InserirUsuario extends HttpServlet {
         int cargo = Integer.parseInt(c);
         String f = request.getParameter("filial");
         int filial = Integer.parseInt(f);
-        
-        
-        Usuario User = new Usuario(nome, rg, cpf, login, senha, cargo, filial);
+
+        Usuario usuario = new Usuario(nome, rg, cpf, login, senha, cargo, filial);
         UsuarioDAO u = new UsuarioDAO();
-        u.cadastrarUsuarioBD(User);
-        RequestDispatcher rd = request.getRequestDispatcher("cadastroSucesso.jsp");
+        u.cadastrarUsuarioBD(usuario);
+
+        LogSistema log = new LogSistema();
+//LOG inserir usuario
+        log.cadastrarLog(2, user.getUsuarioId());
+        RequestDispatcher rd = request.getRequestDispatcher("cadastroUsuarioSucesso.jsp");
         rd.forward(request, response);
     }
 

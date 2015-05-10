@@ -8,7 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import projetorentacar.Cliente;
+import projetorentacar.LogSistema;
+import projetorentacar.Usuario;
 
 @WebServlet(urlPatterns = {"/AtualizarCliente"})
 public class AtualizarCliente extends HttpServlet {
@@ -16,7 +19,9 @@ public class AtualizarCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
         if (request.getParameter("CPFClientePesquisa") == null) {
             int id = Integer.parseInt(request.getParameter("id"));
             String nome = request.getParameter("nome");
@@ -38,14 +43,18 @@ public class AtualizarCliente extends HttpServlet {
             ClienteDAO c = new ClienteDAO();
             Cliente cliente = new Cliente(id, nome, rg, cpf, cnh, date, dateCad);
             c.updateCliente(cliente);
-
+            LogSistema log = new LogSistema();
+//LOG ALTERAÇÃO DE CLIENTE
+            log.cadastrarLog(7, user.getUsuarioId());
             request.getRequestDispatcher("/cadastroSucesso.jsp").forward(request, response);
 
         } else {
             String cpfBusca = request.getParameter("CPFClientePesquisa");
             ClienteDAO c = new ClienteDAO();
             Cliente cliente = c.buscarClienteByCpf(cpfBusca);
-            
+            LogSistema log = new LogSistema();
+//LOG BUSCA DE CLIENTE
+            log.cadastrarLog(8, user.getUsuarioId());
             if (cliente.getCpf() == null) {
                 request.getRequestDispatcher("/atualizarClienteErro.jsp").forward(request, response);
             } else {
@@ -53,17 +62,23 @@ public class AtualizarCliente extends HttpServlet {
             }
         }
     }
-@Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
 
-            String cpfBusca = request.getParameter("cpf");
-            ClienteDAO c = new ClienteDAO();
-            Cliente cliente = c.buscarClienteByCpf(cpfBusca);
-            request.setAttribute("cliente", cliente);
-            
-                request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
-            
-        }
-    
+        String cpfBusca = request.getParameter("cpf");
+        ClienteDAO c = new ClienteDAO();
+        Cliente cliente = c.buscarClienteByCpf(cpfBusca);
+        request.setAttribute("cliente", cliente);
+        LogSistema log = new LogSistema();
+//LOG BUSCA DE CLIENTE
+        log.cadastrarLog(8, user.getUsuarioId());
+        request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
+
+    }
+
 }

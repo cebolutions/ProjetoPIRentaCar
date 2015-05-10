@@ -23,10 +23,9 @@
             <section class="menu">
                 <nav class>
                     <ul>
-                        <li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
-                        <li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
-                        <li><a id="ativo" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
+                        <li><a id="cadastro" href="cadastraUsuario.jsp">Cadastrar Usuário</a></li>
+                        <li><a id="ativo" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
+                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarUsuarios">Lista de Usuários</a></li>
 
                     </ul>
                 </nav>
@@ -53,12 +52,30 @@
                 <fieldset>
                     <div class="msgsucesso"><p>Cadastro Realizado com sucesso!!!</p></div>
                     <table class="consulta">
-                        <tr><td id="label">Id:</td><td id="data"><c:out value="${cliente.clienteId}"/></td></tr>
-                        <tr><td id="label">Nome:</td><td id="data"><c:out value="${cliente.nome}"/></td></tr>
-                        <tr><td id="label">RG:</td><td id="data"><c:out value="${cliente.rg}"/></td></tr>
-                        <tr><td id="label">CPF:</td><td id="data"><c:out value="${cliente.cpf}"/></td></tr>
-                        <tr><td id="label">CNH:</td><td id="data"><c:out value="${cliente.cnh}"/></td></tr>
-                        <tr><td id="label">Data Nasc.:</td><td id="data"><fmt:formatDate value="${cliente.dataNascimento}" pattern="dd/MM/yyyy"/></td></tr>
+                        <tr><td>ID:</td><td><c:out value="${usuario.usuarioId}"/></td></tr>
+                        <tr><td>Nome:</td><td><c:out value="${usuario.nome}"/></td></tr>
+                        <tr><td>RG:</td><td><c:out value="${usuario.rg}"/></td></tr>
+                        <tr><td>CPF:</td><td><c:out value="${usuario.cpf}"/></td></tr>
+                        <tr><td>Login:</td><td><c:out value="${usuario.login}"/></td></tr>
+                        <tr><td>Senha:</td><td><c:out value="${usuario.senha}"/></td></tr>
+                        <tr><td>Cargo: </td><td>
+                                <c:choose>
+                                    <c:when test="${usuario.cargo == 0}"><c:out value="Atendente"/></c:when>
+                                    <c:when test="${usuario.cargo == 1}"><c:out value="Gerente"/></c:when>
+                                    <c:when test="${usuario.cargo == 2}"><c:out value="Diretor"/></c:when>
+                                </c:choose></td></tr>
+                        <tr><td>Filial: </td><td> 
+                                <c:choose>
+                                    <c:when test="${usuario.filial == 0}"><c:out value="São Paulo"/></c:when>
+                                    <c:when test="${usuario.filial == 1}"><c:out value="Rio de Janeiro"/></c:when>
+                                    <c:when test="${usuario.filial == 2}"><c:out value="Porto Alegre"/></c:when>
+                                    <c:when test="${usuario.filial == 3}"><c:out value="Belo Horizonte"/></c:when>
+                                </c:choose></td></tr>
+                        <tr><td>Status: </td><td> 
+                                <c:choose>
+                                    <c:when test="${usuario.ativo== true}"><c:out value="Ativo"/></c:when>
+                                    <c:when test="${usuario.ativo== false}"><c:out value="Inativo"/></c:when>
+                                </c:choose></td></tr>
                     </table>
                 </fieldset>
             </main>

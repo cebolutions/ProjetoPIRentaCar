@@ -16,6 +16,8 @@ import projetorentacar.Cliente;
 import projetorentacar.LogSistema;
 import projetorentacar.Usuario;
 
+//SERVLET PARA INSERIR O CLIENTE NO BD
+//RECEBE PARAM FROM CADASTRACLIENTE.JSP
 @WebServlet(urlPatterns = {"/InserirCliente"})
 public class InserirCliente extends HttpServlet {
 
@@ -25,7 +27,7 @@ public class InserirCliente extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
-        
+        // verificar se cliente já está no banco
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");
@@ -41,7 +43,8 @@ public class InserirCliente extends HttpServlet {
         ClienteDAO c = new ClienteDAO();
         c.cadastrarClienteBD(cliente);
         LogSistema log = new LogSistema();
-        log.cadastrarLog(5, user.getUsuarioId());
+        //LOG inserir cliente
+        log.cadastrarLog(6, user.getUsuarioId());
         RequestDispatcher rd = request.getRequestDispatcher("cadastroSucesso.jsp");
         rd.forward(request, response);
     }

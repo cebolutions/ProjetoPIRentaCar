@@ -15,8 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import projetorentacar.Cliente;
 import projetorentacar.Contrato;
+import projetorentacar.LogSistema;
+import projetorentacar.Usuario;
 import projetorentacar.Veiculos;
 
 /**
@@ -26,12 +29,14 @@ import projetorentacar.Veiculos;
 @WebServlet(urlPatterns = {"/CadastrarContrato"})
 public class CadastrarContrato extends HttpServlet {
 
-
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String cpfCliente = request.getParameter("cpf");
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
+
         ClienteDAO c = new ClienteDAO();
         Cliente cliente = c.buscarClienteByCpf(cpfCliente);
         String dtRetirada = request.getParameter("dtRetirada");
@@ -44,7 +49,7 @@ public class CadastrarContrato extends HttpServlet {
         int diarias = Integer.parseInt(qtd);
         int veiculoId = Integer.parseInt(veic);
         double valorReserva = Double.parseDouble(valor);
-        
+
         VeiculoDAO v = new VeiculoDAO();
 
         Veiculos veiculo = v.verificarDisponibilidadeById(veiculoId);
@@ -60,15 +65,19 @@ public class CadastrarContrato extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-            Contrato contrato = new Contrato(c.getClienteId(), usuarioId, veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
-            ContratoDAO cdao = new ContratoDAO();
-            cdao.cadastrarContratoBD(contrato);
-            //executar cadastrar contrato
+        Contrato contrato = new Contrato(c.getClienteId(), usuarioId, veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
+        ContratoDAO cdao = new ContratoDAO();
+        cdao.cadastrarContratoBD(contrato);
+        
 
-            request.setAttribute("contrato", contrato);
-            request.setAttribute("cliente", cliente);
-            request.setAttribute("veic", veiculo);
-            request.getRequestDispatcher("ContratoAberto.jsp").forward(request, response);
+        LogSistema log = new LogSistema();
+//LOG cadastra contrato
+        log.cadastrarLog(10, user.getUsuarioId());
+
+        request.setAttribute("contrato", contrato);
+        request.setAttribute("cliente", cliente);
+        request.setAttribute("veic", veiculo);
+        request.getRequestDispatcher("ContratoAberto.jsp").forward(request, response);
 
     }
 }

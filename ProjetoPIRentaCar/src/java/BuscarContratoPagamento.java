@@ -14,9 +14,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import projetorentacar.Cliente;
 import projetorentacar.Contrato;
 import projetorentacar.LogSistema;
+import projetorentacar.Usuario;
 import projetorentacar.Veiculos;
 
 /**
@@ -25,11 +27,14 @@ import projetorentacar.Veiculos;
  */
 @WebServlet(urlPatterns = {"/BuscarContratoPagamento"})
 public class BuscarContratoPagamento extends HttpServlet {
-    
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("user", session.getAttribute("user"));
+
         ContratoDAO cdao = new ContratoDAO();
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
         ClienteDAO cldao = new ClienteDAO();
@@ -39,16 +44,18 @@ public class BuscarContratoPagamento extends HttpServlet {
         PagamentoDAO pdao = new PagamentoDAO();
         double recebido = pdao.totalRecebidoByContrato(contrato.getContratoId());
         double saldoReserva = contrato.getSaldoReserva() - recebido;
-        
+        LogSistema log = new LogSistema();
+//LOG BUSCA CONTRATO
+        log.cadastrarLog(12, user.getUsuarioId());
         if (contrato.isAberto()) {
-            
+
             request.setAttribute("cliente", cliente);
             request.setAttribute("contrato", contrato);
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
             request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
-            
+
         } else {
             request.setAttribute("cliente", cliente);
             request.setAttribute("contrato", contrato);
