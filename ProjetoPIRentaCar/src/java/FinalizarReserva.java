@@ -19,8 +19,7 @@ import projetorentacar.Cliente;
 import projetorentacar.Veiculos;
 
 /**
- *
- * @author pc
+ * RECEBE TODAS AS INFORMAÇÕES E ENVIA PARA A PAGINA CONTRATO.JSP PARA USUÁRIO CONFIRMAR A RESERVA.
  */
 @WebServlet(urlPatterns = {"/FinalizarReserva"})
 public class FinalizarReserva extends HttpServlet {

@@ -36,52 +36,69 @@ public class InserirPagamento extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
-
+        Double vlRecebido = Double.parseDouble(request.getParameter("vlPago"));
         ContratoDAO cdao = new ContratoDAO();
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
         Pagamento pgto = new Pagamento(Integer.parseInt(request.getParameter("contrato")), Integer.parseInt(request.getParameter("fop")), Double.parseDouble(request.getParameter("vlPago")));
-        //Validar se pagamento for maior q o saldo
-
-        PagamentoDAO pdao = new PagamentoDAO();
-        pdao.cadastrarPagamentoBD(pgto);
 
         ClienteDAO cldao = new ClienteDAO();
         Cliente cliente = cldao.buscarClienteById(contrato.getClienteId());
         VeiculoDAO vdao = new VeiculoDAO();
         Veiculos veiculo = vdao.verificarDisponibilidadeById(contrato.getVeiculoId());
+        PagamentoDAO pdao = new PagamentoDAO();
         double recebido = pdao.totalRecebidoByContrato(contrato.getContratoId());
         double saldoReserva = contrato.getSaldoReserva() - recebido;
-
-        if (saldoReserva == 0) {
-            cdao.fecharContrato(contrato);
+        if (saldoReserva < vlRecebido) {
+            request.setAttribute("cliente", cliente);
+            request.setAttribute("contrato", contrato);
+            request.setAttribute("veiculo", veiculo);
+            request.setAttribute("pgtoRecebido", recebido);
+            request.setAttribute("saldo", saldoReserva);
+            request.setAttribute("erro", "*Valor informado maior que o saldo da reserva!");
+            request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
+        } else if (saldoReserva == 0 && contrato.isAberto()) {
             request.setAttribute("cliente", cliente);
             request.setAttribute("contrato", contrato);
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
             LogSistema log = new LogSistema();
-            log.cadastrarLog(10, user.getUsuarioId());
-            log.cadastrarLog(9, user.getUsuarioId());
+            //log.cadastrarLog(10, user.getUsuarioId());
+            //log.cadastrarLog(9, user.getUsuarioId());
             request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
 
-        } else if (saldoReserva < 0) {
+        } else if (!contrato.isAberto()) {
             request.setAttribute("cliente", cliente);
             request.setAttribute("contrato", contrato);
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
-            request.setAttribute("erro", "Valor informado maior que o saldo da reserva!");
-            request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
+            request.getRequestDispatcher("ContratoFechado.jsp").forward(request, response);
         } else {
-
-            request.setAttribute("cliente", cliente);
-            request.setAttribute("contrato", contrato);
-            request.setAttribute("veiculo", veiculo);
-            request.setAttribute("pgtoRecebido", recebido);
-            request.setAttribute("saldo", saldoReserva);
+            pdao.cadastrarPagamentoBD(pgto);
             LogSistema log = new LogSistema();
-            log.cadastrarLog(10, user.getUsuarioId());
-            request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
+
+            recebido = pdao.totalRecebidoByContrato(contrato.getContratoId());
+            saldoReserva = contrato.getSaldoReserva() - recebido;
+
+            if (saldoReserva <= 0) {
+                request.setAttribute("cliente", cliente);
+                request.setAttribute("contrato", contrato);
+                request.setAttribute("veiculo", veiculo);
+                request.setAttribute("pgtoRecebido", recebido);
+                request.setAttribute("saldo", saldoReserva);
+            //LogSistema log = new LogSistema();
+                //log.cadastrarLog(10, user.getUsuarioId());
+                //log.cadastrarLog(9, user.getUsuarioId());
+                request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
+            } else {
+                request.setAttribute("cliente", cliente);
+                request.setAttribute("contrato", contrato);
+                request.setAttribute("veiculo", veiculo);
+                request.setAttribute("pgtoRecebido", recebido);
+                request.setAttribute("saldo", saldoReserva);
+                request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
+            }
         }
     }
 

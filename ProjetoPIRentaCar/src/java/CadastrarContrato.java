@@ -23,8 +23,7 @@ import projetorentacar.Usuario;
 import projetorentacar.Veiculos;
 
 /**
- *
- * @author pc
+ * RECEBE OS DADOS PARA CADASTRAR CONTRATO NO BD E ENVIA PARA CONTRATOABERTO.JSP
  */
 @WebServlet(urlPatterns = {"/CadastrarContrato"})
 public class CadastrarContrato extends HttpServlet {
@@ -56,8 +55,6 @@ public class CadastrarContrato extends HttpServlet {
 
         Date ret = null;
         Date dev = null;
-        int usuarioId = 0;
-        // precisa receber info do usuario logado
         try {
             SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
             ret = dfmt.parse(dtRetirada);
@@ -65,7 +62,7 @@ public class CadastrarContrato extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Contrato contrato = new Contrato(c.getClienteId(), usuarioId, veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
+        Contrato contrato = new Contrato(c.getClienteId(), user.getUsuarioId(), veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
         ContratoDAO cdao = new ContratoDAO();
         cdao.cadastrarContratoBD(contrato);
         

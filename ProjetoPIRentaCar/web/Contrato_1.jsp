@@ -25,11 +25,8 @@
             <section class="menu">
                 <nav class>
                     <ul>
-                        <li><a id="ativo" href="Contrato_1.jsp">Consultar Estoque</a></li>
-                        <li><a id="veiculo" href="Contrato_2.jsp">Escolher Veiculo</a></li>
-                        <li><a id="atualiza" href="Contrato_3.jsp">Selecionar Cliente</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
-
+                        <li><a id="ativo" href="Contrato_1.jsp">Contrato</a></li>
+                        <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
                     </ul>
                 </nav>
             </section>
@@ -42,9 +39,9 @@
                 <nav class>
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
-                        <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
+                        <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
                         <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
-                        <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
+                        <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
                         <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
@@ -54,6 +51,7 @@
             <main>
                 <form action="Disponibilidade" method="POST">
                     <fieldset class="consultaEstoque">
+                        <legend>Verificar Estoque</legend>
                         <table>
                             <tr><td>Data Retirada: </td><td><input type="text" placeholder="dd/mm/aaaa" name="dtRetirada"></td>
                                 <td id="dev">Data Devolução: </td><td><input type="text" placeholder="dd/mm/aaaa" name="dtDevolucao"></td></tr>

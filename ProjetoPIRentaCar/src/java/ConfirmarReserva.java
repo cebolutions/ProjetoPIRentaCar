@@ -20,8 +20,7 @@ import projetorentacar.Cliente;
 import projetorentacar.Veiculos;
 
 /**
- *
- * @author pc
+ *RECEBE CPF E BUSCA CLIENTE PARA MANDAR PARA CONTRATO_4.JSP
  */
 @WebServlet(urlPatterns = {"/ConfirmarReserva"})
 public class ConfirmarReserva extends HttpServlet {
@@ -74,7 +73,7 @@ public class ConfirmarReserva extends HttpServlet {
             request.getRequestDispatcher("Contrato_4.jsp").forward(request, response);
 
         } else {
-            request.setAttribute("erro", "Cliente não existe");
+            request.setAttribute("erro", "*Cliente não existe");
             request.setAttribute("ret", ret);
             request.setAttribute("dev", dev);
             request.setAttribute("filial", filial);

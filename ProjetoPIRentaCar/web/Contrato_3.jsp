@@ -25,11 +25,8 @@
             <section class="menu">
                 <nav class>
                     <ul>
-                        <li><a id="consulta" href="Contrato_1.jsp">Consultar Estoque</a></li>
-                        <li><a id="veiculo" href="Contrato_2.jsp">Escolher Veiculo</a></li>
-                        <li><a id="ativo" href="Contrato_3.jsp">Selecionar Cliente</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
-
+                        <li><a id="ativo" href="Contrato_1.jsp">Contrato</a></li>
+                        <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
                     </ul>
                 </nav>
             </section>
@@ -42,9 +39,9 @@
                 <nav class>
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
-                        <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
+                        <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
                         <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
-                        <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
+                        <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
                         <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
@@ -75,7 +72,7 @@
                                         </c:choose>
                                     </select></td></tr>            
                             <tr><td id="diarias">Diárias </td><td><input id="dias" readonly="readonly" type="text" name="diarias" value="${diarias}"></td></tr>
-                            <tr><td id="diarias">Valor Total Reserva: </td><td><input readonly="readonly" type="text" name="valor" value="${valor}"></td></tr>
+                            <tr><td id="diarias">Valor Total Reserva: R$</td><td><input readonly="readonly" type="text" name="valor" value="${valor}"></td></tr>
                         </table>
                     </fieldset>
                     <fieldset class="disponibilidade">
@@ -97,6 +94,7 @@
                         </table>
                     </fieldset>
                     <fieldset class="cliente">
+                        <legend>Buscar Cliente</legend>
                         <table>
                             <label>CPF Cliente </label><input type="text" maxlength="11" name="CPFClientePesquisa">
                         </table>

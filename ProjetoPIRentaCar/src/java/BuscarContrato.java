@@ -9,6 +9,7 @@ import Dao.ContratoDAO;
 import Dao.PagamentoDAO;
 import Dao.VeiculoDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +26,8 @@ import projetorentacar.Veiculos;
  *
  * @author pc
  */
-@WebServlet(urlPatterns = {"/BuscarContratoPagamento"})
-public class BuscarContratoPagamento extends HttpServlet {
+@WebServlet(urlPatterns = {"/BuscarContrato"})
+public class BuscarContrato extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,8 +39,9 @@ public class BuscarContratoPagamento extends HttpServlet {
         ContratoDAO cdao = new ContratoDAO();
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
         if (contrato == null) {
+
             request.setAttribute("erro", "*Contrato não encontrado.");
-            request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
+            request.getRequestDispatcher("ConsultaContrato.jsp").forward(request, response);
         } else {
             ClienteDAO cldao = new ClienteDAO();
             Cliente cliente = cldao.buscarClienteById(contrato.getClienteId());
@@ -49,31 +51,15 @@ public class BuscarContratoPagamento extends HttpServlet {
             double recebido = pdao.totalRecebidoByContrato(contrato.getContratoId());
             double saldoReserva = contrato.getSaldoReserva() - recebido;
             LogSistema log = new LogSistema();
-            //LOG BUSCA CONTRATO
+//LOG BUSCA CONTRATO
             log.cadastrarLog(12, user.getUsuarioId());
 
-            if (saldoReserva <= 0 && contrato.isAberto()) {
-                request.setAttribute("cliente", cliente);
-                request.setAttribute("contrato", contrato);
-                request.setAttribute("veiculo", veiculo);
-                request.setAttribute("pgtoRecebido", recebido);
-                request.setAttribute("saldo", saldoReserva);
-                request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
-            } else if (saldoReserva > 0 && contrato.isAberto()) {
-                request.setAttribute("cliente", cliente);
-                request.setAttribute("contrato", contrato);
-                request.setAttribute("veiculo", veiculo);
-                request.setAttribute("pgtoRecebido", recebido);
-                request.setAttribute("saldo", saldoReserva);
-                request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
-            } else if (!contrato.isAberto()) {
-                request.setAttribute("cliente", cliente);
-                request.setAttribute("contrato", contrato);
-                request.setAttribute("veiculo", veiculo);
-                request.setAttribute("pgtoRecebido", recebido);
-                request.setAttribute("saldo", saldoReserva);
-                request.getRequestDispatcher("ConsultaContrato.jsp").forward(request, response);
-            }
+            request.setAttribute("cliente", cliente);
+            request.setAttribute("contrato", contrato);
+            request.setAttribute("veiculo", veiculo);
+            request.setAttribute("pgtoRecebido", recebido);
+            request.setAttribute("saldo", saldoReserva);
+            request.getRequestDispatcher("ConsultaContrato.jsp").forward(request, response);
         }
     }
 
