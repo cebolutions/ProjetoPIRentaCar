@@ -38,7 +38,7 @@ public class BuscarContratoPagamento extends HttpServlet {
         ContratoDAO cdao = new ContratoDAO();
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
         if (contrato == null) {
-            request.setAttribute("erro", "*Contrato não encontrado.");
+            request.setAttribute("erroBusca", "*Contrato não encontrado.");
             request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
         } else {
             ClienteDAO cldao = new ClienteDAO();

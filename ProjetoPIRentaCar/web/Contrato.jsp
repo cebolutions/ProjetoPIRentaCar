@@ -73,11 +73,7 @@
                                     </select></td></tr>            
                             <tr><td>Diárias </td><td><input readonly="readonly" type="text" name="diarias" value="${diarias}"></td></tr>
                             <tr><td>Valor Total Reserva: R$</td><td><input readonly="readonly" type="text" name="valor" value="${valor}"></td></tr>
-                            <tr><td>Veiculo Escolhido</td><td id="disponibilidade"><input type="hidden" name="veiculo" value="${veic.idVeiculo}"></td>
-                                <td id="disponibilidade"><c:out value="${veic.categoria}"/> </td>
-                                <td id="disponibilidade"><c:out value="${veic.marca}"/> </td>
-                                <td id="disponibilidade"><c:out value="${veic.nomeVeiculo}"/> </td>
-                                <td id="disponibilidade">R$<c:out value="${veic.valorCategoria}"/></td></tr>
+                            <tr><td>Veiculo Escolhido: </td><td><input type="hidden" name="veiculo" value="${veiculo.idVeiculo}"/><input id="veiculo" readonly="readonly" value="${veiculo.categoria} - ${veiculo.marca} ${veiculo.nomeVeiculo}"></tr>
                             <tr><td>Id:</td><td><input readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
                             <tr><td>Nome:</td><td><input readonly="readonly" name="nome" value="${cliente.nome}"></td></tr>
                             <tr><td>CPF:</td><td><input readonly="readonly" name="cpf" value="${cliente.cpf}"></td></tr>

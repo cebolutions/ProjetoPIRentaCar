@@ -53,6 +53,7 @@
             <main>
                 <form id="contrato" action="BuscarContratoPagamento" method="POST">
                     <fieldset class="consultaEstoque">
+                        <legend>Contrato Aberto com Sucesso</legend>
                         <table>
                             <tr><td>Número da reserva</td><td><input type="text" readonly="readonly" title="Não é possível alterar" name="contrato" value="<c:out value="${contrato.contratoId}"/>"></td></tr>                   
                             <tr><td>Data Retirada </td><td><input type="text" readonly="readonly" title="Não é possível alterar" name="dtRetirada" value="<fmt:formatDate value="${contrato.dataRetirada}" pattern="dd/MM/yyyy"/>"></td></tr>
@@ -75,11 +76,7 @@
                                     </select></td></tr>            
                             <tr><td>Diárias </td><td><input readonly="readonly" type="text" name="diarias" value="${contrato.quantidadeDiarias}"></td></tr>
                             <tr><td>Valor Total Reserva: R$</td><td><input readonly="readonly" type="text" name="valor" value="${contrato.saldoReserva}"></td></tr>
-                            <tr><td>Veiculo Escolhido</td><td id="disponibilidade"><input type="hidden" name="veiculo" value="${veic.idVeiculo}"></td>
-                                <td id="disponibilidade"><c:out value="${veic.categoria}"/> </td>
-                                <td id="disponibilidade"><c:out value="${veic.marca}"/> </td>
-                                <td id="disponibilidade"><c:out value="${veic.nomeVeiculo}"/> </td>
-                                <td id="disponibilidade">R$<c:out value="${veic.valorCategoria}"/></td></tr>
+                            <tr><td>Veiculo Escolhido: </td><td><input type="hidden" name="veiculo" value="${veiculo.idVeiculo}"/><input id="veiculo" readonly="readonly" value="${veiculo.categoria} - ${veiculo.marca} ${veiculo.nomeVeiculo}"></tr>
                             <tr><td>Id:</td><td><input readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
                             <tr><td>Nome:</td><td><input readonly="readonly" name="nome" value="${cliente.nome}"></td></tr>
                             <tr><td>CPF:</td><td><input readonly="readonly" name="cpf" value="${cliente.cpf}"></td></tr>

@@ -590,6 +590,10 @@ vertical-align:middle;
 .consultaEstoque #dias{
     width: 40px;
 }
+
+.consultaEstoque #veiculo{
+    width: 350px;
+}
 .disponibilidade{
     position: relative;
     margin: auto;

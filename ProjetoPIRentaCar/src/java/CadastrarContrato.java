@@ -66,14 +66,15 @@ public class CadastrarContrato extends HttpServlet {
         ContratoDAO cdao = new ContratoDAO();
         cdao.cadastrarContratoBD(contrato);
         
+        Contrato contratoGerado = cdao.buscarUltimoContratoByUser(user.getUsuarioId());
 
         LogSistema log = new LogSistema();
-//LOG cadastra contrato
+        //LOG cadastra contrato
         log.cadastrarLog(10, user.getUsuarioId());
 
-        request.setAttribute("contrato", contrato);
+        request.setAttribute("contrato", contratoGerado);
         request.setAttribute("cliente", cliente);
-        request.setAttribute("veic", veiculo);
+        request.setAttribute("veiculo", veiculo);
         request.getRequestDispatcher("ContratoAberto.jsp").forward(request, response);
 
     }

@@ -53,7 +53,7 @@
 
                 <fieldset class="pagamento">
                     <form action="BuscarContratoPagamento" method="POST">
-                        <div class="msgerro"><p><c:out value="${erro}"/></p></div>
+                        <div class="msgerro"><p><c:out value="${erroBusca}"/></p></div>
                         <label>Contrato </label> <input type="text" name="contrato">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>

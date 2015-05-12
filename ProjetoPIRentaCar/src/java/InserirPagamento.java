@@ -63,8 +63,8 @@ public class InserirPagamento extends HttpServlet {
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
             LogSistema log = new LogSistema();
-            //log.cadastrarLog(10, user.getUsuarioId());
-            //log.cadastrarLog(9, user.getUsuarioId());
+            //log.cadastrarLog(11, user.getUsuarioId());
+            //log.cadastrarLog(14, user.getUsuarioId());
             request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
 
         } else if (!contrato.isAberto()) {
@@ -88,8 +88,8 @@ public class InserirPagamento extends HttpServlet {
                 request.setAttribute("pgtoRecebido", recebido);
                 request.setAttribute("saldo", saldoReserva);
             //LogSistema log = new LogSistema();
-                //log.cadastrarLog(10, user.getUsuarioId());
-                //log.cadastrarLog(9, user.getUsuarioId());
+                //log.cadastrarLog(11, user.getUsuarioId());
+                //log.cadastrarLog(14, user.getUsuarioId());
                 request.getRequestDispatcher("FecharContrato.jsp").forward(request, response);
             } else {
                 request.setAttribute("cliente", cliente);

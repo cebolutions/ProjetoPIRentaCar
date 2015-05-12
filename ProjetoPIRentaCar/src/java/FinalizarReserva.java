@@ -61,7 +61,7 @@ public class FinalizarReserva extends HttpServlet {
             request.setAttribute("dev", dev);
             request.setAttribute("filial", filial);
             request.setAttribute("diarias", diarias);
-            request.setAttribute("veic", veiculo);
+            request.setAttribute("veiculo", veiculo);
             request.setAttribute("valor", valorTotal);
             request.getRequestDispatcher("Contrato.jsp").forward(request, response);
 
