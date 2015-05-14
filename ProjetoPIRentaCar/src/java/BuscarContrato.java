@@ -38,6 +38,8 @@ public class BuscarContrato extends HttpServlet {
 
         ContratoDAO cdao = new ContratoDAO();
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
+        
+        System.out.println(contrato.isAberto());
         if (contrato == null) {
 
             request.setAttribute("erro", "*Contrato não encontrado.");

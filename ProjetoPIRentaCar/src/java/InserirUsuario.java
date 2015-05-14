@@ -46,7 +46,7 @@ public class InserirUsuario extends HttpServlet {
 
         LogSistema log = new LogSistema();
 //LOG inserir usuario
-        log.cadastrarLog(2, user.getUsuarioId());
+        //log.cadastrarLog(2, user.getUsuarioId());
         RequestDispatcher rd = request.getRequestDispatcher("cadastroUsuarioSucesso.jsp");
         rd.forward(request, response);
     }

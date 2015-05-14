@@ -5,7 +5,8 @@
  */
 package projetorentacar;
 
-import java.util.List;
+import Dao.ContratoDAO;
+import java.util.Date;
 
 /**
  *
@@ -72,6 +73,11 @@ public class Testes {
             System.out.println(cl.getCategoria());
         }
                 */
+        
+        
+        Contrato contrato = new Contrato(0, 0, 0, new Date(), new Date(), 1, 150.00, 0);
+        ContratoDAO cdao = new ContratoDAO();
+        cdao.cadastrarContratoBD(contrato);
     }
                 
 }

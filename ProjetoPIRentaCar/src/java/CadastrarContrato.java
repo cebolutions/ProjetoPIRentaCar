@@ -52,13 +52,14 @@ public class CadastrarContrato extends HttpServlet {
         VeiculoDAO v = new VeiculoDAO();
 
         Veiculos veiculo = v.verificarDisponibilidadeById(veiculoId);
-
+        
         Date ret = null;
         Date dev = null;
         try {
             SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
             ret = dfmt.parse(dtRetirada);
             dev = dfmt.parse(dtDevolucao);
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

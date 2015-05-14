@@ -29,8 +29,8 @@ public class ContratoDAO {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("rentacar");
         Connection con = null;
         PreparedStatement pstm = null;
-        String cmdSQL = "INSERT INTO TB_CONTRATO (CLIENTE_ID, USUARIO_ID, VEICULO_ID, DATA_RETIRADA, DATA_DEVOLUCAO, QUANTIDADE_DIARIAS, SALDO_DA_RESERVA, FILIAL_ID, ABERTO) "
-                + "VALUES (?,?,?,?,?,?,?,?,?)";
+        String cmdSQL = "INSERT INTO TB_CONTRATO (CLIENTE_ID, USUARIO_ID, VEICULO_ID, DATA_RETIRADA, DATA_DEVOLUCAO, QUANTIDADE_DIARIAS, SALDO_DA_RESERVA, FILIAL_ID, DATA_ABERTURA, DATA_FECHAMENTO, ABERTO) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             con = cnx.obterConexao();
@@ -44,7 +44,10 @@ public class ContratoDAO {
             pstm.setInt(6, contrato.getQuantidadeDiarias());
             pstm.setDouble(7, contrato.getSaldoReserva());
             pstm.setDouble(8, contrato.getFilialId());
-            pstm.setBoolean(9, contrato.isAberto());
+            pstm.setDate(9, new java.sql.Date (contrato.getDataAbertura().getTime()));  
+            pstm.setDate(10, null);  
+            pstm.setBoolean(11, contrato.isAberto());
+            
 
             pstm.execute();
 
@@ -65,12 +68,12 @@ public class ContratoDAO {
         }
     }
 
-    public void fecharContrato(Contrato contrato) {
+    public void fecharContrato(Contrato contrato, Date date) {
+        //Date data = new java.sql.Date(date.getTime());
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("rentacar");
         Connection con = null;
         PreparedStatement pstm = null;
-        String cmdSQL = "UPDATE TB_CONTRATO SET ABERTO='FALSE' "
-                + "WHERE ID_CONTRATO = " + contrato.getContratoId();
+        String cmdSQL = "UPDATE TB_CONTRATO SET ABERTO='FALSE', DATA_FECHAMENTO='"+ new java.sql.Date(date.getTime()) +"' WHERE ID_CONTRATO = " + contrato.getContratoId();
 
         try {
             con = cnx.obterConexao();
@@ -113,8 +116,10 @@ public class ContratoDAO {
                 int diarias = r.getInt(7);
                 double saldo = r.getDouble(8);
                 int filial = r.getInt(9);
-                boolean ativo = r.getBoolean(10);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, ativo);
+                Date abertura = r.getDate(10);
+                Date fechamento = r.getDate(11);
+                boolean ativo = r.getBoolean(12);
+                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
                 return contrato;
             }
             return null;
@@ -158,8 +163,10 @@ public class ContratoDAO {
                 int diarias = r.getInt(7);
                 double saldo = r.getDouble(8);
                 int filial = r.getInt(9);
-                boolean ativo = r.getBoolean(10);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, ativo);
+                Date abertura = r.getDate(10);
+                Date fechamento = r.getDate(11);
+                boolean ativo = r.getBoolean(12);
+                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
                 return contrato;
             }
             return null;
@@ -201,8 +208,10 @@ public class ContratoDAO {
                 int diarias = r.getInt(7);
                 double saldo = r.getDouble(8);
                 int filial = r.getInt(9);
-                boolean ativo = r.getBoolean(10);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, ativo);
+                Date abertura = r.getDate(10);
+                Date fechamento = r.getDate(11);
+                boolean ativo = r.getBoolean(12);
+                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
                 contratos.add(contrato);
             }
 

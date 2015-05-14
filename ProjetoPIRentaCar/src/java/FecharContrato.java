@@ -9,6 +9,7 @@ import Dao.ContratoDAO;
 import Dao.PagamentoDAO;
 import Dao.VeiculoDAO;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +38,8 @@ public class FecharContrato extends HttpServlet {
 
         ContratoDAO cdao = new ContratoDAO();
         Contrato contratoAberto = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
-        cdao.fecharContrato(contratoAberto);
+        Date date = new Date();
+        cdao.fecharContrato(contratoAberto, date);
         Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
         ClienteDAO cldao = new ClienteDAO();
         Cliente cliente = cldao.buscarClienteById(contrato.getClienteId());

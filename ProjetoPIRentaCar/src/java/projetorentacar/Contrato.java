@@ -17,6 +17,8 @@ public class Contrato {
     private int quantidadeDiarias;
     private double saldoReserva;
     private int filialId;
+    private Date dataAbertura;
+    private Date dataEncerramento;
     private boolean aberto;
     
     public Contrato(){
@@ -32,13 +34,14 @@ public class Contrato {
         this.quantidadeDiarias = quantidadeDiarias;
         this.saldoReserva = saldoReserva;
         this.filialId = filialId;
+        this.dataAbertura = new Date();               
         this.aberto = true;
         
     }
 
     
 public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRetirada, Date dataDevolucao, 
-            int quantidadeDiarias, double saldoReserva, int filialId, boolean ativo) {
+            int quantidadeDiarias, double saldoReserva, int filialId, Date dataAbertura, Date dataEncerramento, boolean ativo) {
         this.contratoId = id;
         this.clienteId = clienteId;
         this.usuarioId = usuarioId;
@@ -48,6 +51,8 @@ public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRe
         this.quantidadeDiarias = quantidadeDiarias;
         this.saldoReserva = saldoReserva;
         this.filialId = filialId;
+        this.dataAbertura = dataAbertura;
+        this.dataEncerramento = dataEncerramento;
         this.aberto = ativo;
         
     }
@@ -89,5 +94,13 @@ public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRe
 
     public boolean isAberto() {
         return aberto;
+    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public Date getDataEncerramento() {
+        return dataEncerramento;
     }
 }
