@@ -39,8 +39,8 @@
                 <nav class>
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
-                        <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
+                        <li><a id="usuariosAtivo" href="usuarios.jsp">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
                         <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>

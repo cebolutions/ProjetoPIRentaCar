@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
@@ -16,23 +16,23 @@
         <title>Cebolutions Rent a Car</title>
     </head>
     <body>
-        
+
         <header>
             <div class="logo-empresa">
                 <a href="home.jsp"></a>
             </div>
             <section class="menu">
-		   <nav class>
-			<ul>
-				<li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
-				<li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
-				<li><a id="atualiza" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
-				<li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
-				
-			</ul>
-		   </nav>
-		</section>
-		<div class="teste"></div>
+                <nav class>
+                    <ul>
+                        <li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
+                        <li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
+                        <li><a id="atualiza" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
+                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
+
+                    </ul>
+                </nav>
+            </section>
+            <div class="teste"></div>
         </header>
 
         <div class="container destaque">
@@ -50,7 +50,20 @@
                     </ul>
                 </nav>
             </section><!-- fim .menu-opcoes -->
-
+            <main>
+                <table class="icons">
+                    <tr>
+                        <td><a href="clientes.jsp"><img src="img/clienteAtivo.png" width="140" height="140" /></a></td>
+                        <td><a href="usuarios.jsp"><img src="img/user.png" width="140" height="140" /></a></td>
+                        <td><a href="Contrato_1.jsp"><img src="img/car.png" width="140" height="140" /></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="Pagamento.jsp"><img src="img/money.png" width="140" height="140" /></a></td>
+                        <td><a id="listaContrato" href="http://localhost:8080/ProjetoPIRentaCar/Relatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
+                        <td><a href="login.jsp"><img src="img/exit.png" width="140" height="140" /></a></td>
+                    </tr>
+                </table>
+            </main>
         </div><!-- fim .container .destaque -->
 
         <footer>

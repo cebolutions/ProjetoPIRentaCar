@@ -15,17 +15,22 @@ public class Contrato {
     private Date dataRetirada;
     private Date dataDevolucao;
     private int quantidadeDiarias;
+    private double totalReserva;
     private double saldoReserva;
     private int filialId;
     private Date dataAbertura;
     private Date dataEncerramento;
     private boolean aberto;
     
+    private String nomeCliente;
+    private String nomeFilial;
+    private String categoria;
+    
     public Contrato(){
     
     }
     public Contrato(int clienteId, int usuarioId, int veiculoId, Date dataRetirada, Date dataDevolucao, 
-            int quantidadeDiarias, double saldoReserva, int filialId) {
+            int quantidadeDiarias, double totalReserva, double saldoReserva, int filialId) {
         this.clienteId = clienteId;
         this.usuarioId = usuarioId;
         this.veiculoId = veiculoId;
@@ -41,7 +46,7 @@ public class Contrato {
 
     
 public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRetirada, Date dataDevolucao, 
-            int quantidadeDiarias, double saldoReserva, int filialId, Date dataAbertura, Date dataEncerramento, boolean ativo) {
+            int quantidadeDiarias, double totalReserva, double saldoReserva, int filialId, Date dataAbertura, Date dataEncerramento, boolean ativo) {
         this.contratoId = id;
         this.clienteId = clienteId;
         this.usuarioId = usuarioId;
@@ -49,10 +54,26 @@ public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRe
         this.dataRetirada = dataRetirada;
         this.dataDevolucao = dataDevolucao;
         this.quantidadeDiarias = quantidadeDiarias;
+        this.totalReserva = totalReserva;
         this.saldoReserva = saldoReserva;
         this.filialId = filialId;
         this.dataAbertura = dataAbertura;
         this.dataEncerramento = dataEncerramento;
+        this.aberto = ativo;
+        
+    }
+public Contrato(int id, String nomeCliente, Date dataRetirada, Date dataDevolucao, int quantidadeDiarias, String categoria, 
+        double totalReserva, Date dataAbertura, Date dataEncerramento, String nomeFilial, boolean ativo) {
+        this.contratoId = id;
+        this.nomeCliente = nomeCliente;
+        this.dataRetirada = dataRetirada;
+        this.dataDevolucao = dataDevolucao;
+        this.quantidadeDiarias = quantidadeDiarias;
+        this.categoria = categoria;
+        this.totalReserva = totalReserva;
+        this.dataAbertura = dataAbertura;
+        this.dataEncerramento = dataEncerramento;
+        this.nomeFilial = nomeFilial;
         this.aberto = ativo;
         
     }
@@ -102,5 +123,21 @@ public Contrato(int id, int clienteId, int usuarioId, int veiculoId, Date dataRe
 
     public Date getDataEncerramento() {
         return dataEncerramento;
+    }
+
+    public double getTotalReserva() {
+        return totalReserva;
+    }
+
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public String getNomeFilial() {
+        return nomeFilial;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
 }

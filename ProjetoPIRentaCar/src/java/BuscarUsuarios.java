@@ -30,6 +30,13 @@ public class BuscarUsuarios extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
+        
+        if (user.getCargo() == 0) {
+            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
+            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
+            rd.forward(request, response);
+            
+        } 
 
         UsuarioDAO u = new UsuarioDAO();
         List<Usuario> lUsers = u.buscarUsuarios();
@@ -47,6 +54,12 @@ public class BuscarUsuarios extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
+        if (user.getCargo() == 0) {
+            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
+            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
+            rd.forward(request, response);
+            
+        }
 
         UsuarioDAO u = new UsuarioDAO();
         List<Usuario> lUsers = u.buscarUsuarios();

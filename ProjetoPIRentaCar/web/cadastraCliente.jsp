@@ -13,7 +13,8 @@
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
         <link rel="shortcut icon" href="img/favicon.PNG" type="image/x-icon"/>
-        <script src ="js/jscript.js" type="text/javascript"></script>
+        <script src ="js/mask.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
         <title>Cebolutions Rent a Car</title>
     </head>

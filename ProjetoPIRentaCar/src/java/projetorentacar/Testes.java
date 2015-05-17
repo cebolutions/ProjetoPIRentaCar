@@ -75,9 +75,9 @@ public class Testes {
                 */
         
         
-        Contrato contrato = new Contrato(0, 0, 0, new Date(), new Date(), 1, 150.00, 0);
+        //Contrato contrato = new Contrato(0, 0, 0, new Date(), new Date(), 1, 150.00, 0);
         ContratoDAO cdao = new ContratoDAO();
-        cdao.cadastrarContratoBD(contrato);
+        //cdao.cadastrarContratoBD(contrato);
     }
                 
 }

@@ -42,6 +42,8 @@ public class InserirCliente extends HttpServlet {
         Cliente cliente = new Cliente(nome, rg, cpf, cnh, date);
         ClienteDAO c = new ClienteDAO();
         c.cadastrarClienteBD(cliente);
+        cliente = c.buscarClienteByCpf(cpf);
+        request.setAttribute("cliente", cliente);
         LogSistema log = new LogSistema();
         //LOG inserir cliente
         log.cadastrarLog(6, user.getUsuarioId());

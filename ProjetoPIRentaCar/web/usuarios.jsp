@@ -49,6 +49,20 @@
                 </nav>
             </section><!-- fim .menu-opcoes -->
             <main>
+                <div class="msgsucesso"><p>${erro}</p></div>
+                <table class="icons">
+                    <tr>
+                        <td><a href="clientes.jsp"><img src="img/cliente.png" width="140" height="140" /></a></td>
+                        <td><a href="usuarios.jsp"><img src="img/userAtivo.png" width="140" height="140" /></a></td>
+                        <td><a href="Contrato_1.jsp"><img src="img/car.png" width="140" height="140" /></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="Pagamento.jsp"><img src="img/money.png" width="140" height="140" /></a></td>
+                        <td><a href="http://localhost:8080/ProjetoPIRentaCar/Relatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
+                        <td><a href="login.jsp"><img src="img/exit.png" width="140" height="140" /></a></td>
+                    </tr>
+                </table>
+            
             </main>
         </div><!-- fim .container .destaque -->
 

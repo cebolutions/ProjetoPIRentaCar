@@ -29,6 +29,12 @@ public class InserirUsuario extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
+        
+        if (user.getCargo() == 0) {
+            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
+            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
+            
+        }
 
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
@@ -43,9 +49,11 @@ public class InserirUsuario extends HttpServlet {
         Usuario usuario = new Usuario(nome, rg, cpf, login, senha, cargo, filial);
         UsuarioDAO u = new UsuarioDAO();
         u.cadastrarUsuarioBD(usuario);
-
+        
+        usuario = u.buscarUsuarioByCpf(cpf);
+        request.setAttribute("usuario", usuario);
         LogSistema log = new LogSistema();
-//LOG inserir usuario
+        //LOG inserir usuario
         //log.cadastrarLog(2, user.getUsuarioId());
         RequestDispatcher rd = request.getRequestDispatcher("cadastroUsuarioSucesso.jsp");
         rd.forward(request, response);

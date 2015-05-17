@@ -28,6 +28,7 @@
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
                         <li><a id="ativo" href="">Contrato Aberto</a></li>
+                        <li><a id="lista" href="http://localhost:8080/ProjetoPIRentaCar/BuscarContratos">Lista de Contrato</a></li>
 
                     </ul>
                 </nav>

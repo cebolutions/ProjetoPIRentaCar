@@ -29,6 +29,12 @@ public class AtualizarUsuario extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
+        
+        if (user.getCargo() == 0) {
+            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
+            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
+            
+        }
 
         String cpf = request.getParameter("cpf");
         UsuarioDAO u = new UsuarioDAO();

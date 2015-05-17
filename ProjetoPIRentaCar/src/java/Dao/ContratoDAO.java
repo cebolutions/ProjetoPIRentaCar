@@ -29,8 +29,8 @@ public class ContratoDAO {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("rentacar");
         Connection con = null;
         PreparedStatement pstm = null;
-        String cmdSQL = "INSERT INTO TB_CONTRATO (CLIENTE_ID, USUARIO_ID, VEICULO_ID, DATA_RETIRADA, DATA_DEVOLUCAO, QUANTIDADE_DIARIAS, SALDO_DA_RESERVA, FILIAL_ID, DATA_ABERTURA, DATA_FECHAMENTO, ABERTO) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String cmdSQL = "INSERT INTO TB_CONTRATO (CLIENTE_ID, USUARIO_ID, VEICULO_ID, DATA_RETIRADA, DATA_DEVOLUCAO, QUANTIDADE_DIARIAS, TOTAL_RESERVA, SALDO_DA_RESERVA, FILIAL_ID, DATA_ABERTURA, DATA_FECHAMENTO, ABERTO) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             con = cnx.obterConexao();
@@ -43,10 +43,11 @@ public class ContratoDAO {
             pstm.setDate(5, new java.sql.Date(contrato.getDataDevolucao().getTime()));
             pstm.setInt(6, contrato.getQuantidadeDiarias());
             pstm.setDouble(7, contrato.getSaldoReserva());
-            pstm.setDouble(8, contrato.getFilialId());
-            pstm.setDate(9, new java.sql.Date (contrato.getDataAbertura().getTime()));  
-            pstm.setDate(10, null);  
-            pstm.setBoolean(11, contrato.isAberto());
+            pstm.setDouble(8, contrato.getSaldoReserva());
+            pstm.setDouble(9, contrato.getFilialId());
+            pstm.setDate(10, new java.sql.Date (contrato.getDataAbertura().getTime()));  
+            pstm.setDate(11, null);  
+            pstm.setBoolean(12, contrato.isAberto());
             
 
             pstm.execute();
@@ -114,12 +115,13 @@ public class ContratoDAO {
                 Date ret = r.getDate(5);
                 Date dev = r.getDate(6);
                 int diarias = r.getInt(7);
-                double saldo = r.getDouble(8);
-                int filial = r.getInt(9);
-                Date abertura = r.getDate(10);
-                Date fechamento = r.getDate(11);
-                boolean ativo = r.getBoolean(12);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
+                double total = r.getDouble(8);
+                double saldo = r.getDouble(9);
+                int filial = r.getInt(10);
+                Date abertura = r.getDate(11);
+                Date fechamento = r.getDate(12);
+                boolean ativo = r.getBoolean(13);
+                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, total, saldo, filial, abertura, fechamento, ativo);
                 return contrato;
             }
             return null;
@@ -161,12 +163,13 @@ public class ContratoDAO {
                 Date ret = r.getDate(5);
                 Date dev = r.getDate(6);
                 int diarias = r.getInt(7);
-                double saldo = r.getDouble(8);
-                int filial = r.getInt(9);
-                Date abertura = r.getDate(10);
-                Date fechamento = r.getDate(11);
-                boolean ativo = r.getBoolean(12);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
+                double total = r.getDouble(8);
+                double saldo = r.getDouble(9);
+                int filial = r.getInt(10);
+                Date abertura = r.getDate(11);
+                Date fechamento = r.getDate(12);
+                boolean ativo = r.getBoolean(13);
+                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, total, saldo, filial, abertura, fechamento, ativo);
                 return contrato;
             }
             return null;
@@ -192,26 +195,31 @@ public class ContratoDAO {
         Connection con = null;
         PreparedStatement pstm = null;
         List<Contrato> contratos = new ArrayList<>();
-        String cmdSQL = "SELECT * FROM TB_CONTRATO";
+        String cmdSQL = "SELECT id_contrato, cl.nome_Cliente, data_Retirada, data_Devolucao, \n" +
+        "       quantidade_Diarias, c.DESCRICAO_CATEGORIA, total_Reserva, data_Abertura, data_fechamento, f.nome_loja, aberto\n" +
+        "from tb_contrato\n" +
+        "inner join tb_cadastro_cliente as cl on cl.id_cliente = cliente_id\n" +
+        "inner join tb_filiais as f on f.id_filial = filial_id\n" +
+        "inner join tb_veiculos as v on v.id_veiculo = VEICULO_ID\n" +
+        "inner join tb_categoria_veiculos as c on c.ID_CATEGORIA = v.CATEGORIA_ID";
 
         try {
             con = cnx.obterConexao();
             pstm = con.prepareStatement(cmdSQL);
             ResultSet r = pstm.executeQuery();
             while (r.next()) {
-                int id = r.getInt(2);
-                int cliente = r.getInt(2);
-                int user = r.getInt(3);
-                int veiculo = r.getInt(4);
-                Date ret = r.getDate(5);
-                Date dev = r.getDate(6);
-                int diarias = r.getInt(7);
-                double saldo = r.getDouble(8);
-                int filial = r.getInt(9);
-                Date abertura = r.getDate(10);
-                Date fechamento = r.getDate(11);
-                boolean ativo = r.getBoolean(12);
-                Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, saldo, filial, abertura, fechamento, ativo);
+                int id = r.getInt(1);
+                String cliente = r.getString(2);
+                Date ret = r.getDate(3);
+                Date dev = r.getDate(4);
+                int diarias = r.getInt(5);
+                String categoria = r.getString(6);
+                double total = r.getDouble(7);
+                Date abertura = r.getDate(8);
+                Date fechamento = r.getDate(9);
+                String loja = r.getString(10);
+                boolean ativo = r.getBoolean(11);
+                Contrato contrato = new Contrato(id, cliente, ret, dev, diarias, categoria, total, abertura, fechamento, loja, ativo);
                 contratos.add(contrato);
             }
 

@@ -11,16 +11,18 @@
         <link rel="shortcut icon" href="img/favicon.PNG" type="image/x-icon"/>
         <title>Cebolutions Rent a Car</title>
     <body>
-    <main>
-        <form action="ValidarLogin" method="POST" name="fLogin">
-            <div class="msgerro"><p>${erro}</p></div>
-            <table border="0">
-                    <tr><td>Login</td><td><input type="text" name="login" required/></td></tr>
-                    <tr><td>Senha</td><td><input type="password" name="senha" required/></td></tr>
-                    
-            </table>
-            <div class="submeter"><input type="submit" value="Entrar"></div>
-        </form>
-    </main>
-    </body>
+        <div id="login">
+            <img src="img/logo2.PNG" alt="logo2"/>
+
+            <form action="ValidarLogin" method="POST" name="fLogin">
+                <table id="log">
+                    <tr><td></td><td><div class="msgerro"><p>${erro}</p></div></td></tr>
+                    <tr><td>Login</td><td><input required type="text" name="login"></td></tr>
+                    <tr><td>Senha</td><td><input required type="password" name="senha"></td></tr>
+
+                </table>
+                <div class="submeter"><input type="submit" value="Entrar"></div>
+            </form>
+        </div>
+</body>
 </html>

@@ -63,7 +63,7 @@ public class CadastrarContrato extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Contrato contrato = new Contrato(c.getClienteId(), user.getUsuarioId(), veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, filial);
+        Contrato contrato = new Contrato(c.getClienteId(), user.getUsuarioId(), veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, valorReserva, filial);
         ContratoDAO cdao = new ContratoDAO();
         cdao.cadastrarContratoBD(contrato);
         
