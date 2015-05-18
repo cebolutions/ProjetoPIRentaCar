@@ -15,8 +15,15 @@
             <div class="logo-empresa">
                 <a href="home.jsp"></a>
             </div>
+            <section class="menu">
+                <nav class>
+                    <ul>
+                        <li><a id="ativo">Gerência</a></li>
+                    </ul>
+                </nav>
+            </section>
+            <div class="teste"></div>
         </header>
-
         <div class="container destaque">
             <section class="menu-opcoes">
                 <h2>opções</h2>
@@ -24,15 +31,34 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorioAtivo" href="Relatorios.jsp">Relatòrios</a></li>
+                        <li><a id="relatorioAtivo" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
             </section><!-- fim .menu-opcoes -->
+            <main>
+                <fieldset><legend>Buscar Relatório</legend>
+                    <form action="buscaRelatorio" method="POST">
+                        <table>
+                            <tr><td><input type="radio" name="relatorio" value="0">Quantidade Veiculos</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="1">Veiculos por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="5">Quantidade Veiculos</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="6">Vendas por usuários (1sem)</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="7">Vendas por usuários (filial)</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="8">Vendas por Usuário</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="9">Qtd Veículos por filial</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="10">Formas de pagamento</td></tr>
+                            <tr><div class="submeter"><input type="submit" value="Buscar"></div></tr>
 
+                        </table>
+                    </form>
+                </fieldset>
+            </main>
         </div><!-- fim .container .destaque -->
 
         <footer>

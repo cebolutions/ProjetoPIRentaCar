@@ -123,7 +123,7 @@ public class VeiculoDAO {
                 + "INNER JOIN TB_ESTOQUE ON ID_VEICULO = VEICULO_ID "
                 + "INNER JOIN TB_MARCAS_VEICULOS ON ID_MARCA = MARCA_ID "
                 + "INNER JOIN TB_CATEGORIA_VEICULOS ON ID_CATEGORIA = CATEGORIA_ID "
-                + "WHERE tb_estoque.filial_id = "+filial+"";
+                + "WHERE tb_estoque.filial_id = "+filial+" AND TB_ESTOQUE.QUANTIDADE > 0";
 
         try {
             conn = cnx.obterConexao();
@@ -221,35 +221,33 @@ public class VeiculoDAO {
         return valCategoria;
     }
     
-    public void adicionarVeiculo(/*int id_veiculo_alocado, int id_filial, Date dataEntrega*/) {
+    public void adicionarVeiculo(int id_veiculo, int id_filial) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstm = null;
-        ResultSet addVeiculo = null;
 
         String cmdSQL = "UPDATE TB_ESTOQUE"
                 + " SET QUANTIDADE = QUANTIDADE + 1"
                 + " WHERE TB_ESTOQUE.VEICULO_ID = ? AND TB_ESTOQUE.FILIAL_ID = ?";
-
-        //1,2,3 testando...
-        String data = "2015/04/15";
-        Date teste = null;
-
-        SimpleDateFormat formatData = new SimpleDateFormat("yyyy/MM/dd");
-
         try {
-            teste = formatData.parse(data);
-        } catch (ParseException ex) {
+            conn = cnx.obterConexao();
+            pstm = conn.prepareStatement(cmdSQL);
+            pstm.setInt(1, id_veiculo);
+            pstm.setInt(2, id_filial);
+            pstm.executeUpdate();
+        } catch (SQLException ex) {
             ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+                pstm.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-
-        String r = String.valueOf(teste);
-
-        if (teste.equals(r)) {
-            System.out.println("Data formatada e são iguais ");
-        } else {
-            System.out.println("////");
-        }
+        
     }
 
     public void retirarVeiculo(int id_veiculo_alocado, int id_filial) {
@@ -260,7 +258,7 @@ public class VeiculoDAO {
 
         String comandoSQL = "UPDATE TB_ESTOQUE"
                 + " SET QUANTIDADE = QUANTIDADE - 1"
-                + " WHERE TB_ESTOQUE.VEICULO_ID = ? AND TB_ESTOQUE.FILIAL_ID = ? ";
+                + " WHERE TB_ESTOQUE.VEICULO_ID = ? AND TB_ESTOQUE.FILIAL_ID = ?";
 
         try {
             conn = cnx.obterConexao();

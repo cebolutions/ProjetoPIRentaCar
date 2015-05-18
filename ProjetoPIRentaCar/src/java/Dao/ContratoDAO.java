@@ -124,7 +124,8 @@ public class ContratoDAO {
                 Contrato contrato = new Contrato(id, cliente, user, veiculo, ret, dev, diarias, total, saldo, filial, abertura, fechamento, ativo);
                 return contrato;
             }
-            return null;
+            Contrato contrato = new Contrato();
+            return contrato;
             
         } catch (SQLException ex) {
             ex.printStackTrace();

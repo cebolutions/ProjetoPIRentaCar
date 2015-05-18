@@ -23,9 +23,9 @@
             <section class="menu">
                 <nav class>
                     <ul>
-                        <li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
+                        <li><a id="ativo" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
                         <li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
-                        <li><a id="ativo" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
+                        <li><a id="atulizar" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
                         <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
 
                     </ul>
@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
+                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>

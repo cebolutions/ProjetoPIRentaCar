@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
+                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -59,7 +59,7 @@
                     </form>
                     <form id="atualizar" action="AtualizarCliente" method="POST">
 
-                        <table>
+                        <table class="atualizar">
                             <tr><td id="label">Id:</td><td id="input"><input required readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
                             <tr><td id="label">Nome:</td><td id="input"><input required type="text" name="nome" value="${cliente.nome}"></td></tr>
                             <tr><td id="label">RG:</td><td id="input"><input required type="text" name="rg" value="${cliente.rg}"></td></tr>

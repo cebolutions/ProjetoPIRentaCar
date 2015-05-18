@@ -40,10 +40,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuariosAtivo" href="usuarios.jsp">Usuários</a></li>
+                        <li><a id="usuariosAtivo" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="Relatorios.jsp">Relatòrios</a></li>
+                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -53,12 +53,12 @@
                 <table class="icons">
                     <tr>
                         <td><a href="clientes.jsp"><img src="img/cliente.png" width="140" height="140" /></a></td>
-                        <td><a href="usuarios.jsp"><img src="img/userAtivo.png" width="140" height="140" /></a></td>
+                        <td><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios"><img src="img/userAtivo.png" width="140" height="140" /></a></td>
                         <td><a href="Contrato_1.jsp"><img src="img/car.png" width="140" height="140" /></a></td>
                     </tr>
                     <tr>
                         <td><a href="Pagamento.jsp"><img src="img/money.png" width="140" height="140" /></a></td>
-                        <td><a href="http://localhost:8080/ProjetoPIRentaCar/Relatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
+                        <td><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
                         <td><a href="login.jsp"><img src="img/exit.png" width="140" height="140" /></a></td>
                     </tr>
                 </table>

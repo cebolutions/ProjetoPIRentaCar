@@ -817,3 +817,26 @@ vertical-align:middle;
     text-align: center;
     vertical-align: middle;
 }
+
+.btRelatorio {
+    position: relative;
+    margin: auto;
+    float: right;
+    
+}
+.btRelatorio input {
+    width: 200px;
+    height: 60px;
+    background-color: #347235;
+    color: #FFF;
+    font-weight: bold;
+}
+
+.btRelatorio input:hover{
+    width: 200px;
+    height: 60px;
+    background-color: #85BB65;
+    color: #FFF;
+    font-weight: bold;
+    transition: 0.5s;
+}
