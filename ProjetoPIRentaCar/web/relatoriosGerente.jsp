@@ -45,8 +45,11 @@
                         <table>
                             <tr><td><input type="radio" name="relatorio" value="0">Quantidade Veiculos</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="1">Veiculos por Usuários</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuário</td></tr>
+                            <tr><td><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId"></td></tr>
+                            
                             <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
+                            <tr><td><label>Período: </label></td><td><input type="text" name="perInicial" placeholder="Inicio"></td><td><input type="text" name="perFinal" placeholder="Final"></td></tr>
                             <tr><td><input type="radio" name="relatorio" value="5">Quantidade Veiculos</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="6">Vendas por usuários (1sem)</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="7">Vendas por usuários (filial)</td></tr>

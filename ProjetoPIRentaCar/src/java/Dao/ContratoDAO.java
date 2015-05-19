@@ -70,7 +70,6 @@ public class ContratoDAO {
     }
 
     public void fecharContrato(Contrato contrato, Date date) {
-        //Date data = new java.sql.Date(date.getTime());
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("rentacar");
         Connection con = null;
         PreparedStatement pstm = null;

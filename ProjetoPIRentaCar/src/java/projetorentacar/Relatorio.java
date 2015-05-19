@@ -14,10 +14,13 @@ import java.util.Date;
 public class Relatorio {
     private String nomeUsuario;
     private String nomeVeiculo;
+    private String nomeLoja;
     private String tipoPagamento;
     private int qtdVeiculo;
     private Date periodoInicial;
     private Date periodoFinal;
+    private Date dataRetirada;
+    private Date dataDevolucao;
     private double totalVendas;
     private int usuarioId;
     private int filialId;
@@ -105,6 +108,30 @@ public class Relatorio {
 
     public void setVeiculoId(int veiculoId) {
         this.veiculoId = veiculoId;
+    }
+
+    public Date getDataRetirada() {
+        return dataRetirada;
+    }
+
+    public void setDataRetirada(Date dataRetirada) {
+        this.dataRetirada = dataRetirada;
+    }
+
+    public Date getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(Date dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public String getNomeLoja() {
+        return nomeLoja;
+    }
+
+    public void setNomeLoja(String nomeLoja) {
+        this.nomeLoja = nomeLoja;
     }
     
 }

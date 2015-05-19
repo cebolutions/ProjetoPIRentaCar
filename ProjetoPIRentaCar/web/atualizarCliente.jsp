@@ -61,7 +61,7 @@
                             <tr><td id="label">Id:</td><td id="input"><input required readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
                             <tr><td id="label">Nome:</td><td id="input"><input required type="text" name="nome" value="${cliente.nome}"></td></tr>
                             <tr><td id="label">RG:</td><td id="input"><input required type="text" name="rg" value="${cliente.rg}"></td></tr>
-                            <tr><td id="label">CPF:</td><td id="input"><input required type="text" name="cpf" value="${cliente.cpf}"></td></tr>
+                            <tr><td id="label">CPF:</td><td id="input"><input required type="text" maxlength="11" name="cpf" value="${cliente.cpf}"></td></tr>
                             <tr><td id="label">CNH:</td><td id="input"><input required type="text" name="cnh" value="${cliente.cnh}"></td></tr>
                             <tr><td id="label">Data Nasc.:</td><td id="input"><input required type="text" name="dtNasc" value="<fmt:formatDate value="${cliente.dataNascimento}" pattern="dd/MM/yyyy"/>"></td></tr>
                             <tr><td id="label">Data Cadastro:</td><td id="input"><input required readonly="readonly" title="Não é possível alterar" name="dtCadastro" value="<fmt:formatDate value="${cliente.dataCadastro}" pattern="dd/MM/yyyy"/>"></td></tr>
