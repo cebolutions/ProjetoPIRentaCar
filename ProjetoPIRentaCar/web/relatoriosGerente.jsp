@@ -41,10 +41,10 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
-                    <form action="buscaRelatorio" method="POST">
+                    <form action="BuscarRelatorio" method="POST">
                         <table>
-                            <tr><td><input type="radio" name="relatorio" value="0">Quantidade Veiculos</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="1">Veiculos por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="1">Quantidade Veiculos</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="2">Veiculos por Usuários</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuário</td></tr>
                             <tr><td><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId"></td></tr>
                             
@@ -56,9 +56,10 @@
                             <tr><td><input type="radio" name="relatorio" value="8">Vendas por Usuário</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="9">Qtd Veículos por filial</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="10">Formas de pagamento</td></tr>
-                            <tr><div class="submeter"><input type="submit" value="Buscar"></div></tr>
+                            
 
                         </table>
+                        <div class="submeter"><input type="submit" value="Buscar"></div>
                     </form>
                 </fieldset>
             </main>

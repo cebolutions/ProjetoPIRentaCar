@@ -154,11 +154,11 @@ public class RelatorioDAO {
 
         try {
             conn = cnx.obterConexao();
-            String comandoSQL = "SELECT NOME_USUARIO , SUM(SALDO_DA_RESERVA), DATA_RETIRADA , DATA_DEVOLUCAO\n"
+            String comandoSQL = "SELECT NOME_USUARIO , SUM(TOTAL_RESERVA)\n"
                     + "     FROM TB_CONTRATO\n"
                     + "     JOIN TB_USUARIOS ON TB_CONTRATO.USUARIO_ID  = TB_USUARIOS.ID_USUARIO\n"
                     + "     WHERE DATA_ABERTURA >= '" + new java.sql.Date(perInicial.getTime()) + "' AND DATA_ABERTURA <= '" + new java.sql.Date(perFinal.getTime()) + "'\n"
-                    + "     GROUP BY NOME_USUARIO , DATA_RETIRADA, DATA_DEVOLUCAO";
+                    + "     GROUP BY NOME_USUARIO";
             pstmt = conn.prepareStatement(comandoSQL);
             List<Relatorio> lista = new ArrayList<>();
             ResultSet relatorio = pstmt.executeQuery();
@@ -166,8 +166,6 @@ public class RelatorioDAO {
                 Relatorio r = new Relatorio();
                 r.setNomeUsuario(relatorio.getString(1));
                 r.setTotalVendas(relatorio.getDouble(2));
-                r.setDataRetirada(relatorio.getDate(3));
-                r.setDataDevolucao(relatorio.getDate(4));
                 lista.add(r);
             }
             return lista;

@@ -6,7 +6,10 @@
 package Servlets;
 
 import Dao.RelatorioDAO;
+import Dao.VeiculoDAO;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import projetorentacar.Relatorio;
+import projetorentacar.Veiculos;
 
 /**
  *
@@ -32,39 +36,58 @@ public class BuscarRelatorio extends HttpServlet {
         switch (Integer.parseInt(request.getParameter("relatorio"))) {
             case 1:
                 lista = r.qtdVeiculosPorUsuario();
-                request.setAttribute("listaQtdVeiculo", lista);
-                
+                request.setAttribute("rel", 1);
+                request.setAttribute("relatorio", lista);
+                request.getRequestDispatcher("visaoRelatoriosGerente.jsp").forward(request, response);
                 break;
             case 2:
                 lista = r.veiculosPorUsuarios();
-                request.setAttribute("listaVeiculosPorUsuario", lista);
+                request.setAttribute("rel", 2);
+                request.setAttribute("relatorio", lista);
                 request.getRequestDispatcher("visaoRelatoriosGerente.jsp").forward(request, response);
                 break;
             case 3:
-                relatorio = r.totalVendasDeUsuario(Integer.parseInt(request.getParameter("id")));
-                request.setAttribute("listaVeiculosPorUsuario", relatorio);
+                int id = Integer.parseInt(request.getParameter("id"));
+                relatorio = r.totalVendasDeUsuario(id);
+                request.setAttribute("rel", 3);
+                request.setAttribute("relatorio", relatorio);
                 request.getRequestDispatcher("visaoRelatoriosGerente.jsp").forward(request, response);
                 break;
             case 4:
-                
+                String dtInicial = request.getParameter("perInicial");
+                String dtFinal = request.getParameter("perFinal");
+                Date inicio = null;
+                Date fim = null;
+                try {
+                    SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
+                    inicio = dfmt.parse(dtInicial);
+                    fim = dfmt.parse(dtFinal);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                lista = r.totalVendasPorUsuariosPorPeriodo(inicio, fim);
+                request.setAttribute("rel", 4);
+                request.setAttribute("relatorio", lista);
+                request.getRequestDispatcher("visaoRelatoriosGerente.jsp").forward(request, response);
                 break;
             case 5:
-                
+
                 break;
             case 6:
-                
+
                 break;
             case 7:
-                
+
                 break;
             case 8:
-                
+
                 break;
             case 9:
-                
+
                 break;
             case 10:
-                
+
                 break;
         }
     }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,9 +42,60 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
-                    <div class="opcao"><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Nova Busca</a></div>
-                    <table>
+
+                    <table class="lista" border="1" cellpadding="10">
+                        <c:choose>
+                            <c:when test="${rel == 1}">
+                                <tr>
+                                    <th>Nome Usuário</th>
+                                    <th>Quantidade Veículos</th>
+                                    <th>Nome Veículo</th>
+                                </tr>
+                                <c:forEach items="${relatorio}" var="rel" varStatus="stat">
+                                    <tr>
+                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
+                                        <td> <c:out value="${rel.qtdVeiculo}" /> </td>
+                                        <td> <c:out value="${rel.nomeVeiculo}" /> </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:when test="${rel == 2}">
+                                <tr>
+                                    <th>Nome Usuário</th>
+                                    <th>Quantidade Veículos</th>
+                                </tr>
+                                <c:forEach items="${relatorio}" var="rel" varStatus="stat">
+                                    <tr>
+                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
+                                        <td> <c:out value="${rel.qtdVeiculo}" /> </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                            <c:when test="${rel == 3}">
+                                <tr>
+                                    <th>Nome Usuário</th>
+                                    <th>Quantidade Veículos</th>
+                                </tr>
+                                <tr>
+                                    <td> <c:out value="${relatorio.nomeUsuario}" /></td>
+                                    <td> <c:out value="${relatorio.qtdVeiculo}" /> </td>
+                                </tr>
+                            </c:when>
+                            <c:when test="${rel == 4}">
+                                <tr>
+                                    <th>Nome Usuário</th>
+                                    <th>Total Vendas</th>
+                                </tr>
+                                <c:forEach items="${relatorio}" var="rel" varStatus="stat">
+                                    <tr>
+                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
+                                        <td> <c:out value="${rel.totalVendas}" /> </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:when>
+                        </c:choose>
                     </table>
+                    <div class="opcao"><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Nova Busca</a></div>
                 </fieldset>
             </main>
         </div><!-- fim .container .destaque -->
