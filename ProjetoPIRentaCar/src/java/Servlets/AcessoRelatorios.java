@@ -36,7 +36,7 @@ public class AcessoRelatorios extends HttpServlet {
 
         LogSistema log = new LogSistema();
         //LOG visualizar relatorio
-        //log.cadastrarLog(15, user.getUsuarioId());
+        log.cadastrarLog(17, user.getUsuarioId());
         RequestDispatcher rd;
         if (user.getCargo() == 1) {
 

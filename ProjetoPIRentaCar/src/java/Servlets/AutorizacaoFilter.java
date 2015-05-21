@@ -23,7 +23,7 @@ import projetorentacar.Usuario;
  *
  * @author pc
  */
-@WebFilter(filterName = "AutorizacaoFilter", servletNames = {})
+@WebFilter(filterName = "AutorizacaoFilter", servletNames = {"/AcessoRelatorios","/AcessoUsuarios","/ValorReserva","/AtualizarUsuario","/AtualizarCliente","/BuscarClienteByCpf","/BuscarClientes","/BuscarContrato", "/BuscarContratoPagamento", "/BuscarContratos", "/BuscarRelatorio", "/BuscarUsuarios", "/CadastrarContrato", "/ConfirmarReserva", "/Disponibilidade", "/ExcluirUsuario", "/FecharContrato", "/FinalizarReserva", "/InserirCliente", "/InserirPagamento", "/InserirUsuario"})
 public class AutorizacaoFilter implements Filter {
 
     @Override

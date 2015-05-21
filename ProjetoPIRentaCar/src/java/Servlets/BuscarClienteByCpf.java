@@ -27,7 +27,7 @@ public class BuscarClienteByCpf extends HttpServlet {
         Cliente cliente = c.buscarClienteByCpf(cpf);
         LogSistema log = new LogSistema();
 //LOG BUSCA DE CLIENTE
-        //log.cadastrarLog(8, user.getUsuarioId());
+        log.cadastrarLog(8, user.getUsuarioId());
         request.setAttribute("cliente", cliente);
         if (cliente.getCpf() == null) {
             request.setAttribute("erro", "*Cliente não encontrado");

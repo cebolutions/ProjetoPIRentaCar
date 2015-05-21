@@ -38,9 +38,9 @@ public class BuscarContratos extends HttpServlet {
         List<Contrato> lista = c.listarContratos();
         request.setAttribute("lista", lista);
 
-        //LogSistema log = new LogSistema();
+        LogSistema log = new LogSistema();
 //LOG VIEW LISTA CLIENTES
-       // log.cadastrarLog(9, user.getUsuarioId());
+        log.cadastrarLog(13, user.getUsuarioId());
 
         request.getRequestDispatcher("listarContratos.jsp").forward(request, response);
     }
@@ -56,9 +56,9 @@ public class BuscarContratos extends HttpServlet {
         List<Contrato> lista = c.listarContratos();
         request.setAttribute("lista", lista);
 
-        //LogSistema log = new LogSistema();
-//LOG VIEW LISTA CLIENTES
-        //log.cadastrarLog(9, user.getUsuarioId());
+        LogSistema log = new LogSistema();
+//LOG VIEW LISTA Contratos
+        log.cadastrarLog(13, user.getUsuarioId());
 
         request.getRequestDispatcher("listarContratos.jsp").forward(request, response);
     }

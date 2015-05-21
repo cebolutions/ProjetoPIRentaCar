@@ -42,22 +42,16 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
-                    <form action="buscaRelatorio" method="POST">
-                        <table>
-                            <tr><td><input type="radio" name="relatorio" value="0">Quantidade Veiculos</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="1">Veiculos por Usuários</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuários</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="5">Quantidade Veiculos</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="6">Vendas por usuários (1sem)</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="7">Vendas por usuários (filial)</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="8">Vendas por Usuário</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="9">Qtd Veículos por filial</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="10">Formas de pagamento</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="11">Vendas Filiais</td></tr>
-                            <tr><div class="submeter"><input type="submit" value="Buscar"></div></tr>
+                    <form action="BuscarRelatorio" method="POST">
+                        <table class="relatorio">
+                                
+                                <tr><td><input type="radio" name="relatorio" value="6">Veiculos vendidos por filial</td></tr>
+                                
+                                <tr><td><input type="radio" name="relatorio" value="7">Total de vendas por filial</td></tr>
 
-                        </table>
+                                <tr><td><input type="radio" name="relatorio" value="8">Histórico de logs</td></tr>
+                            </table>
+                        <div class="submeter"><input type="submit" value="Buscar"></div>
                     </form>
                 </fieldset>
             </main>

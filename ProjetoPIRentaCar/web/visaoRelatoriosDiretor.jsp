@@ -19,7 +19,7 @@
             <section class="menu">
                 <nav class>
                     <ul>
-                        <li><a id="ativo">Gerência</a></li>
+                        <li><a id="ativo">Diretoria</a></li>
                     </ul>
                 </nav>
             </section>
@@ -45,84 +45,43 @@
 
                     <table class="lista" border="1" cellpadding="10">
                         <c:choose>
-                            <c:when test="${rel == 1}">
+                            <c:when test="${rel == 6}">
                                 <tr>
-                                    <th>Nome Usuário</th>
                                     <th>Quantidade Veículos</th>
-                                    <th>Nome Veículo</th>
+                                    <th>Filial</th>
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
-                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
                                         <td> <c:out value="${rel.qtdVeiculo}" /> </td>
-                                        <td> <c:out value="${rel.nomeVeiculo}" /> </td>
+                                        <td> <c:out value="${rel.nomeLoja}" /> </td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
-                            <c:when test="${rel == 2}">
+                            <c:when test="${rel == 7}">
                                 <tr>
-                                    <th>Nome Usuário</th>
-                                    <th>Quantidade Veículos</th>
+                                    <th>Total Vendas (R$)</th>
+                                    <th>Filial</th>
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
-                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
-                                        <td> <c:out value="${rel.qtdVeiculo}" /> </td>
+                                        <td> <c:out value="${rel.totalVendas}" /></td>
+                                        <td> <c:out value="${rel.nomeLoja}" /> </td>
                                     </tr>
                                 </c:forEach>
                             </c:when>
-                            <c:when test="${rel == 3}">
-                                <tr>
-                                    <th>Nome Usuário</th>
-                                    <th>Quantidade Veículos</th>
-                                </tr>
-                                <tr>
-                                    <td> <c:out value="${relatorio.nomeUsuario}" /></td>
-                                    <td> <c:out value="${relatorio.qtdVeiculo}" /> </td>
-                                </tr>
-                            </c:when>
-                            <c:when test="${rel == 4}">
-                                <tr>
-                                    <th>Nome Usuário</th>
-                                    <th>Total Vendas</th>
-                                </tr>
-                                <c:forEach items="${relatorio}" var="rel" varStatus="stat">
-                                    <tr>
-                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
-                                        <td> <c:out value="${rel.totalVendas}" /> </td>
-                                    </tr>
-                                </c:forEach>
-                            </c:when>
-                            <c:when test="${rel == 5}">
-                                <tr>
-                                    <th>Nome Usuário</th>
-                                    <th>Nome Veículo</th>
-                                    <th>Qtd Veículos</th>
-                                    <th>Data Retirada</th>
-                                    <th>Data Devolução</th>
-                                </tr>
-                                <c:forEach items="${relatorio}" var="rel" varStatus="stat">
-                                    <tr>
-                                        <td> <c:out value="${rel.nomeUsuario}" /></td>
-                                        <td> <c:out value="${rel.nomeVeiculo}" /> </td>
-                                        <td> <c:out value="${rel.qtdVeiculo}" /> </td>
-                                        <td> <c:out value="${rel.dataRetirada}" /> </td>
-                                        <td> <c:out value="${rel.dataDevolucao}" /> </td>
-                                    </tr>
-                                </c:forEach>
-                            </c:when>
-                            <c:when test="${rel == 9}">
+                            <c:when test="${rel == 8}">
                                 <tr>
                                     <th>Nome Usuário</th>
                                     <th>Log</th>
                                     <th>Data Log</th>
                                     <th>Hora Log</th>
+                                    
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
                                         <td> <c:out value="${rel.nomeUsuario}" /></td>
                                         <td> <c:out value="${rel.tipoLog}" /> </td>
-                                        <td> <fmt:formatDate value="${rel.dataLog}" pattern="dd/MM/yyyy"/> </td> 
+                                        <td> <fmt:formatDate value="${rel.dataLog}" pattern="dd/MM/yyyy"/> </td>
                                         <td> <fmt:formatDate type="time" value="${rel.horaLog}"/> </td> 
                                     </tr>
                                 </c:forEach>

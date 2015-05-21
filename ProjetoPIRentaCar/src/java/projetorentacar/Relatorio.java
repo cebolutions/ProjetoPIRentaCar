@@ -25,6 +25,9 @@ public class Relatorio {
     private int usuarioId;
     private int filialId;
     private int veiculoId;
+    private String tipoLog;
+    private Date dataLog;
+    private Date horaLog;
     
     public Relatorio(){
         
@@ -133,5 +136,30 @@ public class Relatorio {
     public void setNomeLoja(String nomeLoja) {
         this.nomeLoja = nomeLoja;
     }
+
+    public String getTipoLog() {
+        return tipoLog;
+    }
+
+    public void setTipoLog(String tipoLog) {
+        this.tipoLog = tipoLog;
+    }
+
+    public Date getDataLog() {
+        return dataLog;
+    }
+
+    public void setDataLog(Date dataLog) {
+        this.dataLog = dataLog;
+    }
+
+    public Date getHoraLog() {
+        return horaLog;
+    }
+
+    public void setHoraLog(Date horaLog) {
+        this.horaLog = horaLog;
+    }
+
     
 }

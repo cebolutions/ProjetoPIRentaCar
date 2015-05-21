@@ -107,7 +107,7 @@ public class RelatorioDAO {
     }
 
     //SELECT PARA SABER O TOTAL DE VENDAS A PARTIR DE UM USUÁRIO
-    public Relatorio totalVendasDeUsuario(int id) {
+    public Relatorio totalVendasDeUsuarioPorFilial(int id, int filial) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -117,7 +117,7 @@ public class RelatorioDAO {
             String comandoSQL = "SELECT NOME_USUARIO, COUNT(VEICULO_ID)\n"
                     + "     FROM TB_CONTRATO\n"
                     + "     JOIN TB_USUARIOS ON TB_CONTRATO.USUARIO_ID  = TB_USUARIOS.ID_USUARIO\n"
-                    + "     WHERE USUARIO_ID = " + id + " GROUP BY NOME_USUARIO";
+                    + "     WHERE USUARIO_ID = " + id + " AND TB_CONTRATO.FILIAL_ID = " + filial + " GROUP BY NOME_USUARIO";
             pstmt = conn.prepareStatement(comandoSQL);
             ResultSet relatorio = pstmt.executeQuery();
             while (relatorio.next()) {
@@ -147,7 +147,7 @@ public class RelatorioDAO {
     }
 
 //SELECT PARA SABER QUAL O VALOR TOTAL DE VENDAS POR USUARIO EM UM PERÍODO DEFINIDO
-    public List<Relatorio> totalVendasPorUsuariosPorPeriodo(Date perInicial, Date perFinal) {
+    public List<Relatorio> totalVendasPorUsuariosPorPeriodoEFilial(Date perInicial, Date perFinal, int filial) {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -157,7 +157,7 @@ public class RelatorioDAO {
             String comandoSQL = "SELECT NOME_USUARIO , SUM(TOTAL_RESERVA)\n"
                     + "     FROM TB_CONTRATO\n"
                     + "     JOIN TB_USUARIOS ON TB_CONTRATO.USUARIO_ID  = TB_USUARIOS.ID_USUARIO\n"
-                    + "     WHERE DATA_ABERTURA >= '" + new java.sql.Date(perInicial.getTime()) + "' AND DATA_ABERTURA <= '" + new java.sql.Date(perFinal.getTime()) + "'\n"
+                    + "     WHERE DATA_ABERTURA >= '" + new java.sql.Date(perInicial.getTime()) + "' AND DATA_ABERTURA <= '" + new java.sql.Date(perFinal.getTime()) + "' AND TB_CONTRATO.FILIAL_ID = "+ filial +""
                     + "     GROUP BY NOME_USUARIO";
             pstmt = conn.prepareStatement(comandoSQL);
             List<Relatorio> lista = new ArrayList<>();
@@ -166,55 +166,6 @@ public class RelatorioDAO {
                 Relatorio r = new Relatorio();
                 r.setNomeUsuario(relatorio.getString(1));
                 r.setTotalVendas(relatorio.getDouble(2));
-                lista.add(r);
-            }
-            return lista;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                pstmt.close();
-                conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-        return null;
-    }
-
-//**********PRECISA PENSAR******
-    //RETORNA A VENDA DE TODOS OS FUNCIONARIOS DA FILIAL CORRESPONDE, DE ACORDO COM A DATA SELECIONADA
-    //RELATORIO EXCLUSIVO PARA DIRETOR
-    public List<Relatorio> vendasUsuariosPorFilial(int id) {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            conn = cnx.obterConexao();
-            String comandoSQL = "SELECT NOME_USUARIO, VEICULO_ID, NOME_VEICULO, COUNT(VEICULO_ID), DATA_RETIRADA, DATA_DEVOLUCAO\n"
-                    + "     FROM TB_CONTRATO\n"
-                    + "     JOIN TB_USUARIOS ON TB_CONTRATO.USUARIO_ID = TB_USUARIOS.ID_USUARIO\n"
-                    + "     JOIN TB_VEICULOS ON TB_CONTRATO.VEICULO_ID = TB_VEICULOS.ID_VEICULO\n"
-                    + "     WHERE DATA_RETIRADA >= '2015-01-01' AND DATA_DEVOLUCAO <= '2015-06-01'\n"
-                    + "     GROUP BY NOME_USUARIO, VEICULO_ID, NOME_VEICULO, DATA_RETIRADA, DATA_DEVOLUCAO";
-            pstmt = conn.prepareStatement(comandoSQL);
-            List<Relatorio> lista = new ArrayList<>();
-            ResultSet relatorio = pstmt.executeQuery();
-            while (relatorio.next()) {
-                Relatorio r = new Relatorio();
-                r.setNomeUsuario(relatorio.getString(1));
-                r.setVeiculoId(relatorio.getInt(2));
-                r.setNomeVeiculo(relatorio.getString(3));
-                r.setQtdVeiculo(relatorio.getInt(5));
-                r.setDataRetirada(relatorio.getDate(6));
-                r.setDataDevolucao(relatorio.getDate(7));
                 lista.add(r);
             }
             return lista;
@@ -260,9 +211,9 @@ public class RelatorioDAO {
                 r.setNomeUsuario(relatorio.getString(1));
                 r.setVeiculoId(relatorio.getInt(2));
                 r.setNomeVeiculo(relatorio.getString(3));
-                r.setQtdVeiculo(relatorio.getInt(5));
-                r.setDataRetirada(relatorio.getDate(6));
-                r.setDataDevolucao(relatorio.getDate(7));
+                r.setQtdVeiculo(relatorio.getInt(4));
+                r.setDataRetirada(relatorio.getDate(5));
+                r.setDataDevolucao(relatorio.getDate(6));
                 lista.add(r);
             }
             return lista;
@@ -285,7 +236,7 @@ public class RelatorioDAO {
         return null;
     }
 
-//QUANTIDADE DE VEICULOS VENDIDOS POR FILIAL
+//QUANTIDADE DE VEICULOS VENDIDOS POR FILIAL - GERENTE
     public List<Relatorio> veiculosPorFilial() {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
@@ -304,47 +255,6 @@ public class RelatorioDAO {
                 Relatorio r = new Relatorio();
                 r.setQtdVeiculo(relatorio.getInt(1));
                 r.setNomeLoja(relatorio.getString(2));
-                lista.add(r);
-            }
-            return lista;
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                pstmt.close();
-                conn.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }
-        }
-        return null;
-    }
-
-//RETORNA A QUANTIDADE DE VEZES Q FOI UTILIZADO CARTÃO E DINHEIRO, MAS UM CONTROLE PARA SABER O Q ESTÁ SENDO UTILIZADO MAIS PELOS OS 'CLIENTES'
-    public List<Relatorio> formasPagamento() {
-        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            conn = cnx.obterConexao();
-            String comandoSQL = "SELECT TIPO_PAGAMENTO, NOME_VEICULO, COUNT(VEICULO_ID)\n"
-                    + "FROM TB_CONTRATO\n"
-                    + "JOIN TB_FORMA_DE_PAGAMENTOS ON TB_CONTRATO.FORMA_PAGAMENTO_ID = TB_FORMA_DE_PAGAMENTOS.ID_FORMA_PAGAMENTO\n"
-                    + "JOIN TB_VEICULOS ON TB_CONTRATO.VEICULO_ID = TB_VEICULOS.ID_VEICULO\n"
-                    + "GROUP BY TIPO_PAGAMENTO, NOME_VEICULO";
-            pstmt = conn.prepareStatement(comandoSQL);
-            List<Relatorio> lista = new ArrayList<>();
-            ResultSet relatorio = pstmt.executeQuery();
-            while (relatorio.next()) {
-                Relatorio r = new Relatorio();
-
                 lista.add(r);
             }
             return lista;
@@ -386,6 +296,49 @@ public class RelatorioDAO {
                 Relatorio r = new Relatorio();
                 r.setTotalVendas(relatorio.getDouble(1));
                 r.setNomeLoja(relatorio.getString(2));
+                lista.add(r);
+            }
+            return lista;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                pstmt.close();
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+        }
+        return null;
+    }
+
+      public List<Relatorio> historicoLog() {
+        ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            conn = cnx.obterConexao();
+            String comandoSQL = "SELECT NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA\n"
+                    + "FROM TB_HISTORICO_ACESSO\n"
+                    + "JOIN TB_USUARIOS ON TB_USUARIOS.ID_USUARIO = TB_HISTORICO_ACESSO.USUARIO_ID\n"
+                    + "JOIN TB_TIPO_LOG ON TB_TIPO_LOG.ID_TIPO_LOG = TB_HISTORICO_ACESSO.TIPO_LOG_ID\n"
+                    + "GROUP BY NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA";
+            pstmt = conn.prepareStatement(comandoSQL);
+            List<Relatorio> lista = new ArrayList<>();
+            ResultSet relatorio = pstmt.executeQuery();
+            while (relatorio.next()) {
+                Relatorio r = new Relatorio();
+                r.setNomeUsuario(relatorio.getString(1));
+                r.setTipoLog(relatorio.getString(2));
+                r.setDataLog(relatorio.getDate(3));
+                r.setHoraLog(relatorio.getTime(4));
                 lista.add(r);
             }
             return lista;

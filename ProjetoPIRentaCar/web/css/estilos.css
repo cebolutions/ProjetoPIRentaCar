@@ -840,3 +840,38 @@ vertical-align:middle;
     font-weight: bold;
     transition: 0.5s;
 }
+.style7 {
+    font-size: 20px; 
+    margin-top: 7px; 
+    font-weight: bold;
+    font-family: Verdana;
+    padding-top: 2em;
+    text-align: center;
+}
+
+.relatorio{
+    font-size: 75%;
+    font-weight: bold;
+    display: block;
+}
+.relatorio tr{
+    vertical-align: middle;
+    border: 1px solid #eee;
+    width: 300px;
+    height: 50px;
+}
+.relatorio input{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.relatorio#label{
+    text-align: right;
+    font-weight: normal;
+    width: 100px;
+}
+.relatorio label{
+    font-size: 90%;
+    text-align: right;
+    font-weight: normal;
+    width: 100px;
+}

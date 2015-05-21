@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AtualizarCliente
-    Created on : 12/04/2015, 19:14:40
+    Document   : excluirUsuario
+    Created on : 20/05/2015, 21:59:08
     Author     : pc
 --%>
+
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,8 +26,8 @@
                 <nav class>
                     <ul>
                         <li><a id="cadastra" href="cadastraUsuario.jsp">Cadastrar Usuário</a></li>
-                        <li><a id="ativo" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
-                        <li><a id="excluir" href="excluirUsuario.jsp">Excluir Usuário</a></li>
+                        <li><a id="atualiza" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
+                        <li><a id="ativo" href="excluirUsuario.jsp">Excluir Usuário</a></li>
                         <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarUsuarios">Lista de Usuários</a></li>
 
                     </ul>
@@ -52,35 +53,24 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset>
-                    <legend>Dados Atualizados</legend>
-                    <div class="msgsucesso"><p>Dados atualizados com sucesso!!!</p></div>
-                    <table class="consulta">
-                        <tr><td>ID:</td><td><c:out value="${usuario.usuarioId}"/></td></tr>
-                        <tr><td>Nome:</td><td><c:out value="${usuario.nome}"/></td></tr>
-                        <tr><td>RG:</td><td><c:out value="${usuario.rg}"/></td></tr>
-                        <tr><td>CPF:</td><td><c:out value="${usuario.cpf}"/></td></tr>
-                        <tr><td>Login:</td><td><c:out value="${usuario.login}"/></td></tr>
-                        <tr><td>Senha:</td><td><c:out value="${usuario.senha}"/></td></tr>
-                        <tr><td>Cargo: </td><td>
-                                <c:choose>
-                                    <c:when test="${usuario.cargo == 0}"><c:out value="Atendente"/></c:when>
-                                    <c:when test="${usuario.cargo == 1}"><c:out value="Gerente"/></c:when>
-                                    <c:when test="${usuario.cargo == 2}"><c:out value="Diretor"/></c:when>
-                                </c:choose></td></tr>
-                        <tr><td>Filial: </td><td> 
-                                <c:choose>
-                                    <c:when test="${usuario.filial == 0}"><c:out value="São Paulo"/></c:when>
-                                    <c:when test="${usuario.filial == 1}"><c:out value="Rio de Janeiro"/></c:when>
-                                    <c:when test="${usuario.filial == 2}"><c:out value="Porto Alegre"/></c:when>
-                                    <c:when test="${usuario.filial == 3}"><c:out value="Belo Horizonte"/></c:when>
-                                </c:choose></td></tr>
-                        <tr><td>Status: </td><td> 
-                                <c:choose>
-                                    <c:when test="${usuario.ativo== true}"><c:out value="Ativo"/></c:when>
-                                    <c:when test="${usuario.ativo== false}"><c:out value="Inativo"/></c:when>
-                                </c:choose></td></tr>
-                    </table>
-                    
+                    <legend>Excluir Usuario</legend>
+                    <div class="msgsucesso"><p>${sucesso}</p></div>
+                    <div class="msgerro"><p>${erro}</p></div>
+                    <form action="ExcluirUsuario" method="post">
+                        <label>CPF Usuario </label><input type="text" maxlength="11" name="CPFUsuario">
+                        <button type="submit" name="btPesquisa">Pesquisar </button>
+                    </form>
+                    <form action="ExcluirUsuario" method="post">
+                        <table class="consulta">
+                            <tr><td id="label">ID:</td><td><input hidden name="id" value="${usuario.usuarioId}"><c:out value="${usuario.usuarioId}"/></td></tr>
+                            <tr><td id="label">Nome:</td><td><c:out value="${usuario.nome}"/></td></tr>
+                            <tr><td id="label">CPF:</td><td><c:out value="${usuario.cpf}"/></td></tr>
+                            <tr><td id="label">Login:</td><td><c:out value="${usuario.login}"/></td></tr>
+
+                        </table>
+
+                        <div class="submeter"><input type="submit" value="Excluir"></div>
+                    </form>
                 </fieldset>
             </main>
         </div><!-- fim .container .destaque -->
@@ -96,5 +86,7 @@
                 </ul>
             </div>
         </footer>
+
+
     </body>
 </html>

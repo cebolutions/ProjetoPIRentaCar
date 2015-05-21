@@ -26,6 +26,7 @@
                     <ul>
                         <li><a id="cadastra" href="cadastraUsuario.jsp">Cadastrar Usuário</a></li>
                         <li><a id="ativo" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
+                        <li><a id="excluir" href="excluirUsuario.jsp">Excluir Usuário</a></li>
                         <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarUsuarios">Lista de Usuários</a></li>
 
                     </ul>

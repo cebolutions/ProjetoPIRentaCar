@@ -42,24 +42,24 @@
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
                     <form action="BuscarRelatorio" method="POST">
-                        <table>
-                            <tr><td><input type="radio" name="relatorio" value="1">Quantidade Veiculos</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="2">Veiculos por Usuários</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="3">Vendas por Usuário</td></tr>
-                            <tr><td><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId"></td></tr>
-                            
-                            <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
-                            <tr><td><label>Período: </label></td><td><input type="text" name="perInicial" placeholder="Inicio"></td><td><input type="text" name="perFinal" placeholder="Final"></td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="5">Quantidade Veiculos</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="6">Vendas por usuários (1sem)</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="7">Vendas por usuários (filial)</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="8">Vendas por Usuário</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="9">Qtd Veículos por filial</td></tr>
-                            <tr><td><input type="radio" name="relatorio" value="10">Formas de pagamento</td></tr>
-                            
-
+                        <table class="relatorio">
+                            <tr><td><input type="radio" name="relatorio" value="1">Tipo de Veiculos Locados por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="2">Quantidade Veiculos Locados por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" value="3">Total de vendas por Usuário</td></tr>
                         </table>
-                        <div class="submeter"><input type="submit" value="Buscar"></div>
+                        <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId"></td></tr></table>
+                        <table class="relatorio">
+                            <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
+                        </table>
+                        <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="text" name="perInicial" placeholder="Inicio"></td><td><input type="text" name="perFinal" placeholder="Final"></td></tr></table>
+                        <table class="relatorio">
+
+                            <tr><td><input type="radio" name="relatorio" value="5">Total de vendas por Usuários (Período)</td></tr>
+                        </table>
+                            <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId2"></td></tr></table>
+                            <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="text" name="perInicial2" placeholder="Inicio"></td><td><input type="text" name="perFinal2" placeholder="Final"></td></tr></table>
+                            <table class="relatorio"><tr><td><input type="radio" name="relatorio" value="9">Histórico de logs</td></tr></table>
+                            <div class="submeter"><input type="submit" value="Buscar"></div>
                     </form>
                 </fieldset>
             </main>
