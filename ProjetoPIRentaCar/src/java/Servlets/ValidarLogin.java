@@ -5,7 +5,6 @@ package Servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Dao.UsuarioDAO;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -19,8 +18,9 @@ import projetorentacar.LogSistema;
 import projetorentacar.Usuario;
 
 /**
- * SERVLET PARA VALIDAR USUARIO SE ESTA CADASTRADO E ATIVO NO BD E ENVIAR PARA HOME.JSP
- * 
+ * SERVLET PARA VALIDAR USUARIO SE ESTA CADASTRADO E ATIVO NO BD E ENVIAR PARA
+ * HOME.JSP
+ *
  */
 @WebServlet(urlPatterns = {"/ValidarLogin"})
 public class ValidarLogin extends HttpServlet {
@@ -40,10 +40,19 @@ public class ValidarLogin extends HttpServlet {
                     LogSistema log = new LogSistema();
                     log.cadastrarLog(0, user.getUsuarioId());
                     session.setAttribute("user", user);
+                    if (user.getCargo() == 0) {
+                        session.setAttribute("cargo", 0);
+                    }
+                    if (user.getCargo() == 1) {
+                        session.setAttribute("cargo", 1);
+                    }
+                    if (user.getCargo() == 2) {
+                        session.setAttribute("cargo", 2);
+                    }
                     RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
                     rd.forward(request, response);
                 } else {
-                    request.setAttribute("erro", "Login e/ou Senha esta(ão) incorreto(s). Tente novamente!");
+                    request.setAttribute("erro", "Login e/ou senha está(ão) incorreto(s). Tente novamente!");
                     RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                     rd.forward(request, response);
                 }

@@ -26,7 +26,7 @@
                     <ul>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="ativo" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
-                        <li><a id="lista" href="http://localhost:8080/ProjetoPIRentaCar/BuscarContratos">Lista de Contrato</a></li>
+                        <li><a id="lista" href="BuscarContratos">Lista de Contrato</a></li>
 
                     </ul>
                 </nav>
@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -53,7 +53,6 @@
 
                 <fieldset>
                     <form action="BuscarContrato" method="POST">
-                        <div class="msgerro"><p><c:out value="${erro}"/></p></div>
                         <label>Contrato </label> <input type="text" name="contrato">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>
@@ -105,5 +104,17 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+            
+             
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            if(${erro == 'true'}){
+                alert("ERRO!\n\Contrato não encontrado.");
+            }
+        </script>
     </body>
 </html>

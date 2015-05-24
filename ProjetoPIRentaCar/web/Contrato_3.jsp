@@ -40,17 +40,16 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
             </section><!-- fim .menu-opcoes -->
             <main>
                 <form id="contrato" action="ConfirmarReserva" method="POST">
-                    <input type="hidden" name="userLogado" value="${CPFlogado}">
                     <fieldset class="consultaEstoque">
                         <table>
                             <tr><td>Data Retirada </td><td><input type="text" readonly="readonly" title="Não é possível alterar" name="dtRetirada" value="<fmt:formatDate value="${ret}" pattern="dd/MM/yyyy"/>"></td>
@@ -96,7 +95,7 @@
                     <fieldset class="cliente">
                         <legend>Buscar Cliente</legend>
                         <table>
-                            <label>CPF Cliente </label><input type="text" maxlength="11" name="CPFClientePesquisa">
+                            <label>CPF Cliente </label><input type="text" id="cpf" maxlength="14" name="CPFClientePesquisa">
                         </table>
                         <div class="submeter"><input type="submit" value="Avançar"></div>
                     </fieldset>
@@ -115,5 +114,21 @@
                 </ul>
             </div>
         </footer>
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript">
+            
+            if(${erro == 'true'}){
+                alert("ERRO!\n\Cliente NÃO encontrado.\n\Tente novamente.");
+            }
+            
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            
+        </script>
     </body>
 </html>

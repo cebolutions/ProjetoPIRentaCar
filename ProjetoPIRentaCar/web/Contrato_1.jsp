@@ -27,7 +27,7 @@
                     <ul>
                         <li><a id="ativo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
-                        <li><a id="lista" href="http://localhost:8080/ProjetoPIRentaCar/BuscarContratos">Lista de Contrato</a></li>
+                        <li><a id="lista" href="BuscarContratos">Lista de Contrato</a></li>
                     </ul>
                 </nav>
             </section>
@@ -41,30 +41,30 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
             </section><!-- fim .menu-opcoes -->
             <main>
-                <form action="Disponibilidade" method="POST">
+                <form name="disponibilidade" id="disponibilidade" action="Disponibilidade" method="POST">
                     <fieldset class="consultaEstoque">
                         <legend>Verificar Estoque</legend>
                         <table>
-                            <tr><td>Data Retirada: </td><td><input type="text" placeholder="dd/mm/aaaa" name="dtRetirada"></td>
-                                <td id="dev">Data Devolução: </td><td><input type="text" placeholder="dd/mm/aaaa" name="dtDevolucao"></td></tr>
+                            <tr><td>Data Retirada: </td><td><input type="date" name="dtRetirada"></td>
+                                <td id="dev">Data Devolução: </td><td><input type="date" name="dtDevolucao"></td></tr>
                             <tr><td id="loja">Loja: </td><td><select name="filial">
-                                        <option>Escolha a loja</option>
+                                        <option value="-1" selected>Escolha a loja</option>
                                         <option value="0">São Paulo</option>
                                         <option value="1">Rio de Janeiro</option>
                                         <option value="2">Porto Alegre</option>
                                         <option value="3">Belo Horizonte</option>
                                     </select></td></tr>
                         </table>
-                        <div class="submeter"><input type="submit" value="Avançar"></div>
+                        <div class="submeter"><input type="button" value="Avançar" onclick="validar()"></div>
                     </fieldset>
                     <fieldset class="disponibilidadeInativo">
                         <h4>Disponibilidade</h4>
@@ -87,5 +87,43 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+            
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            
+            if (${erro == 'true'}) {
+                alert("Sem disponibilidade de veículos.");
+            }
+            
+            if (${erroDt == 'true'}) {
+                alert("Data da retirada deve ser menor que a data de devolução.");
+            }
+
+            function validar() {
+                var filial = document.disponibilidade.filial.value;
+                var dtr = document.disponibilidade.dtRetirada.value;
+                var dtd = document.disponibilidade.dtDevolucao.value;
+                if (dtr === "") {
+                    document.disponibilidade.dtRetirada.focus();
+                    return false;
+                }
+                if (dtd === "") {
+                    document.disponibilidade.dtDevolucao.focus();
+                    return false;
+                }
+                if (filial === "-1") {
+
+                    alert('Selecione ao menos 1 loja.');
+                    document.disponibilidade.filial.focus();
+                    return false;
+                }
+                document.disponibilidade.submit();
+                return true;
+            }
+        </script>
     </body>
 </html>

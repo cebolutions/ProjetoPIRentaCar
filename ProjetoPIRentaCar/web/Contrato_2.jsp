@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -96,7 +96,6 @@
                                 </tr>
                             </c:forEach>
                         </table>
-                        <div class="msgerroVeiculo"><p><c:out value="${veicSemDisp}"/></p></div>
 
                         <div class="submeter"><input type="submit" value="Avançar"></div>
                     </fieldset>
@@ -119,6 +118,14 @@
                 </ul>
             </div>
         </footer>
-
+<script type="text/javascript">
+             
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+                
+        </script>
     </body>
 </html>

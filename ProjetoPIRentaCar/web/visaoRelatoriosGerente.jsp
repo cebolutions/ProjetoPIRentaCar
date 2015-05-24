@@ -32,10 +32,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorioAtivo" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li><a id="relatorioAtivo" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -129,7 +129,7 @@
                             </c:when>
                         </c:choose>
                     </table>
-                    <div class="opcao"><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Nova Busca</a></div>
+                    <div class="opcao"><a href="AcessoRelatorios">Nova Busca</a></div>
                 </fieldset>
             </main>
         </div><!-- fim .container .destaque -->

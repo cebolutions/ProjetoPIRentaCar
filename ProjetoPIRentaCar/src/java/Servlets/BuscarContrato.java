@@ -10,7 +10,6 @@ import Dao.ContratoDAO;
 import Dao.PagamentoDAO;
 import Dao.VeiculoDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,17 +35,16 @@ public class BuscarContrato extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
-        
+
         if (request.getParameter("contrato").equals("")) {
-            request.setAttribute("erro", "*Contrato não encontrado.");
+            request.setAttribute("erro", true);
             request.getRequestDispatcher("ConsultaContrato.jsp").forward(request, response);
         } else {
             ContratoDAO cdao = new ContratoDAO();
             Contrato contrato = cdao.buscarContrato(Integer.parseInt(request.getParameter("contrato")));
 
             if (contrato.getContratoId() == 0) {
-
-                request.setAttribute("erro", "*Contrato não encontrado.");
+                request.setAttribute("erro", true);
                 request.getRequestDispatcher("ConsultaContrato.jsp").forward(request, response);
             } else {
                 ClienteDAO cldao = new ClienteDAO();

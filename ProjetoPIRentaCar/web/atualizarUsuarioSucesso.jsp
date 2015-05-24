@@ -27,7 +27,7 @@
                         <li><a id="cadastra" href="cadastraUsuario.jsp">Cadastrar Usuário</a></li>
                         <li><a id="ativo" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
                         <li><a id="excluir" href="excluirUsuario.jsp">Excluir Usuário</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarUsuarios">Lista de Usuários</a></li>
+                        <li><a id="buscar" href="BuscarUsuarios">Lista de Usuários</a></li>
 
                     </ul>
                 </nav>
@@ -42,10 +42,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuariosAtivo" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li><a id="usuariosAtivo" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>

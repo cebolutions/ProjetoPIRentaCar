@@ -6,6 +6,8 @@
 package projetorentacar;
 
 import Dao.ContratoDAO;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -78,6 +80,20 @@ public class Testes {
         //Contrato contrato = new Contrato(0, 0, 0, new Date(), new Date(), 1, 150.00, 0);
         ContratoDAO cdao = new ContratoDAO();
         //cdao.cadastrarContratoBD(contrato);
+        
+        String dtNasc = "2015-05-23";
+        Date date = null;
+        Date date2 = null;
+        try {
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            String ds2 = sdf2.format(sdf1.parse(dtNasc)); 
+            System.out.println(ds2);
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(ds2);
+        } catch (ParseException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(date));
     }
                 
 }

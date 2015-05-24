@@ -56,7 +56,7 @@ public class InserirPagamento extends HttpServlet {
             request.setAttribute("veiculo", veiculo);
             request.setAttribute("pgtoRecebido", recebido);
             request.setAttribute("saldo", saldoReserva);
-            request.setAttribute("erro", "*Valor informado maior que o saldo da reserva!");
+            request.setAttribute("erroPg", true);
             request.getRequestDispatcher("Pagamento.jsp").forward(request, response);
         } else if (saldoReserva == 0 && contrato.isAberto()) {
             request.setAttribute("cliente", cliente);

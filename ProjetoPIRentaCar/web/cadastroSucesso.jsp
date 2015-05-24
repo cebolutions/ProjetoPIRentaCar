@@ -26,7 +26,7 @@
                         <li><a id="ativo" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
                         <li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
                         <li><a id="atulizar" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
+                        <li><a id="buscar" href="BuscarClientes">Lista de Clientes</a></li>
 
                     </ul>
                 </nav>
@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -75,5 +75,14 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+            
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            
+        </script>
     </body>
 </html>

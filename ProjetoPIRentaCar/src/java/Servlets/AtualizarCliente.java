@@ -34,7 +34,8 @@ public class AtualizarCliente extends HttpServlet {
             log.cadastrarLog(8, user.getUsuarioId());
 
             if (cliente.getCpf() == null) {
-                request.getRequestDispatcher("/atualizarClienteErro.jsp").forward(request, response);
+                request.setAttribute("erro", true);
+                request.getRequestDispatcher("/atualizarCliente.jsp").forward(request, response);
 
             } else {
                 request.setAttribute("cliente", cliente);

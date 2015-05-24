@@ -11,8 +11,6 @@ import Dao.VeiculoDAO;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -74,14 +72,14 @@ public class ConfirmarReserva extends HttpServlet {
             request.getRequestDispatcher("Contrato_4.jsp").forward(request, response);
 
         } else {
-            request.setAttribute("erro", "*Cliente não existe");
+            request.setAttribute("erro", true);
             request.setAttribute("ret", ret);
             request.setAttribute("dev", dev);
             request.setAttribute("filial", filial);
             request.setAttribute("diarias", diarias);
             request.setAttribute("veic", veiculo);
             request.setAttribute("valor", valorTotal);
-            request.getRequestDispatcher("Contrato_4Erro.jsp").forward(request, response);
+            request.getRequestDispatcher("Contrato_3.jsp").forward(request, response);
         }
     }
 }

@@ -30,8 +30,8 @@ public class BuscarClienteByCpf extends HttpServlet {
         log.cadastrarLog(8, user.getUsuarioId());
         request.setAttribute("cliente", cliente);
         if (cliente.getCpf() == null) {
-            request.setAttribute("erro", "*Cliente não encontrado");
-            request.getRequestDispatcher("/consultaClienteErro.jsp").forward(request, response);
+            request.setAttribute("erro", true);
+            request.getRequestDispatcher("/consultaCliente.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/consultaCliente.jsp").forward(request, response);
         }

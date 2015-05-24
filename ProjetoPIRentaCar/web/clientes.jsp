@@ -27,7 +27,7 @@
                         <li><a id="cadastro" href="cadastraCliente.jsp">Cadastrar Cliente</a></li>
                         <li><a id="consulta" href="consultaCliente.jsp">Consultar Cliente</a></li>
                         <li><a id="atualiza" href="atualizarCliente.jsp">Atualizar Cliente</a></li>
-                        <li><a id="buscar" href="http://localhost:8080/ProjetoPIRentaCar/BuscarClientes">Lista de Clientes</a></li>
+                        <li><a id="buscar" href="BuscarClientes">Lista de Clientes</a></li>
 
                     </ul>
                 </nav>
@@ -42,10 +42,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientesAtivo" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -54,12 +54,12 @@
                 <table class="icons">
                     <tr>
                         <td><a href="clientes.jsp"><img src="img/clienteAtivo.png" width="140" height="140" /></a></td>
-                        <td><a href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios"><img src="img/user.png" width="140" height="140" /></a></td>
+                        <td id="usuarioIcon"><a href="AcessoUsuarios"><img src="img/user.png" width="140" height="140" /></a></td>
                         <td><a href="Contrato_1.jsp"><img src="img/car.png" width="140" height="140" /></a></td>
                     </tr>
                     <tr>
                         <td><a href="Pagamento.jsp"><img src="img/money.png" width="140" height="140" /></a></td>
-                        <td><a id="listaContrato" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
+                        <td id="relIcon"><a id="listaContrato" href="AcessoRelatorios"><img src="img/relatorio.png" width="140" height="140" /></a></td>
                         <td><a href="login.jsp"><img src="img/exit.png" width="140" height="140" /></a></td>
                     </tr>
                 </table>
@@ -77,5 +77,16 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+             
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("usuarioIcon").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                document.getElementById("relIcon").style.display = 'none';
+                
+            }
+                
+        </script>
     </body>
 </html>

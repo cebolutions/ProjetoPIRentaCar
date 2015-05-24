@@ -25,7 +25,7 @@
                     <ul>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
-                        <li><a id="ativo" href="http://localhost:8080/ProjetoPIRentaCar/BuscarContratos">Lista de Contrato</a></li>
+                        <li><a id="ativo" href="BuscarContratos">Lista de Contrato</a></li>
                     </ul>
                 </nav>
             </section>
@@ -39,10 +39,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contratoAtivo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -67,7 +67,7 @@
                     <tbody id="itensTabela">
                         <c:forEach items="${lista}" var="contrato" varStatus="stat">
                         <tr>
-                           <td> <a title="Clique para Inserir Pagamento" href="http://localhost:8080/ProjetoPIRentaCar/BuscarContratoPagamento?contrato=${contrato.contratoId}">
+                           <td> <a title="Clique para Inserir Pagamento" href="BuscarContratoPagamento?contrato=${contrato.contratoId}">
                                  <c:out value="${contrato.contratoId}" /></a></td>
                             <td> <c:out value="${contrato.nomeCliente}" /></td>
                             <td> <fmt:formatDate value="${contrato.dataRetirada}" pattern="dd/MM/yyyy"/> </td>
@@ -103,6 +103,14 @@
                 </ul>
             </div>
         </footer>
-        <script src="js/jscript.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            
+        </script>
     </body>
 </html>

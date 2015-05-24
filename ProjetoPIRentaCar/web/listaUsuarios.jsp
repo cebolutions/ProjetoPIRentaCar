@@ -27,7 +27,7 @@
                         <li><a id="cadastra" href="cadastraUsuario.jsp">Cadastrar Usuário</a></li>
                         <li><a id="consulta" href="atualizarUsuario.jsp">Atualizar Usuário</a></li>
                         <li><a id="excluir" href="excluirUsuario.jsp">Excluir Usuário</a></li>
-                        <li><a id="ativo" href="http://localhost:8080/ProjetoPIRentaCar/BuscarUsuarios">Lista de Usuários</a></li>
+                        <li><a id="ativo" href="BuscarUsuarios">Lista de Usuários</a></li>
 
                     </ul>
                 </nav>
@@ -42,10 +42,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuariosAtivo" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li><a id="usuariosAtivo" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamento" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -68,7 +68,7 @@
                     <td> <c:out value="${user.nome}" /> </td>
                     <td> <c:out value="${user.rg}" /> </td>
                     <td> 
-                        <a title="Clique para alterar" href="http://localhost:8080/ProjetoPIRentaCar/AtualizarUsuario?cpf=${user.cpf}">
+                        <a title="Clique para alterar" href="AtualizarUsuario?cpf=${user.cpf}">
                             <c:out value="${user.cpf}"/>
                         </a>
                     </td>

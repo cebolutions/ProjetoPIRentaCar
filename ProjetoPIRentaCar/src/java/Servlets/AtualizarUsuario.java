@@ -32,11 +32,6 @@ public class AtualizarUsuario extends HttpServlet {
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
         
-        if (user.getCargo() == 0) {
-            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
-            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
-            
-        }
 
         String cpf = request.getParameter("cpf");
         UsuarioDAO u = new UsuarioDAO();
@@ -66,7 +61,8 @@ public class AtualizarUsuario extends HttpServlet {
             log.cadastrarLog(4, user.getUsuarioId());
 
             if (usuario.getCpf() == null) {
-                request.getRequestDispatcher("/atualizarUsuarioErro.jsp").forward(request, response);
+                request.setAttribute("erro", true);
+                request.getRequestDispatcher("/atualizarUsuario.jsp").forward(request, response);
                 
             } else {
                 request.setAttribute("usuario", usuario);

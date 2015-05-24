@@ -58,10 +58,13 @@ public class CadastrarContrato extends HttpServlet {
         Date ret = null;
         Date dev = null;
         try {
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
-            ret = dfmt.parse(dtRetirada);
-            dev = dfmt.parse(dtDevolucao);
-            
+            String dtR = dfmt.format(sdf1.parse(dtRetirada)); 
+            String dtD = dfmt.format(sdf1.parse(dtDevolucao)); 
+            ret = dfmt.parse(dtR);
+            dev = dfmt.parse(dtD);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

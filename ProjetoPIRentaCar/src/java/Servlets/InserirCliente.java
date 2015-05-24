@@ -1,12 +1,11 @@
 package Servlets;
 
-
 import Dao.ClienteDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,13 +35,26 @@ public class InserirCliente extends HttpServlet {
         String cnh = request.getParameter("cnh");
         String dtNasc = request.getParameter("dtNasc");
         Date date = null;
+        Date date2 = null;
         try {
-            date = new SimpleDateFormat("dd/mm/yyyy").parse(dtNasc);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            String ds2 = sdf2.format(sdf1.parse(dtNasc));
+            System.out.println(ds2);
+            date = sdf2.parse(ds2);
         } catch (ParseException ex) {
             ex.printStackTrace();
         }
-        Cliente cliente = new Cliente(nome, rg, cpf, cnh, date);
         ClienteDAO c = new ClienteDAO();
+        List<Cliente> lista = c.buscarCliente();
+        for (int i = 0; i < lista.size(); i++) {
+            if (nome.equalsIgnoreCase(lista.get(i).getNome()) || cpf.equalsIgnoreCase(lista.get(i).getCpf())) {
+                request.setAttribute("erro", true);
+                request.getRequestDispatcher("cadastraCliente.jsp").forward(request, response);
+            }
+        }
+        Cliente cliente = new Cliente(nome, rg, cpf, cnh, date);
+
         c.cadastrarClienteBD(cliente);
         cliente = c.buscarClienteByCpf(cpf);
         request.setAttribute("cliente", cliente);

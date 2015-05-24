@@ -41,10 +41,10 @@
                     <ul>
                         <li><a id="inicio" href="home.jsp">Inicio</a></li>
                         <li><a id="clientes" href="clientes.jsp">Clientes</a><br></li>
-                        <li><a id="usuarios" href="http://localhost:8080/ProjetoPIRentaCar/AcessoUsuarios">Usuários</a></li>
+                        <li id="usuarioMenu"><a id="usuarios" href="AcessoUsuarios">Usuários</a></li>
                         <li><a id="contrato" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="pagamentoAtivo" href="Pagamento.jsp">Pagamento</a></li>
-                        <li><a id="relatorio" href="http://localhost:8080/ProjetoPIRentaCar/AcessoRelatorios">Relatórios</a></li>
+                        <li id="relMenu"><a id="relatorio" href="AcessoRelatorios">Relatórios</a></li>
                         <li><a id="logout" href="login.jsp">Logout</a></li>
                     </ul>
                 </nav>
@@ -53,7 +53,6 @@
 
                 <fieldset class="pagamento">
                     <form action="BuscarContratoPagamento" method="POST">
-                        <div class="msgerro"><p><c:out value="${erroBusca}"/></p></div>
                         <label>Contrato </label> <input type="text" name="contrato">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>
@@ -100,7 +99,6 @@
                                         </select>
                                     </td>
                                 </tr>
-                                <div class="msgerro"><p>${erro}</p></div>
                                 <tr><td>Valor Recebido R$</td><td><input id="valor" type="text" name="vlPago"/></td></tr>
                             </table>
                                 <div class="submeter"><input type="submit" value="Inserir"></div>
@@ -123,5 +121,19 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+            
+            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+                document.getElementById("usuarioMenu").style.display = 'none';
+                document.getElementById("relMenu").style.display = 'none';
+                
+            }
+            if(${erro == 'true'}){
+                alert("ERRO!\n\Contrato NÃO encontrado.\n\Tente novamente.");
+            }
+            if(${erroPg == 'true'}){
+                alert("ERRO!\n\Valor informado maior que o saldo da reserva!");
+            }
+        </script>
     </body>
 </html>
