@@ -8,6 +8,7 @@ package Servlets;
 
 import Dao.UsuarioDAO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,15 +33,16 @@ public class InserirUsuario extends HttpServlet {
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
         
-        if (user.getCargo() == 0) {
-            request.setAttribute("erro", "Você não possui acesso a esta funcionalidade!");
-            RequestDispatcher rd = request.getRequestDispatcher("usuarios.jsp");
-            
-        }
 
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");
+        if (cpf.contains(".")) {
+            cpf = cpf.replace(".","");
+        }
+        if (cpf.contains("-")) { 
+            cpf = cpf.replace("-", "");
+        }
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String c = request.getParameter("cargo");
@@ -50,6 +52,18 @@ public class InserirUsuario extends HttpServlet {
 
         Usuario usuario = new Usuario(nome, rg, cpf, login, senha, cargo, filial);
         UsuarioDAO u = new UsuarioDAO();
+        List<Usuario> lista = u.buscarUsuarios();
+        for (Usuario us: lista){
+            if (us.getLogin().equals(login)) {
+                request.setAttribute("erroLogin", true);
+                request.getRequestDispatcher("cadastraUsuario.jsp").forward(request, response);
+            }
+            if (us.getCpf().equalsIgnoreCase(cpf)) {
+                request.setAttribute("erroCpf", true);
+                request.getRequestDispatcher("cadastraUsuario.jsp").forward(request, response);
+            }
+            
+        }
         u.cadastrarUsuarioBD(usuario);
         
         usuario = u.buscarUsuarioByCpf(cpf);

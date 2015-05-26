@@ -7,6 +7,7 @@ package Servlets;
 
 import Dao.RelatorioDAO;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -67,14 +68,15 @@ public class BuscarRelatorio extends HttpServlet {
             case 4:
                 dtInicial = request.getParameter("perInicial");
                 dtFinal = request.getParameter("perFinal");
-
                 try {
-                    SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
-                    inicio = dfmt.parse(dtInicial);
-                    fim = dfmt.parse(dtFinal);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+                    String di = sdf2.format(sdf1.parse(dtInicial));
+                    String df = sdf2.format(sdf1.parse(dtFinal));
+                    inicio = sdf2.parse(di);
+                    fim = sdf2.parse(df);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
                 }
                 lista = r.totalVendasPorUsuariosPorPeriodoEFilial(inicio, fim, user.getFilial());
                 request.setAttribute("rel", 4);
@@ -86,12 +88,14 @@ public class BuscarRelatorio extends HttpServlet {
                 dtFinal = request.getParameter("perFinal2");
 
                 try {
-                    SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
-                    inicio = dfmt.parse(dtInicial);
-                    fim = dfmt.parse(dtFinal);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+                    String di = sdf2.format(sdf1.parse(dtInicial));
+                    String df = sdf2.format(sdf1.parse(dtFinal));
+                    inicio = sdf2.parse(di);
+                    fim = sdf2.parse(df);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
                 }
                 lista = r.vendasPorUsuarioPorPeriodo(inicio, fim, Integer.parseInt(request.getParameter("usuarioId2")));
                 request.setAttribute("rel", 5);

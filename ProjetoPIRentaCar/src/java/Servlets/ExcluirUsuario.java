@@ -33,6 +33,12 @@ public class ExcluirUsuario extends HttpServlet {
 
         if (request.getParameter("CPFUsuario") != null) {
             String cpf = request.getParameter("CPFUsuario");
+            if (cpf.contains(".")) {
+            cpf = cpf.replace(".","");
+        }
+        if (cpf.contains("-")) { 
+            cpf = cpf.replace("-", "");
+        }
             UsuarioDAO u = new UsuarioDAO();
             Usuario usuario = u.buscarUsuarioByCpf(cpf);
 
@@ -53,7 +59,7 @@ public class ExcluirUsuario extends HttpServlet {
             UsuarioDAO u = new UsuarioDAO();
             u.deleteUsuarioBD(Integer.parseInt(request.getParameter("id")));
 
-            request.setAttribute("sucesso", "Usuário excluído com suscesso!");
+            request.setAttribute("sucesso", "Usuário excluído com sucesso!");
             LogSistema log = new LogSistema();
         //LOG EXCLUIR usuario
             log.cadastrarLog(16, user.getUsuarioId());

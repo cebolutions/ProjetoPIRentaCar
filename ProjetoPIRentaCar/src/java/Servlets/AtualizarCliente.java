@@ -2,6 +2,7 @@ package Servlets;
 
 import Dao.ClienteDAO;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
@@ -27,6 +28,12 @@ public class AtualizarCliente extends HttpServlet {
         if (request.getParameter("CPFClientePesquisa") != null) {
 
             String cpfBusca = request.getParameter("CPFClientePesquisa");
+            if (cpfBusca.contains(".")) {
+                cpfBusca = cpfBusca.replace(".", "");
+            }
+            if (cpfBusca.contains("-")) {
+                cpfBusca = cpfBusca.replace("-", "");
+            }
             ClienteDAO c = new ClienteDAO();
             Cliente cliente = c.buscarClienteByCpf(cpfBusca);
             LogSistema log = new LogSistema();
@@ -47,6 +54,12 @@ public class AtualizarCliente extends HttpServlet {
             String nome = request.getParameter("nome");
             String rg = request.getParameter("rg");
             String cpf = request.getParameter("cpf");
+            if (cpf.contains(".")) {
+                cpf = cpf.replace(".", "");
+            }
+            if (cpf.contains("-")) {
+                cpf = cpf.replace("-", "");
+            }
             String cnh = request.getParameter("cnh");
             String dtNasc = request.getParameter("dtNasc");
             String dtCadastro = request.getParameter("dtCadastro");
@@ -55,10 +68,17 @@ public class AtualizarCliente extends HttpServlet {
 
             try {
                 SimpleDateFormat dfmt = new SimpleDateFormat("dd/mm/yyyy");
-                date = dfmt.parse(dtNasc);
                 dateCad = dfmt.parse(dtCadastro);
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+            try {
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+                String ds2 = sdf2.format(sdf1.parse(dtNasc));
+                date = sdf2.parse(ds2);
+            } catch (ParseException ex) {
+                ex.printStackTrace();
             }
             ClienteDAO cl = new ClienteDAO();
             Cliente novoCliente = new Cliente(id, nome, rg, cpf, cnh, date, dateCad);
@@ -80,6 +100,12 @@ public class AtualizarCliente extends HttpServlet {
         session.setAttribute("user", session.getAttribute("user"));
 
         String cpfBusca = request.getParameter("cpf");
+        if (cpfBusca.contains(".")) {
+            cpfBusca = cpfBusca.replace(".", "");
+        }
+        if (cpfBusca.contains("-")) {
+            cpfBusca = cpfBusca.replace("-", "");
+        }
         ClienteDAO c = new ClienteDAO();
         Cliente cliente = c.buscarClienteByCpf(cpfBusca);
         LogSistema log = new LogSistema();

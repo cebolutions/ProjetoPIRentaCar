@@ -157,7 +157,7 @@ public class RelatorioDAO {
             String comandoSQL = "SELECT NOME_USUARIO , SUM(TOTAL_RESERVA)\n"
                     + "     FROM TB_CONTRATO\n"
                     + "     JOIN TB_USUARIOS ON TB_CONTRATO.USUARIO_ID  = TB_USUARIOS.ID_USUARIO\n"
-                    + "     WHERE DATA_ABERTURA >= '" + new java.sql.Date(perInicial.getTime()) + "' AND DATA_ABERTURA <= '" + new java.sql.Date(perFinal.getTime()) + "' AND TB_CONTRATO.FILIAL_ID = "+ filial +""
+                    + "     WHERE DATA_ABERTURA >= '" + new java.sql.Date(perInicial.getTime()) + "' AND DATA_ABERTURA <= '" + new java.sql.Date(perFinal.getTime()) + "' AND TB_CONTRATO.FILIAL_ID = " + filial + ""
                     + "     GROUP BY NOME_USUARIO";
             pstmt = conn.prepareStatement(comandoSQL);
             List<Relatorio> lista = new ArrayList<>();
@@ -318,18 +318,19 @@ public class RelatorioDAO {
         return null;
     }
 
-      public List<Relatorio> historicoLog() {
+    public List<Relatorio> historicoLog() {
         ConexaoBDJavaDB cnx = new ConexaoBDJavaDB("RentaCar");
         Connection conn = null;
         PreparedStatement pstmt = null;
 
         try {
             conn = cnx.obterConexao();
-            String comandoSQL = "SELECT NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA\n"
+            String comandoSQL = "SELECT NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA, ID_LOG\n"
                     + "FROM TB_HISTORICO_ACESSO\n"
                     + "JOIN TB_USUARIOS ON TB_USUARIOS.ID_USUARIO = TB_HISTORICO_ACESSO.USUARIO_ID\n"
                     + "JOIN TB_TIPO_LOG ON TB_TIPO_LOG.ID_TIPO_LOG = TB_HISTORICO_ACESSO.TIPO_LOG_ID\n"
-                    + "GROUP BY NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA";
+                    + "GROUP BY NOME_USUARIO, TIPO_LOG, DATA_SISTEMA, HORA_SISTEMA, ID_LOG\n"
+                    + "ORDER BY ID_LOG DESC FETCH FIRST 50 ROWS ONLY";
             pstmt = conn.prepareStatement(comandoSQL);
             List<Relatorio> lista = new ArrayList<>();
             ResultSet relatorio = pstmt.executeQuery();
@@ -339,6 +340,7 @@ public class RelatorioDAO {
                 r.setTipoLog(relatorio.getString(2));
                 r.setDataLog(relatorio.getDate(3));
                 r.setHoraLog(relatorio.getTime(4));
+                int log = relatorio.getInt(5);
                 lista.add(r);
             }
             return lista;

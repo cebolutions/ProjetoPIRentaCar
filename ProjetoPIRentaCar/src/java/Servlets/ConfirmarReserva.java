@@ -29,6 +29,12 @@ public class ConfirmarReserva extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             String cpfCliente = request.getParameter("CPFClientePesquisa");
+            if (cpfCliente.contains(".")) {
+            cpfCliente = cpfCliente.replace(".","");
+        }
+        if (cpfCliente.contains("-")) { 
+            cpfCliente = cpfCliente.replace("-", "");
+        }
             ClienteDAO c = new ClienteDAO();
             Cliente cliente = c.buscarClienteByCpf(cpfCliente);
             String dtRetirada = request.getParameter("dtRetirada");

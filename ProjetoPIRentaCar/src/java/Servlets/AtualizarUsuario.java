@@ -5,9 +5,9 @@ package Servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Dao.UsuarioDAO;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +31,6 @@ public class AtualizarUsuario extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
-        
 
         String cpf = request.getParameter("cpf");
         UsuarioDAO u = new UsuarioDAO();
@@ -53,6 +52,12 @@ public class AtualizarUsuario extends HttpServlet {
 
         if (request.getParameter("CPFUsuario") != null) {
             String cpf = request.getParameter("CPFUsuario");
+            if (cpf.contains(".")) {
+                cpf = cpf.replace(".", "");
+            }
+            if (cpf.contains("-")) {
+                cpf = cpf.replace("-", "");
+            }
             UsuarioDAO u = new UsuarioDAO();
             Usuario usuario = u.buscarUsuarioByCpf(cpf);
 
@@ -63,7 +68,7 @@ public class AtualizarUsuario extends HttpServlet {
             if (usuario.getCpf() == null) {
                 request.setAttribute("erro", true);
                 request.getRequestDispatcher("/atualizarUsuario.jsp").forward(request, response);
-                
+
             } else {
                 request.setAttribute("usuario", usuario);
                 request.getRequestDispatcher("/atualizarUsuario.jsp").forward(request, response);
@@ -74,6 +79,12 @@ public class AtualizarUsuario extends HttpServlet {
             String nome = request.getParameter("nome");
             String rg = request.getParameter("rg");
             String cpf = request.getParameter("cpf");
+            if (cpf.contains(".")) {
+                cpf = cpf.replace(".", "");
+            }
+            if (cpf.contains("-")) {
+                cpf = cpf.replace("-", "");
+            }
             String login = request.getParameter("login");
             String senha = request.getParameter("senha");
             String c = request.getParameter("cargo");
@@ -88,6 +99,18 @@ public class AtualizarUsuario extends HttpServlet {
             }
             Usuario usuario = new Usuario(id, nome, rg, cpf, login, senha, cargo, filial, ativo);
             UsuarioDAO u = new UsuarioDAO();
+            List<Usuario> lista = u.buscarUsuarios();
+            for (Usuario us : lista) {
+                if (us.getLogin().equals(login)) {
+                    request.setAttribute("erroLogin", true);
+                    request.getRequestDispatcher("atualizarUsuario.jsp").forward(request, response);
+                }
+                if (us.getCpf().equalsIgnoreCase(cpf)) {
+                    request.setAttribute("erroCpf", true);
+                    request.getRequestDispatcher("atualizarUsuario.jsp").forward(request, response);
+                }
+
+            }
             u.updateUsuarioBD(usuario);
             Usuario userBD = u.buscarUsuarioByCpf(cpf);
             request.setAttribute("usuario", userBD);

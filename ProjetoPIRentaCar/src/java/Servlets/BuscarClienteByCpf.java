@@ -23,6 +23,12 @@ public class BuscarClienteByCpf extends HttpServlet {
         Usuario user = (Usuario) session.getAttribute("user");
         session.setAttribute("user", session.getAttribute("user"));
         String cpf = request.getParameter("CPFClientePesquisa");
+        if (cpf.contains(".")) {
+            cpf = cpf.replace(".","");
+        }
+        if (cpf.contains("-")) { 
+            cpf = cpf.replace("-", "");
+        }
         ClienteDAO c = new ClienteDAO();
         Cliente cliente = c.buscarClienteByCpf(cpf);
         LogSistema log = new LogSistema();

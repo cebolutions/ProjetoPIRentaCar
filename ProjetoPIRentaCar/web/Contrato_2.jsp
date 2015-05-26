@@ -27,7 +27,7 @@
                     <ul>
                         <li><a id="ativo" href="Contrato_1.jsp">Contrato</a></li>
                         <li><a id="consulta" href="ConsultaContrato.jsp">Consulta Contrato</a></li>
-                        
+
                     </ul>
                 </nav>
             </section>
@@ -50,7 +50,7 @@
                 </nav>
             </section><!-- fim .menu-opcoes -->
             <main>
-                <form action="ValorReserva" id="contrato" method="POST">
+                <form action="ValorReserva" id="contrato" name="contrato" method="POST">
                     <fieldset class="consultaEstoque">
                         <table>
                             <tr><td>Data Retirada </td><td><input type="text" readonly="readonly" title="Não é possível alterar" name="dtRetirada" value="<fmt:formatDate value="${ret}" pattern="dd/MM/yyyy"/>"></td>
@@ -72,9 +72,9 @@
                                         </c:choose>
                                     </select></td></tr>            
                             <tr><td id="diaria">Diárias </td><td ><input id="dias" readonly="readonly" type="text" name="diarias" value="${diarias}"></td></tr>
-                            
+
                         </table>
-                            <div class="opcao"><a href="Contrato_1.jsp">Editar</a></div>
+                        <div class="opcao"><a href="Contrato_1.jsp">Editar</a></div>
                     </fieldset>
                     <fieldset class="disponibilidade">
                         <legend>Escolher veículo</legend>
@@ -97,7 +97,7 @@
                             </c:forEach>
                         </table>
 
-                        <div class="submeter"><input type="submit" value="Avançar"></div>
+                        <div class="submeter"><input type="button" value="Avançar" onclick="validar()"></div>
                     </fieldset>
 
                     <fieldset class="clienteInativo">
@@ -118,14 +118,21 @@
                 </ul>
             </div>
         </footer>
-<script type="text/javascript">
-             
-            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+        <script type="text/javascript">
+
+            function validar() {
+                var escolha = document.contrato.veiculo;
+                if (escolha.value == "") {
+                    alert("Necessário escolher um veículo.")
+                } else {
+                    document.contrato.submit();
+                }
+            }
+            if ('<%=request.getSession().getAttribute("cargo")%>' == 0) {
                 document.getElementById("usuarioMenu").style.display = 'none';
                 document.getElementById("relMenu").style.display = 'none';
-                
             }
-                
+
         </script>
     </body>
 </html>

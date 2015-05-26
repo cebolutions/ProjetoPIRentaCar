@@ -57,7 +57,7 @@
                     <div class="msgsucesso"><p>${sucesso}</p></div>
                     <div class="msgerro"><p>${erro}</p></div>
                     <form action="ExcluirUsuario" method="post">
-                        <label>CPF Usuario </label><input type="text" maxlength="11" name="CPFUsuario">
+                        <label>CPF Usuario </label><input type="text" maxlength="14" id="cpf" name="CPFUsuario">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>
                     <form action="ExcluirUsuario" method="post">
@@ -86,7 +86,9 @@
                 </ul>
             </div>
         </footer>
-
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
 
     </body>
 </html>

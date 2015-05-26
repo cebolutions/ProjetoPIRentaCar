@@ -54,7 +54,7 @@
                 <fieldset>
                     <legend>Atualizar Dados do Usuario</legend>
                     <form action="AtualizarUsuario" method="post">
-                        <label>CPF Usuario </label><input type="text" maxlength="11" name="CPFUsuario">
+                        <label>CPF Usuario </label><input type="text" maxlength="14" id="cpfBusca" name="CPFUsuario">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>
                     <form id="atualizar" action="AtualizarUsuario" method="POST">
@@ -62,7 +62,7 @@
                             <tr><td id="label">ID:</td><td><input type="text" name="id" value="${usuario.usuarioId}"/></td></tr>
                             <tr><td id="label">Nome:</td><td><input type="text" name="nome" value="${usuario.nome}"/></td></tr>
                             <tr><td id="label">RG:</td><td><input type="text" name="rg" value="${usuario.rg}"/></td></tr>
-                            <tr><td id="label">CPF:</td><td><input type="text" name="cpf" value="${usuario.cpf}"/></td></tr>
+                            <tr><td id="label">CPF:</td><td><input type="text" name="cpf" id="cpf" value="${usuario.cpf}"/></td></tr>
                             <tr><td id="label">Login:</td><td><input type="text" name="login" value="${usuario.login}"/></td></tr>
                             <tr><td id="label">Senha:</td><td><input type="text" name="senha" value="${usuario.senha}"/></td></tr>
                             <tr><td id="label">Cargo: </td><td><select name="cargo">
@@ -156,8 +156,13 @@
                 </ul>
             </div>
         </footer>
-        if(${erro == 'true'}){
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript">
+            if (${erro == 'true'}) {
                 alert("ERRO!\n\CPF NÃO encontrado.\n\Tente novamente.");
             }
+        </script>
     </body>
 </html>

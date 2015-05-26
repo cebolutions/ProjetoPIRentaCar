@@ -41,25 +41,25 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
-                    <form action="BuscarRelatorio" method="POST">
+                    <form action="BuscarRelatorio" id="busca" name="busca" method="POST">
                         <table class="relatorio">
-                            <tr><td><input type="radio" name="relatorio" value="1">Tipo de Veiculos Locados por Usuários</td></tr>
+                            <tr><td><input type="radio" name="relatorio" id="relatorio" value="1">Tipo de Veiculos Locados por Usuários</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="2">Quantidade Veiculos Locados por Usuários</td></tr>
                             <tr><td><input type="radio" name="relatorio" value="3">Total de vendas por Usuário</td></tr>
                         </table>
-                        <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId"></td></tr></table>
+                        <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" id="usuarioId" name="usuarioId"></td></tr></table>
                         <table class="relatorio">
                             <tr><td><input type="radio" name="relatorio" value="4">Valor de Vendas por Usuários</td></tr>
                         </table>
-                        <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="text" name="perInicial" placeholder="Inicio"></td><td><input type="text" name="perFinal" placeholder="Final"></td></tr></table>
+                        <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="date" name="perInicial" title="Inicio"></td><td><input type="date" name="perFinal" title="Final"></td></tr></table>
                         <table class="relatorio">
 
                             <tr><td><input type="radio" name="relatorio" value="5">Total de vendas por Usuários (Período)</td></tr>
                         </table>
-                            <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId2"></td></tr></table>
-                            <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="text" name="perInicial2" placeholder="Inicio"></td><td><input type="text" name="perFinal2" placeholder="Final"></td></tr></table>
-                            <table class="relatorio"><tr><td><input type="radio" name="relatorio" value="9">Histórico de logs</td></tr></table>
-                            <div class="submeter"><input type="submit" value="Buscar"></div>
+                        <table class="relatorio"><tr><td id="label"><label>Identificação Usuário:</label></td><td><input type="text" name="usuarioId2"></td></tr></table>
+                        <table class="relatorio"><tr><td id="label"><label>Período: </label></td><td><input type="date" name="perInicial2" title="Inicio"></td><td><input type="date" name="perFinal2" title="Final"></td></tr></table>
+                        <table class="relatorio"><tr><td><input type="radio" name="relatorio" value="9">Histórico de logs</td></tr></table>
+                        <div class="submeter"><input type="button" value="Buscar" onclick="validar()"></div>
                     </form>
                 </fieldset>
             </main>
@@ -76,6 +76,62 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript">
+            function validar() {
+                var radios = document.getElementsByName('relatorio');
+                var escolha = 0;
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        escolha = 1;
+                    }
+                }
+                if (escolha == 0) {
+                    alert("Escolha o tipo de relatorio");
+                    return false;
+                }
+
+                if (radios[2].checked) {
+                    if (document.busca.usuarioId.value === "") {
+                        document.busca.usuarioId.focus();
+                        alert("Informe o código do usuário");
+                        return false;
+                    }
+                }
+                if (radios[3].checked) {
+                    if (document.busca.perInicial.value === "") {
+                        document.busca.perInicial.focus();
+                        alert("Informe o período");
+                        return false;
+                    }
+                    if (document.busca.perFinal.value === "") {
+                        document.busca.perFinal.focus();
+                        alert("Informe o período");
+                        return false;
+                    }
+                }
+                if (radios[4].checked) {
+                    if (document.busca.usuarioId2.value === "") {
+                        document.busca.usuarioId2.focus();
+                        alert("Informe o código do usuário");
+                        return false;
+                    }
+                    if (document.busca.perInicial2.value === "") {
+                        document.busca.perInicial2.focus();
+                        alert("Informe o período");
+                        return false;
+                    }
+                    if (document.busca.perFinal2.value === "") {
+                        document.busca.perFinal2.focus();
+                        alert("Informe o período");
+                        return false;
+                    }
+                }
+                document.busca.submit();
+            }
+
+
+
+        </script>
 
     </body>
 </html>

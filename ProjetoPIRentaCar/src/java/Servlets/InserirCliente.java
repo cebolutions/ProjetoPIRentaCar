@@ -32,15 +32,19 @@ public class InserirCliente extends HttpServlet {
         String nome = request.getParameter("nome");
         String rg = request.getParameter("rg");
         String cpf = request.getParameter("cpf");
+        if (cpf.contains(".")) {
+            cpf = cpf.replace(".","");
+        }
+        if (cpf.contains("-")) { 
+            cpf = cpf.replace("-", "");
+        }
         String cnh = request.getParameter("cnh");
         String dtNasc = request.getParameter("dtNasc");
         Date date = null;
-        Date date2 = null;
         try {
             SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
             String ds2 = sdf2.format(sdf1.parse(dtNasc));
-            System.out.println(ds2);
             date = sdf2.parse(ds2);
         } catch (ParseException ex) {
             ex.printStackTrace();

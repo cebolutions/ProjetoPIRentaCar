@@ -105,5 +105,8 @@
                 </ul>
             </div>
         </footer>
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
     </body>
 </html>

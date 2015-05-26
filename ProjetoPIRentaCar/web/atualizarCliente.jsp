@@ -53,7 +53,7 @@
                 <fieldset>
                     <legend>Atualizar Dados do Cliente</legend>
                     <form action="AtualizarCliente" method="post">
-                        <label>CPF Cliente </label><input type="text" id="cpf" maxlength="14" name="CPFClientePesquisa">
+                        <label>CPF Cliente </label><input type="text" id="cpfBusca" maxlength="14" name="CPFClientePesquisa">
                         <button type="submit" name="btPesquisa">Pesquisar </button>
                     </form>
                     <form id="atualizar" action="AtualizarCliente" method="POST">
@@ -61,9 +61,10 @@
                             <tr><td id="label">Id:</td><td id="input"><input required readonly="readonly" title="Não é possível alterar" type="text" name="id" value="${cliente.clienteId}"></td></tr>
                             <tr><td id="label">Nome:</td><td id="input"><input required type="text" name="nome" value="${cliente.nome}"></td></tr>
                             <tr><td id="label">RG:</td><td id="input"><input required type="text" name="rg" value="${cliente.rg}"></td></tr>
-                            <tr><td id="label">CPF:</td><td id="input"><input required type="text" maxlength="11" name="cpf" value="${cliente.cpf}"></td></tr>
+                            <tr><td id="label">CPF:</td><td id="input"><input required type="text" maxlength="14" id="cpf" name="cpf" value="${cliente.cpf}"></td></tr>
                             <tr><td id="label">CNH:</td><td id="input"><input required type="text" name="cnh" value="${cliente.cnh}"></td></tr>
-                            <tr><td id="label">Data Nasc.:</td><td id="input"><input required type="text" name="dtNasc" value="<fmt:formatDate value="${cliente.dataNascimento}" pattern="dd/MM/yyyy"/>"></td></tr>
+                            <%-- aparece erro no input date mas funciona --%>
+                            <tr><td id="label">Data Nasc.:</td><td id="input"><input type="date" name="dtNasc" value="<fmt:formatDate value="${cliente.dataNascimento}" type="date" pattern="yyyy-MM-dd"/>"></td></tr>
                             <tr><td id="label">Data Cadastro:</td><td id="input"><input required readonly="readonly" title="Não é possível alterar" name="dtCadastro" value="<fmt:formatDate value="${cliente.dataCadastro}" pattern="dd/MM/yyyy"/>"></td></tr>
                         </table>
                         <div class="submeter"><input type="submit" value="Atualizar"></div>
@@ -83,6 +84,9 @@
                 </ul>
             </div>
         </footer>
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
         <script type="text/javascript">
             
             if('<%=request.getSession().getAttribute("cargo")%>' == 0){

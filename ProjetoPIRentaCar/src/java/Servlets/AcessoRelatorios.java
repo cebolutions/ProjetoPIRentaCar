@@ -5,7 +5,6 @@ package Servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class AcessoRelatorios extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("relatorioGerente.jsp");
-            rd.forward(request, response);
+        rd.forward(request, response);
     }
 
     @Override
@@ -45,11 +44,6 @@ public class AcessoRelatorios extends HttpServlet {
         } else if (user.getCargo() == 2) {
             rd = request.getRequestDispatcher("relatoriosDiretor.jsp");
             rd.forward(request, response);
-        } else {
-            rd = request.getRequestDispatcher("relatoriosErro.jsp");
-            rd.forward(request, response);
         }
     }
-
-
 }

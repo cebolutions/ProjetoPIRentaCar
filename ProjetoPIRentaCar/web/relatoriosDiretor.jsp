@@ -42,7 +42,7 @@
             </section><!-- fim .menu-opcoes -->
             <main>
                 <fieldset><legend>Buscar Relatório</legend>
-                    <form action="BuscarRelatorio" method="POST">
+                    <form action="BuscarRelatorio" name="busca" method="POST">
                         <table class="relatorio">
                                 
                                 <tr><td><input type="radio" name="relatorio" value="6">Veiculos vendidos por filial</td></tr>
@@ -51,7 +51,7 @@
 
                                 <tr><td><input type="radio" name="relatorio" value="8">Histórico de logs</td></tr>
                             </table>
-                        <div class="submeter"><input type="submit" value="Buscar"></div>
+                        <div class="submeter"><input type="button" value="Buscar" onclick="validar()"></div>
                     </form>
                 </fieldset>
             </main>
@@ -68,6 +68,24 @@
                 </ul>
             </div>
         </footer>
+<script type="text/javascript">
+            function validar() {
+                var radios = document.getElementsByName('relatorio');
+                var escolha = 0;
+                for (var i = 0; i < radios.length; i++) {
+                    if (radios[i].checked) {
+                        escolha = 1;
+                    }
+                }
+                if (escolha == 0) {
+                    alert("Escolha o tipo de relatorio");
+                    return false;
+                }
+                document.busca.submit();
+            }
 
+            
+
+        </script>
     </body>
 </html>
