@@ -7,6 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
+        <link href="css/basic.css" type="text/css" rel="stylesheet" />
         <link rel="shortcut icon" href="img/favicon.PNG" type="image/x-icon"/>
         <title>Cebolutions Rent a Car</title>
     </head>
@@ -41,31 +42,32 @@
                 </nav>
             </section><!-- fim .menu-opcoes -->
             <main>
-                <fieldset><legend>Buscar Relatório</legend>
+                <fieldset class="frel"><legend>Buscar Relatório</legend>
 
                     <table class="lista" border="1" cellpadding="10">
                         <c:choose>
                             <c:when test="${rel == 6}">
                                 <tr>
-                                    <th>Quantidade Veículos</th>
-                                    <th>Filial</th>
+                                    <td></td>
+                                    <th scope="col">Quantidade Veículos</th>
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
+                                        <th scope="row"> <c:out value="${rel.nomeLoja}" /> </th>
                                         <td> <c:out value="${rel.qtdVeiculo}" /> </td>
-                                        <td> <c:out value="${rel.nomeLoja}" /> </td>
+
                                     </tr>
                                 </c:forEach>
                             </c:when>
                             <c:when test="${rel == 7}">
                                 <tr>
-                                    <th>Total Vendas (R$)</th>
-                                    <th>Filial</th>
+                                    <th scope="col">Total Vendas (R$)</th>
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
+                                        <th scope="row"> <c:out value="${rel.nomeLoja}" /> </th>
                                         <td> <c:out value="${rel.totalVendas}" /></td>
-                                        <td> <c:out value="${rel.nomeLoja}" /> </td>
+
                                     </tr>
                                 </c:forEach>
                             </c:when>
@@ -75,7 +77,7 @@
                                     <th>Log</th>
                                     <th>Data Log</th>
                                     <th>Hora Log</th>
-                                    
+
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
                                     <tr>
@@ -104,6 +106,25 @@
                 </ul>
             </div>
         </footer>
+        <script type="text/javascript" src="http://filamentgroup.github.com/EnhanceJS/enhance.js"></script>
+        <script type="text/javascript">
+            if (${rel != 8}) {
+    
 
+            // Run capabilities test
+            enhance({
+                loadScripts: [
+                    {src: 'js/excanvas.js', iecondition: 'all'},
+                    'js/jquery.js',
+                    'js/visualize.jQuery.js',
+                    'js/example.js'
+                ],
+                loadStyles: [
+                    'css/visualize.css',
+                    'css/visualize-dark.css'
+                ]
+            });
+            }
+        </script>
     </body>
 </html>
