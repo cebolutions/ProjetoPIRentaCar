@@ -54,7 +54,7 @@
             <main>
                 <fieldset>
                     <legend>Consultar Cliente</legend>
-                    
+
                     <form action="BuscarClienteByCpf" method="post">
                         <label>CPF Cliente </label><input type="text" maxlength="11" name="CPFClientePesquisa">
                         <button type="submit" name="btPesquisa">Pesquisar</button>
@@ -82,17 +82,19 @@
                 </ul>
             </div>
         </footer>
-
-<script type="text/javascript">
-            if(${erro == 'true'}){
+        <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+        <script type="text/javascript" src="js/jquery.inputmask.bundle.js"></script>
+        <script type="text/javascript" src="js/mask.js"></script>
+        <script type="text/javascript">
+            if (${erro == 'true'}) {
                 alert("ERRO!\n\Cliente NÃO encontrado.\n\Tente novamente.");
             }
-            if('<%=request.getSession().getAttribute("cargo")%>' == 0){
+            if ('<%=request.getSession().getAttribute("cargo")%>' == 0) {
                 document.getElementById("usuarioMenu").style.display = 'none';
                 document.getElementById("relMenu").style.display = 'none';
-                
+
             }
-            
+
         </script>
     </body>
 </html>

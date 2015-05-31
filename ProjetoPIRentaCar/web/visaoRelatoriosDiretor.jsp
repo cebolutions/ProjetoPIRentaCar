@@ -6,8 +6,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/reset.css">
+        
         <link rel="stylesheet" type="text/css" href="css/estilos.css">
-        <link href="css/basic.css" type="text/css" rel="stylesheet" />
         <link rel="shortcut icon" href="img/favicon.PNG" type="image/x-icon"/>
         <title>Cebolutions Rent a Car</title>
     </head>
@@ -61,6 +61,7 @@
                             </c:when>
                             <c:when test="${rel == 7}">
                                 <tr>
+                                    <td></td>
                                     <th scope="col">Total Vendas (R$)</th>
                                 </tr>
                                 <c:forEach items="${relatorio}" var="rel" varStatus="stat">
@@ -121,7 +122,7 @@
                 ],
                 loadStyles: [
                     'css/visualize.css',
-                    'css/visualize-dark.css'
+                    'css/visualize-light.css'
                 ]
             });
             }

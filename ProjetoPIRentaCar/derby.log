@@ -1,7 +1,24 @@
-Tue May 26 14:11:45 BRT 2015 : Apache Derby Servidor de Rede - 10.10.1.3 - (1557168) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Sat May 30 18:56:09 BRT 2015 : Apache Derby Servidor de Rede - 10.10.1.3 - (1557168) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Tue May 26 15:13:12 BRT 2015:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): instância a816c00e-014d-9135-64c5-ffff8babe90c
+Sat May 30 18:56:12 BRT 2015:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): instância a816c00e-014d-a6d3-3152-ffff8babe90c
+no diretório de banco de dados C:\Users\pc\Documents\NetBeansProjects\ProjetoPIRentaCar\ProjetoPIRentaCar\rentacar 
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_31-b13
+user.dir=C:\Program Files (x86)\Java\jdk1.8.0_31\db
+os.name=Windows 8
+os.arch=x86
+os.version=6.2
+derby.system.home=C:\Users\pc\Documents\NetBeansProjects\ProjetoPIRentaCar\ProjetoPIRentaCar
+Carregador de classe do banco de dados iniciado - derby.database.classpath=''
+----------------------------------------------------------------
+Sat May 30 18:56:32 BRT 2015:
+Encerrando a instância a816c00e-014d-a6d3-3152-ffff8babe90c
+Sat May 30 18:56:33 BRT 2015 Thread[DRDAConnThread_3,5,main] (DATABASE = rentacar), (DRDAID = {2}), Banco de dados 'rentacar' fechado.
+----------------------------------------------------------------
+Sat May 30 18:56:57 BRT 2015:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.1.3 - (1557168): instância 560740aa-014d-a6d3-3152-ffff8babe90c
 no diretório de banco de dados C:\Users\pc\Documents\NetBeansProjects\ProjetoPIRentaCar\ProjetoPIRentaCar\rentacar 
 
 java.vendor=Oracle Corporation

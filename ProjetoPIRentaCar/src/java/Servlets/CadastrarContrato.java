@@ -5,7 +5,6 @@ package Servlets;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import Dao.ClienteDAO;
 import Dao.ContratoDAO;
 import Dao.VeiculoDAO;
@@ -54,24 +53,22 @@ public class CadastrarContrato extends HttpServlet {
         VeiculoDAO v = new VeiculoDAO();
 
         Veiculos veiculo = v.verificarDisponibilidadeById(veiculoId);
-        
+
         Date ret = null;
         Date dev = null;
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat dfmt = new SimpleDateFormat("dd/MM/yyyy");
-            String dtR = dfmt.format(sdf1.parse(dtRetirada)); 
-            String dtD = dfmt.format(sdf1.parse(dtDevolucao)); 
-            ret = dfmt.parse(dtR);
-            dev = dfmt.parse(dtD);
 
+            ret = sdf2.parse(dtRetirada);
+            dev = sdf2.parse(dtDevolucao);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Contrato contrato = new Contrato(c.getClienteId(), user.getUsuarioId(), veiculo.getIdVeiculo(), ret, dev, diarias, valorReserva, valorReserva, filial);
         ContratoDAO cdao = new ContratoDAO();
         cdao.cadastrarContratoBD(contrato);
-        
+
         Contrato contratoGerado = cdao.buscarUltimoContratoByUser(user.getUsuarioId());
         v.retirarVeiculo(contratoGerado.getVeiculoId(), contratoGerado.getFilialId());
         LogSistema log = new LogSistema();

@@ -101,7 +101,7 @@
                                 </tr>
                                 <tr><td>Valor Recebido R$</td><td><input id="valor" type="text" name="vlPago"/></td></tr>
                             </table>
-                                <div class="submeter"><input type="submit" value="Inserir"></div>
+                            <div class="submeter"><input type="button" value="Inserir" onclick="validar()"></div>
                         </fieldset>
                         
                         <div class="submeterOff"><input disabled type="submit" value="Finalizar"></div>
@@ -133,6 +133,14 @@
             }
             if(${erroPg == 'true'}){
                 alert("ERRO!\n\Valor informado maior que o saldo da reserva!");
+            }
+            function validar(){
+                if (document.contrato.vlPago.value == ""){
+                    alert("Necessário inserir valor")
+                    return false;
+                    
+                }
+                document.contrato.submit();
             }
         </script>
     </body>

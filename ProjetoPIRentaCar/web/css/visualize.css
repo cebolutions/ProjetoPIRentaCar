@@ -21,7 +21,7 @@
 .visualize-labels-x,.visualize-labels-y { position: absolute; left: 0; top: 0; list-style: none; }
 .visualize-labels-x li, .visualize-labels-y li { position: absolute; bottom: 0; }
 .visualize-labels-x li span.label, .visualize-labels-y li span.label { position: absolute; color: #555;  }
-.visualize-labels-x li span.line, .visualize-labels-y li span.line {  position: absolute; border: 0 solid #ccc; }
+.visualize-labels-x li span.line, .visualize-labels-y li span.line {  position: absolute; border: 0 solid #347235; }
 .visualize-labels-x li { height: 100%; }
 .visualize-labels-x li span.label { top: 100%; margin-top: 5px; }
 .visualize-labels-x li span.line { border-left-width: 1px; height: 100%; display: block; }
